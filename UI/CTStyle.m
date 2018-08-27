@@ -126,12 +126,7 @@
 - (UIFont *) callFont
 {
     // フォントサイズ
-    NSString *_fontSizeString = [self styleForKey:@"font-size"];
-    CGFloat _fontSize = 12;
-    if(_fontSizeString != nil)
-    {
-        _fontSize = [_fontSizeString floatValue];
-    }
+    CGFloat fontSize = [self floatStyleForKey:@"font-size" defaultValue:12];
     
     // フォントボールド
     NSString *_fontWeight = [self styleForKey:@"font-weight"];
@@ -145,153 +140,121 @@
     }
     
     // フォント生成
-    UIFont *_font;
+    UIFont *font;
     // ボールド
     if(isFontBold == YES)
     {
-        _font = [UIFont boldSystemFontOfSize:_fontSize];
+        font = [UIFont boldSystemFontOfSize:fontSize];
     }
     else
     {
-        _font = [UIFont systemFontOfSize:_fontSize];
+        font = [UIFont systemFontOfSize:fontSize];
     }
     
-    return _font;
+    return font;
 }
 
 // サイズ取得
 - (CGSize) callSize
 {
-    NSString *_widthString = [self styleForKey:@"width"];
-    NSString *_heightString = [self styleForKey:@"height"];
+    CGFloat width = [self floatStyleForKey:@"width" defaultValue:0];
+    CGFloat height = [self floatStyleForKey:@"height" defaultValue:0];
     
-    CGFloat _width = 0;
-    CGFloat _height = 0;
-    if(_widthString != nil)
-    {
-        _width = [_widthString floatValue];
-    }
-    if(_heightString != nil)
-    {
-        _height = [_heightString floatValue];
-    }
-    
-    return CGSizeMake(_width, _height);
+    return CGSizeMake(width, height);
 }
 
 // ポイント取得
 - (CGPoint) callPoint
 {
-    NSString *_topString = [self styleForKey:@"top"];
-    NSString *_leftString = [self styleForKey:@"left"];
+    CGFloat top = [self floatStyleForKey:@"top" defaultValue:0];
+    CGFloat left = [self floatStyleForKey:@"left" defaultValue:0];
     
-    CGFloat _top = 0;
-    CGFloat _left = 0;
-    if(_topString != nil)
-    {
-        _top = [_topString floatValue];
-    }
-    if(_leftString != nil)
-    {
-        _left = [_leftString floatValue];
-    }
-    
-    return CGPointMake(_left, _top);
+    return CGPointMake(left, top);
 }
 
 // フレーム取得
 - (CGRect) callFrame
 {
-    CGPoint _point = [self callPoint];
-    CGSize _size = [self callSize];
+    CGPoint point = [self callPoint];
+    CGSize size = [self callSize];
     
-    CGRect _rect = CGRectZero;
-    _rect.origin = _point;
-    _rect.size = _size;
-    return _rect;
+    CGRect rect = CGRectZero;
+    rect.origin = point;
+    rect.size = size;
+    return rect;
 }
 
 // マージン取得(右)
 - (CGFloat) callMarginRight
 {
-    // マージン
-    NSString *_marginString = [self styleForKey:@"margin"];
-    CGFloat _margins[4] = {0, 0, 0, 0};
-    if(_marginString != nil)
-    {
-        NSArray *_marginsComponents = [_marginString componentsSeparatedByString:@" "];
-        
-        if([_marginsComponents count] == 4)
-        {
-            _margins[0] = [[_marginsComponents objectAtIndex:0] floatValue];
-            _margins[1] = [[_marginsComponents objectAtIndex:1] floatValue];
-            _margins[2] = [[_marginsComponents objectAtIndex:2] floatValue];
-            _margins[3] = [[_marginsComponents objectAtIndex:3] floatValue];
-        }
-        else if([_marginsComponents count] == 2)
-        {
-            _margins[0] = [[_marginsComponents objectAtIndex:0] floatValue];
-            _margins[1] = [[_marginsComponents objectAtIndex:1] floatValue];
-            _margins[2] = _margins[0];
-            _margins[3] = _margins[1];
-        }
-        else if([_marginsComponents count] == 1)
-        {
-            _margins[0] = [[_marginsComponents objectAtIndex:0] floatValue];
-            _margins[1] = _margins[0];
-            _margins[2] = _margins[0];
-            _margins[3] = _margins[0];
-        }
-    }
-    return _margins[1];
+    return [self callMargin].right;
 }
 
 // マージン取得(下)
 - (CGFloat) callMarginBottom
 {
-    // マージン
-    NSString *_marginString = [self styleForKey:@"margin"];
-    CGFloat _margins[4] = {0, 0, 0, 0};
-    if(_marginString != nil)
-    {
-        NSArray *_marginsComponents = [_marginString componentsSeparatedByString:@" "];
-        
-        if([_marginsComponents count] == 4)
-        {
-            _margins[0] = [[_marginsComponents objectAtIndex:0] floatValue];
-            _margins[1] = [[_marginsComponents objectAtIndex:1] floatValue];
-            _margins[2] = [[_marginsComponents objectAtIndex:2] floatValue];
-            _margins[3] = [[_marginsComponents objectAtIndex:3] floatValue];
-        }
-        else if([_marginsComponents count] == 2)
-        {
-            _margins[0] = [[_marginsComponents objectAtIndex:0] floatValue];
-            _margins[1] = [[_marginsComponents objectAtIndex:1] floatValue];
-            _margins[2] = _margins[0];
-            _margins[3] = _margins[1];
-        }
-        else if([_marginsComponents count] == 1)
-        {
-            _margins[0] = [[_marginsComponents objectAtIndex:0] floatValue];
-            _margins[1] = _margins[0];
-            _margins[2] = _margins[0];
-            _margins[3] = _margins[0];
-        }
-    }
-    return _margins[2];
+    return [self callMargin].bottom;
 }
 
 // ボーダー幅取得
 - (CGFloat) callBorderWidth
 {
-    NSString *_borderWidthString = [self styleForKey:@"border-width"];
-    CGFloat _borderWidth = 0;
-    if(_borderWidthString != nil)
+    return [self floatStyleForKey:@"border-width" defaultValue:0];
+}
+
+
+
+#pragma mark - private
+//
+// private
+//
+
+// 設定値か初期値をfloatで取得する
+- (CGFloat) floatStyleForKey:(NSString *)keyValue defaultValue:(CGFloat)defaultValue
+{
+    NSString *styleValue = [self styleForKey:keyValue];
+    if (styleValue != nil)
     {
-        // 枠線幅
-        _borderWidth = [_borderWidthString floatValue];
+        return [styleValue floatValue];
     }
-    return _borderWidth;
+    return defaultValue;
+}
+
+// マージンの取得
+- (CCMargin) callMargin
+{
+    NSString *marginString = [self styleForKey:@"margin"];
+    CCMargin margin = {0, 0, 0, 0};
+    if (marginString == nil)
+    {
+        return margin;
+    }
+    
+    // マージン分解
+    NSArray *marginComponents = [marginString componentsSeparatedByString:@" "];
+    NSUInteger componentCount = [marginComponents count];
+    if (componentCount == 4)
+    {
+        margin.top    = [[marginComponents objectAtIndex:0] floatValue];
+        margin.right  = [[marginComponents objectAtIndex:1] floatValue];
+        margin.bottom = [[marginComponents objectAtIndex:2] floatValue];
+        margin.left   = [[marginComponents objectAtIndex:3] floatValue];
+    }
+    else if (componentCount == 2)
+    {
+        margin.top    = [[marginComponents objectAtIndex:0] floatValue];
+        margin.right  = [[marginComponents objectAtIndex:1] floatValue];
+        margin.bottom = margin.top;
+        margin.left   = margin.right;
+    }
+    else if (componentCount == 1)
+    {
+        margin.top    = [[marginComponents objectAtIndex:0] floatValue];
+        margin.right  = margin.top;
+        margin.bottom = margin.top;
+        margin.left   = margin.top;
+    }
+    return margin;
 }
 
 
@@ -300,7 +263,7 @@
 //
 // NSCopying
 //
-- (id)copyWithZone:(NSZone *)zone
+- (id) copyWithZone:(NSZone *)zone
 {
     CCStyle *result = [[self class] allocWithZone:zone];
     if (result)

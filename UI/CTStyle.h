@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+// マージン構造体
+typedef struct {
+    CGFloat top;
+    CGFloat right;
+    CGFloat bottom;
+    CGFloat left;
+} CCMargin;
+
 @interface CCStyle : NSObject <NSCopying>
 
 //
