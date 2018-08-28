@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+// 色構造体
+typedef struct {
+    CGFloat red;
+    CGFloat green;
+    CGFloat blue;
+    CGFloat alpha;
+} CCColorStruct;
+
 @interface CCColor : NSObject
 
 //
@@ -16,9 +24,6 @@
 
 // 16進数カラー からCCColor(UIColor) オブジェクトを取得
 + (UIColor *) colorWithHEXString:(NSString *)hexString;
-
-// 16進数カラー からCCColor(UIColor) オブジェクトを取得(透過色付き)
-+ (UIColor *) colorWithHEXString:(NSString *)hexString alpha:(CGFloat)alpha;
 
 // 16進数カラー から補色CCColor(UIColor) オブジェクトを取得
 + (UIColor *) complementaryColorWithHEXString:(NSString *)hexString;
