@@ -184,42 +184,6 @@
     return rect;
 }
 
-// マージン取得(右)
-- (CGFloat) callMarginRight
-{
-    return [self callMargin].right;
-}
-
-// マージン取得(下)
-- (CGFloat) callMarginBottom
-{
-    return [self callMargin].bottom;
-}
-
-// ボーダー幅取得
-- (CGFloat) callBorderWidth
-{
-    return [self floatStyleForKey:@"border-width" defaultValue:0];
-}
-
-
-
-#pragma mark - private
-//
-// private
-//
-
-// 設定値か初期値をfloatで取得する
-- (CGFloat) floatStyleForKey:(NSString *)keyValue defaultValue:(CGFloat)defaultValue
-{
-    NSString *styleValue = [self styleForKey:keyValue];
-    if (styleValue != nil)
-    {
-        return [styleValue floatValue];
-    }
-    return defaultValue;
-}
-
 // マージンの取得
 - (CCMargin) callMargin
 {
@@ -255,6 +219,30 @@
         margin.left   = margin.top;
     }
     return margin;
+}
+
+// ボーダー幅取得
+- (CGFloat) callBorderWidth
+{
+    return [self floatStyleForKey:@"border-width" defaultValue:0];
+}
+
+
+
+#pragma mark - private
+//
+// private
+//
+
+// 設定値か初期値をfloatで取得する
+- (CGFloat) floatStyleForKey:(NSString *)keyValue defaultValue:(CGFloat)defaultValue
+{
+    NSString *styleValue = [self styleForKey:keyValue];
+    if (styleValue != nil)
+    {
+        return [styleValue floatValue];
+    }
+    return defaultValue;
 }
 
 

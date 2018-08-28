@@ -59,11 +59,8 @@ typedef struct {
 // フレーム取得
 - (CGRect) callFrame;
 
-// マージン取得(右)
-- (CGFloat) callMarginRight;
-
-// マージン取得(下)
-- (CGFloat) callMarginBottom;
+// マージン取得
+- (CCMargin) callMargin;
 
 // ボーダー幅取得
 - (CGFloat) callBorderWidth;
