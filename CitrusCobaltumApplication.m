@@ -56,12 +56,12 @@
 //
 
 // テーマ取得
-+ (CTTheme *)callTheme
++ (CCTheme *)callTheme
 {
-    CTTheme *theme = [[CitrusCobaltumApplication sharedApplication] theme];
+    CCTheme *theme = [[CitrusCobaltumApplication sharedApplication] theme];
     if(theme == nil)
     {
-        theme = [[CTTheme alloc] init];
+        theme = [[CCTheme alloc] init];
     }
     return theme;
 }
