@@ -259,10 +259,11 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 // スライド処理
 - (void) slideMenu
 {
-    // メニュー表示
+    // メニューフレーム
     CGRect menuFrame = [[self callMenuPanel] frame];
     
-    // shadow
+    // メニュー隠し時
+    menuFrame.origin.x = (CCDrawerViewControllerMenuWidth * -1);
     CGSize shadowOffset = CGSizeZero;
     CGFloat shadowRadius = 0;
     CGFloat shadowOpacity = 0;
@@ -276,31 +277,17 @@ static CGFloat CCDrawerViewControllerMenuHeight()
         shadowRadius = 5;
         shadowOpacity = 0.5;
     }
-    else
-    {
-        // メニューを隠す
-        menuFrame.origin.x = (CCDrawerViewControllerMenuWidth * -1);
-        shadowOffset = CGSizeZero;
-        shadowRadius = 0;
-        shadowOpacity = 0;
-    }
     
-    // アニメーション開始
-    [UIView beginAnimations:@"master" context:nil];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-    [UIView setAnimationDuration:0.2];
-    [UIView setAnimationDelegate:self];
-    
-    // アニメーション内容
-    [[[self callMenuPanel] layer] setShadowOffset:shadowOffset];
-    [[[self callMenuPanel] layer] setShadowRadius:shadowRadius];
-    [[[self callMenuPanel] layer] setShadowOpacity:shadowOpacity];
-    [[[self callMenuPanel] layer] setShadowColor:[[UIColor blackColor] CGColor]];
-    [[[self callMenuPanel] layer] setShadowPath:[UIBezierPath bezierPathWithRect:[[self callMenuPanel] bounds]].CGPath];
-    [[self callMenuPanel] setFrame:menuFrame];
-    
-    // アニメーション終了
-    [UIView commitAnimations];
+    // アニメーション処理
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        // アニメーション内容
+        [[[self callMenuPanel] layer] setShadowOffset:shadowOffset];
+        [[[self callMenuPanel] layer] setShadowRadius:shadowRadius];
+        [[[self callMenuPanel] layer] setShadowOpacity:shadowOpacity];
+        [[[self callMenuPanel] layer] setShadowColor:[[UIColor blackColor] CGColor]];
+        [[[self callMenuPanel] layer] setShadowPath:[UIBezierPath bezierPathWithRect:[[self callMenuPanel] bounds]].CGPath];
+        [[self callMenuPanel] setFrame:menuFrame];
+    } completion:nil];
     
     // メニュー表示フラグ切り替え
     [self setMenuVisible:![self menuVisible]];
