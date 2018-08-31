@@ -176,26 +176,23 @@ static CGFloat const kControlHeight = 48;
     if ([keyPath isEqualToString:@"width"] == YES)
     {
         rect.size.width = [[stylesheet styleForKey:@"width"] floatValue];
-        [self setFrame:rect];
     }
     // height 変更時
     else if ([keyPath isEqualToString:@"height"] == YES)
     {
         rect.size.height = [[stylesheet styleForKey:@"height"] floatValue];
-        [self setFrame:rect];
     }
     // top 変更時
     else if ([keyPath isEqualToString:@"top"] == YES)
     {
         rect.origin.y = [[stylesheet styleForKey:@"top"] floatValue];
-        [self setFrame:rect];
     }
     // left 変更時
     else if ([keyPath isEqualToString:@"left"] == YES)
     {
         rect.origin.x = [[stylesheet styleForKey:@"left"] floatValue];
-        [self setFrame:rect];
     }
+    [self setFrame:rect];
 }
 
 // 描画
