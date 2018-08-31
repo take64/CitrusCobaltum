@@ -1,14 +1,14 @@
 //
-//  CTView.m
+//  CCView.m
 //  CitrusCobaltum
 //
 //  Created by kouhei.takemoto on 2018/08/27.
 //  Copyright © 2018年 citrus.tk. All rights reserved.
 //
 
-#import "CTView.h"
+#import "CCView.h"
 
-@implementation CTView
+@implementation CCView
 
 #pragma mark - method
 //

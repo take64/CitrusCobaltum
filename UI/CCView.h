@@ -1,5 +1,5 @@
 //
-//  CTView.h
+//  CCView.h
 //  CitrusCobaltum
 //
 //  Created by kouhei.takemoto on 2018/08/27.
@@ -8,6 +8,6 @@
 
 #import "CCControl.h"
 
-@interface CTView : CCControl
+@interface CCView : CCControl
 
 @end
