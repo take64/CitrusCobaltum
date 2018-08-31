@@ -52,8 +52,6 @@ static CGFloat const kImageSizeOneSide = 64;
         CGSize panelSize = frame.size;
         // ヘッダサイズ
         CGSize headSize = CGSizeMake(panelSize.width, panelSize.width);
-        // 画像サイズ
-        CGSize imageSize = CGSizeMake(kImageSizeOneSide, kImageSizeOneSide);
         
         // ヘッダビュー
         CCView *view;
@@ -61,15 +59,6 @@ static CGFloat const kImageSizeOneSide = 64;
         [view setUserInteractionEnabled:YES];
         [self addSubview:view];
         [self setHeadView:view];
-        
-        // 画像
-        UIImageView *imageView;
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageSize.width, imageSize.height)];
-        [imageView setCenter:[view center]];
-        [imageView setClipsToBounds:YES];
-        [[imageView layer] setCornerRadius:8];
-        [view addSubview:imageView];
-        [self setHeadImageView:imageView];
         
         // テーブルビュー
         UITableView *tableView;
@@ -83,6 +72,20 @@ static CGFloat const kImageSizeOneSide = 64;
 // 画像設定
 - (void) bindImage:(UIImage *)imageValue
 {
+    // 未生成なら生成
+    if ([self headImageView] == nil)
+    {
+        // 画像ビュー
+        UIImageView *imageView;
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kImageSizeOneSide, kImageSizeOneSide)];
+        [imageView setCenter:[[self headView] center]];
+        [imageView setClipsToBounds:YES];
+        [[imageView layer] setCornerRadius:8];
+        [[self headView] addSubview:imageView];
+        [self setHeadImageView:imageView];
+    }
+    
+    // 画像設定
     [[self headImageView] setImage:imageValue];
 }
 
