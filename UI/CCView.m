@@ -16,20 +16,20 @@
 //
 
 // 初期化
-- (instancetype)initWithText:(NSString *)textString
+- (instancetype) initWithText:(NSString *)textString
 {
     self = [self initWithFrame:CGRectZero];
-    if(self)
+    if (self)
     {
         
     }
     return self;
 }
 // 初期化
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if(self)
+    if (self)
     {
         [self setUserInteractionEnabled:NO];
     }
