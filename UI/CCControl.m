@@ -14,6 +14,13 @@
 #import "CCStyle.h"
 #import "CFString.h"
 
+#pragma mark - static variables
+//
+// static variables
+//
+static CGFloat const kControlWidth = 64;
+static CGFloat const kControlHeight = 48;
+
 
 
 @interface CCControl()
@@ -119,25 +126,13 @@
     [[self callStyleDisabled] addStyleDictionary:[styleValue allStyles]];
 }
 
-
-//@synthesize ctstyleNormal;
-//@synthesize ctstyleHighlighted;
-//@synthesize ctstyleDisabled;
-//@synthesize _textString;
-//@synthesize _state;
-//@synthesize userInfo;
-
-
-
 // 初期化
 - (id)initWithFrame:(CGRect)frame
 {
     // デフォルトサイズ処理
-    CGFloat width = 64;
-    CGFloat height = 48;
     if(CGRectIsEmpty(frame) == YES)
     {
-        frame = CGRectMake(0, 0, width, height);
+        frame = CGRectMake(0, 0, kControlWidth, kControlHeight);
     }
     
     self = [super initWithFrame:frame];
