@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CitrusTouchTheme.h"
-#import "CitrusTouchCoreData.h"
+@class CCTheme;
 
 @interface CitrusCobaltumApplication : NSObject
 {
@@ -34,7 +33,7 @@
 //
 
 // テーマ取得
-+ (CTTheme *) callTheme;
++ (CCTheme *) callTheme;
 
 //// CoreData manager
 //+ (CTCoreDataManager *) callCoreDataManager;
