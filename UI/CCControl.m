@@ -174,38 +174,32 @@
 // キー値監視
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    
-    CGRect _frame = [self frame];
-    CGSize _size = _frame.size;
-    CGPoint _origin = _frame.origin;
+    CGRect rect = [self frame];
+    CCStyle *stylesheet = [self callStyleNormal];
     
     // width 変更時
-    if([keyPath isEqualToString:@"width"] == YES)
+    if ([keyPath isEqualToString:@"width"] == YES)
     {
-        _size.width = [[[self callStyleNormal] styleForKey:@"width"] floatValue];
-        _frame.size = _size;
-        [self setFrame:_frame];
+        rect.size.width = [[stylesheet styleForKey:@"width"] floatValue];
+        [self setFrame:rect];
     }
     // height 変更時
-    else if([keyPath isEqualToString:@"height"] == YES)
+    else if ([keyPath isEqualToString:@"height"] == YES)
     {
-        _size.height = [[[self callStyleNormal] styleForKey:@"height"] floatValue];
-        _frame.size = _size;
-        [self setFrame:_frame];
+        rect.size.height = [[stylesheet styleForKey:@"height"] floatValue];
+        [self setFrame:rect];
     }
     // top 変更時
-    else if([keyPath isEqualToString:@"top"] == YES)
+    else if ([keyPath isEqualToString:@"top"] == YES)
     {
-        _origin.y = [[[self callStyleNormal] styleForKey:@"top"] floatValue];
-        _frame.origin = _origin;
-        [self setFrame:_frame];
+        rect.origin.y = [[stylesheet styleForKey:@"top"] floatValue];
+        [self setFrame:rect];
     }
     // left 変更時
-    else if([keyPath isEqualToString:@"left"] == YES)
+    else if ([keyPath isEqualToString:@"left"] == YES)
     {
-        _origin.x = [[[self callStyleNormal] styleForKey:@"left"] floatValue];
-        _frame.origin = _origin;
-        [self setFrame:_frame];
+        rect.origin.x = [[stylesheet styleForKey:@"left"] floatValue];
+        [self setFrame:rect];
     }
 }
 
