@@ -47,14 +47,26 @@
 // フォントサイズ取得
 - (CGFloat) callFontSize;
 
+// フォント要素取得
+- (NSMutableDictionary *) callFontAttributes;
+
 // サイズ取得
 - (CGSize) callSize;
+
+// サイズ設定
+- (void) setSize:(CGSize)size;
 
 // ポイント取得
 - (CGPoint) callPoint;
 
+// ポイント設定
+- (void) setPoint:(CGPoint)point;
+
 // フレーム取得
 - (CGRect) callFrame;
+
+// フレーム設定
+- (void) setFrame:(CGRect)frame;
 
 // マージン取得
 - (CCMargin) callMargin;
@@ -83,8 +95,11 @@
 // ラインブレイク取得
 - (NSLineBreakMode) callLineBreak;
 
-// 文字寄せ取得
-- (NSTextAlignment) callTextAlign;
+// 横文字寄せ取得
+- (NSTextAlignment) callTextAlignment;
+
+// 縦文字寄せ取得
+- (CCVerticalAlignment) callVerticalAlignment;
 
 // 背景色取得
 - (CCColorStruct) callBackgroundColor;

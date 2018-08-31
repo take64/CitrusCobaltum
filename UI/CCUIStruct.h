@@ -9,6 +9,19 @@
 #ifndef CCStyleStruct_h
 #define CCStyleStruct_h
 
+__attribute__((unused)) static CGFloat CC8(CGFloat oct)
+{
+    return oct * 8;
+}
+__attribute__((unused)) static NSString * CC8Str(CGFloat oct)
+{
+    return [@(CC8(oct)) stringValue];
+}
+__attribute__((unused)) static NSString * CCStr(CGFloat floatValue)
+{
+    return [@(floatValue) stringValue];
+}
+
 // 色構造体
 typedef struct {
     CGFloat red;
@@ -70,5 +83,13 @@ typedef struct {
 bool CCShadowIsNull(CCShadow value) {
     return (value.horizontal == 0 && value.vertical == 0 && value.shading == 0 && CCColorStructIsNull(value.color) == true);
 }
+
+// 縦位置
+typedef NS_ENUM(NSInteger, CCVerticalAlignment)
+{
+    CCVerticalAlignmentTop,
+    CCVerticalAlignmentMiddle,
+    CCVerticalAlignmentBottom
+};
 
 #endif /* CCStyleStruct_h */
