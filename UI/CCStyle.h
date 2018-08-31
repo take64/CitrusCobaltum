@@ -9,13 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-// マージン構造体
-typedef struct {
-    CGFloat top;
-    CGFloat right;
-    CGFloat bottom;
-    CGFloat left;
-} CCMargin;
+#import "CCUIStruct.h"
 
 @interface CCStyle : NSObject <NSCopying>
 
@@ -50,6 +44,9 @@ typedef struct {
 // フォント取得
 - (UIFont *) callFont;
 
+// フォントサイズ取得
+- (CGFloat) callFontSize;
+
 // サイズ取得
 - (CGSize) callSize;
 
@@ -62,7 +59,37 @@ typedef struct {
 // マージン取得
 - (CCMargin) callMargin;
 
+// パッディング取得
+- (CCPadding) callPadding;
+
+// 角丸取得
+- (CCRadius) callBorderRadius;
+
+// ボックス影取得
+- (CCShadow) callBoxShadow;
+
+// 文字色取得
+- (CCColorStruct) callColor;
+
+// テキスト影取得
+- (CCShadow) callTextShadow;
+
 // ボーダー幅取得
 - (CGFloat) callBorderWidth;
+
+// ボーダー色取得
+- (CCColorStruct) callBorderColor;
+
+// ラインブレイク取得
+- (NSLineBreakMode) callLineBreak;
+
+// 文字寄せ取得
+- (NSTextAlignment) callTextAlign;
+
+// 背景色取得
+- (CCColorStruct) callBackgroundColor;
+
+// フォントをアジャストさせる
+- (void) fontAdjustmentWithText:(NSString *)textValue rect:(CGRect)rect;
 
 @end

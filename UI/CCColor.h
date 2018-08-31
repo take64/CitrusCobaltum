@@ -8,13 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-// 色構造体
-typedef struct {
-    CGFloat red;
-    CGFloat green;
-    CGFloat blue;
-    CGFloat alpha;
-} CCColorStruct;
+#import "CCUIStruct.h"
 
 @interface CCColor : NSObject
 
@@ -22,10 +16,10 @@ typedef struct {
 // method
 //
 
-// 16進数カラー からCCColor(UIColor) オブジェクトを取得
+// 16進数カラー から UIColor オブジェクトを取得
 + (UIColor *) colorWithHEXString:(NSString *)hexString;
 
-// 16進数カラー から補色CCColor(UIColor) オブジェクトを取得
+// 16進数カラー から補色 UIColor オブジェクトを取得
 + (UIColor *) complementaryColorWithHEXString:(NSString *)hexString;
 
 // CCColor(UIColor) から 16進数文字列を取得
@@ -33,5 +27,11 @@ typedef struct {
 
 // table background color
 + (UIColor *) colorTableBackground;
+
+// 色構造体に変換する
++ (CCColorStruct) colorStructWithHEXString:(NSString *)hexString;
+
+// 色構造体から UIColor オブジェクトを取得
++ (UIColor *) colorWithColorStruct:(CCColorStruct)colorStruct;
 
 @end
