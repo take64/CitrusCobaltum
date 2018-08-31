@@ -131,10 +131,7 @@ static CGFloat CCDrawerViewControllerMenuHeight()
     }
     if (cell != nil)
     {
-        NSInteger section = [indexPath section];
-        NSInteger row = [indexPath row];
-        
-        CCDrawerMenuItem *menuItem = [[[[self menuSections] objectAtIndex:section] menuItems] objectAtIndex:row];
+        CCDrawerMenuItem *menuItem = [self callMenuItemWithIndexPath:indexPath];
         [cell setBackgroundColor:[self callCellColor]];
         [[cell textLabel] setText:[menuItem title]];
         [[cell textLabel] setTextColor:[CCColor colorWithHEXString:@"333333"]];
@@ -254,6 +251,15 @@ static CGFloat CCDrawerViewControllerMenuHeight()
         [self setCellColor:[CCColor colorWithHEXString:@"CCCCCC"]];
     }
     return [self cellColor];
+}
+
+// メニューアイテム取得
+- (CCDrawerMenuItem *) callMenuItemWithIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger section = [indexPath section];
+    NSInteger row = [indexPath row];
+    
+    return [[[[self menuSections] objectAtIndex:section] menuItems] objectAtIndex:row];
 }
 
 // スライド処理
