@@ -1,14 +1,14 @@
 //
-//  CTView.m
+//  CCView.m
 //  CitrusCobaltum
 //
 //  Created by kouhei.takemoto on 2018/08/27.
 //  Copyright © 2018年 citrus.tk. All rights reserved.
 //
 
-#import "CTView.h"
+#import "CCView.h"
 
-@implementation CTView
+@implementation CCView
 
 #pragma mark - method
 //
@@ -16,20 +16,20 @@
 //
 
 // 初期化
-- (instancetype)initWithText:(NSString *)textString
+- (instancetype) initWithText:(NSString *)textString
 {
     self = [self initWithFrame:CGRectZero];
-    if(self)
+    if (self)
     {
         
     }
     return self;
 }
 // 初期化
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if(self)
+    if (self)
     {
         [self setUserInteractionEnabled:NO];
     }
