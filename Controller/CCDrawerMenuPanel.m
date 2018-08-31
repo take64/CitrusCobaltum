@@ -12,6 +12,8 @@
 #import "CCView.h"
 #import "CCColor.h"
 
+static CGFloat const kImageSizeOneSide = 64;
+
 @interface CCDrawerMenuPanel()
 
 #pragma mark - property
@@ -41,33 +43,28 @@
 //
 
 // init
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         // パネルサイズ
-        CGFloat panelWidth = CGRectGetWidth(frame);
-        CGFloat panelHeight = CGRectGetHeight(frame);
-        
+        CGSize panelSize = frame.size;
         // ヘッダサイズ
-        CGFloat headWidth = CGRectGetWidth(frame);
-        CGFloat headHeight = headWidth;
-        
+        CGSize headSize = CGSizeMake(panelSize.width, panelSize.width);
         // 画像サイズ
-        CGFloat imageWidth = 64;
-        CGFloat imageHeight = imageWidth;
+        CGSize imageSize = CGSizeMake(kImageSizeOneSide, kImageSizeOneSide);
         
         // ヘッダビュー
         CCView *view;
-        view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, headWidth, headHeight)];
+        view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, headSize.width, headSize.height)];
         [view setUserInteractionEnabled:YES];
         [self addSubview:view];
         [self setHeadView:view];
         
         // 画像
         UIImageView *imageView;
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageWidth, imageHeight)];
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageSize.width, imageSize.height)];
         [imageView setCenter:[view center]];
         [imageView setClipsToBounds:YES];
         [[imageView layer] setCornerRadius:8];
@@ -76,7 +73,7 @@
         
         // テーブルビュー
         UITableView *tableView;
-        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelWidth, panelWidth, (panelHeight - headHeight)) style:UITableViewStylePlain];
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelSize.width, panelSize.width, (panelSize.height - headSize.height)) style:UITableViewStylePlain];
         [self addSubview:tableView];
         [self setMenuTableView:tableView];
     }
