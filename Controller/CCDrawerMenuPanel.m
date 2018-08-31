@@ -49,20 +49,19 @@ static CGFloat const kImageSizeOneSide = 64;
     if (self)
     {
         // パネルサイズ
-        CGSize panelSize = frame.size;
-        // ヘッダサイズ
-        CGSize headSize = CGSizeMake(panelSize.width, panelSize.width);
+        CGFloat panelWidth = frame.size.width;
+        CGFloat panelHeight = frame.size.height;
         
         // ヘッダビュー
         CCView *view;
-        view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, headSize.width, headSize.height)];
+        view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, panelWidth, panelWidth)];
         [view setUserInteractionEnabled:YES];
         [self addSubview:view];
         [self setHeadView:view];
         
         // テーブルビュー
         UITableView *tableView;
-        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelSize.width, panelSize.width, (panelSize.height - headSize.height)) style:UITableViewStylePlain];
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelWidth, panelWidth, (panelHeight - panelWidth)) style:UITableViewStylePlain];
         [self addSubview:tableView];
         [self setMenuTableView:tableView];
     }
