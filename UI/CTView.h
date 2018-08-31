@@ -1,0 +1,13 @@
+//
+//  CTView.h
+//  CitrusCobaltum
+//
+//  Created by kouhei.takemoto on 2018/08/27.
+//  Copyright © 2018年 citrus.tk. All rights reserved.
+//
+
+#import "CCControl.h"
+
+@interface CTView : CCControl
+
+@end
