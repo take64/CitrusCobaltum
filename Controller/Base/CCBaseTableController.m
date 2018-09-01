@@ -78,6 +78,8 @@
     
     return CC8(3);
 }
+
+// セルフッタ高さ
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     UIView *footerView = [self callFooterCacheWithSection:section];
@@ -93,6 +95,7 @@
 {
     return [self callHeaderCacheWithSection:section];
 }
+
 // セルフッタを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -113,7 +116,7 @@
     if (cacheView == nil)
     {
         cacheView = [CCTableViewTrait callTableHeaderViewWithController:self tableView:[self tableView] section:section];
-        [self saveHeaderCacheWithSection:section view:cacheView];
+        [self saveCache:[self headerCaches] section:section view:cacheView];
     }
     return cacheView;
 }
@@ -125,29 +128,19 @@
     if (cacheView == nil)
     {
         cacheView = [CCTableViewTrait callTableFooterViewWithController:self tableView:[self tableView] section:section];
-        [self saveFooterCacheWithSection:section view:cacheView];
+        [self saveCache:[self footerCaches] section:section view:cacheView];
     }
     return cacheView;
 }
 
-// ヘッダキャッシュの追加
-- (void) saveHeaderCacheWithSection:(NSInteger)section view:(UIView *)viewValue
+// ヘッダ/フッタキャッシュの追加
+- (void) saveCache:(NSMutableDictionary *)caches section:(NSInteger)section view:(UIView *)viewValue
 {
     if (viewValue == nil)
     {
         return;
     }
-    [[self headerCaches] setObject:viewValue forKey:@(section)];
-}
-
-// フッタキャッシュの追加
-- (void) saveFooterCacheWithSection:(NSInteger)section view:(UIView *)viewValue
-{
-    if (viewValue == nil)
-    {
-        return;
-    }
-    [[self footerCaches] setObject:viewValue forKey:@(section)];
+    [caches setObject:viewValue forKey:@(section)];
 }
 
 // セルの長押し
