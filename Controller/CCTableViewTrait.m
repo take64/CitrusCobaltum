@@ -13,6 +13,9 @@
 #import "CCTableFooterView.h"
 #import "CCUIStruct.h"
 
+static NSString * const kCCTableHeaderViewName = @"CCTableHeaderView";
+static NSString * const kCCTableFooterViewName = @"CCTableFooterView";
+
 @implementation CCTableViewTrait
 
 #pragma mark - static method
@@ -23,129 +26,106 @@
 // ヘッダビュー取得
 + (UIView *) callTableHeaderViewWithController:(id<CCTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView section:(NSInteger)section
 {
-    // head title
-    NSString *titleString = @"";
-    if([tableDelegate respondsToSelector:@selector(callHeaderTitleWithSection:)] == YES)
-    {
-        titleString = [tableDelegate callHeaderTitleWithSection:section];
-    }
-    
-    // head view
-    UIView *titleView = nil;
-    if([tableDelegate respondsToSelector:@selector(callHeaderViewWithSection:)] == YES)
-    {
-        titleView = [tableDelegate callHeaderViewWithSection:section];
-    }
-    
-    // title id
-    NSString *queueID = [CCTableHeaderView reuseIdentifierWithSection:section];
-    
-    // dequeue
-    CCTableHeaderView *headerFooterView = (CCTableHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:queueID];
-    
-    // data exists
-    if([titleString length] > 0 || titleView != nil)
-    {
-        // generate
-        if(headerFooterView == nil)
-        {
-            headerFooterView = [[CCTableHeaderView alloc] initWithReuseIdentifier:queueID];
-            [headerFooterView setMargin:[self callTableSectionMarginSizeWithController:(id)tableDelegate tableView:tableView]];
-        }
-    }
-    
-    // bind
-    if(headerFooterView != nil)
-    {
-        // title string exist
-        if([titleString length] > 0)
-        {
-            [headerFooterView bindTitle:titleString];
-        }
-        
-        // title view exist
-        if(titleView != nil)
-        {
-            [headerFooterView bindView:titleView];
-        }
-    }
-    
-    return headerFooterView;
+    return [self generateHeaderFooterType:[CCTableHeaderView class] tableDelegate:tableDelegate tableView:tableView section:section];
 }
 
 // フッタビュー取得
 + (UIView *) callTableFooterViewWithController:(id<CCTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView section:(NSInteger)section
 {
-    // head title
-    NSString *titleString = @"";
-    if([tableDelegate respondsToSelector:@selector(callFooterTitleWithSection:)] == YES)
-    {
-        titleString = [tableDelegate callFooterTitleWithSection:section];
-    }
-    
-    // head view
-    UIView *titleView = nil;
-    if([tableDelegate respondsToSelector:@selector(callFooterViewWithSection:)] == YES)
-    {
-        titleView = [tableDelegate callFooterViewWithSection:section];
-    }
-    
-    // queue id
-    NSString *queueID = [CCTableFooterView reuseIdentifierWithSection:section];
-    
-    // dequeue
-    CCTableFooterView *headerFooterView = (CCTableFooterView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:queueID];
-    
-    // data exists
-    if([titleString length] > 0 || titleView != nil)
-    {
-        // generate
-        if(headerFooterView == nil)
-        {
-            headerFooterView = [[CCTableFooterView alloc] initWithReuseIdentifier:queueID];
-            [headerFooterView setMargin:[self callTableSectionMarginSizeWithController:(id)tableDelegate tableView:tableView]];
-        }
-    }
-    
-    // bind
-    if(headerFooterView != nil)
-    {
-        // title string exist
-        if([titleString length] > 0)
-        {
-            [headerFooterView bindTitle:titleString];
-        }
-        
-        // title view exist
-        if(titleView != nil)
-        {
-            [headerFooterView bindView:titleView];
-        }
-    }
-    
-    return headerFooterView;
+    return [self generateHeaderFooterType:[CCTableFooterView class] tableDelegate:tableDelegate tableView:tableView section:section];
 }
 
 // ヘッダ/フッタ セクションマージン取得
 + (CGFloat) callTableSectionMarginSizeWithController:(id<CCTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView
 {
     CCTableViewMode mode = CCTableViewModeList;
-    if([tableDelegate respondsToSelector:@selector(callTableViewMode)] == YES)
+    if ([tableDelegate respondsToSelector:@selector(callTableViewMode)] == YES)
     {
         mode = [tableDelegate callTableViewMode];
     }
     
     CGFloat result = .0f;
-    if(mode == CCTableViewModeEdit)
+    if (mode == CCTableViewModeEdit)
     {
         result = CC8(1);
-        if([tableView style] == UITableViewStyleGrouped)
+        if ([tableView style] == UITableViewStyleGrouped)
         {
             result += CC8(1);
         }
     }
     
     return result;
+}
+
+
+
+#pragma mark - static private
+//
+// static private
+//
+
+// ヘッダフッタビューの生成
++ (CCTableHeaderFooterView *) generateHeaderFooterType:(Class)viewClass tableDelegate:(id<CCTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView section:(NSInteger)section
+{
+    // タイトル/ビュー
+    NSString *titleString = @"";
+    UIView *titleView = nil;
+    
+    // ヘッダ
+    if ([viewClass isKindOfClass:[CCTableHeaderView class]] == YES)
+    {
+        if ([tableDelegate respondsToSelector:@selector(callHeaderTitleWithSection:)] == YES)
+        {
+            titleString = [tableDelegate callHeaderTitleWithSection:section];
+        }
+        if ([tableDelegate respondsToSelector:@selector(callHeaderViewWithSection:)] == YES)
+        {
+            titleView = [tableDelegate callHeaderViewWithSection:section];
+        }
+    }
+    // フッタ
+    else if ([viewClass isKindOfClass:[CCTableFooterView class]] == YES)
+    {
+        if ([tableDelegate respondsToSelector:@selector(callFooterTitleWithSection:)] == YES)
+        {
+            titleString = [tableDelegate callFooterTitleWithSection:section];
+        }
+        if ([tableDelegate respondsToSelector:@selector(callFooterViewWithSection:)] == YES)
+        {
+            titleView = [tableDelegate callFooterViewWithSection:section];
+        }
+        
+    }
+    
+    // キューID
+    NSString *queueID = [viewClass reuseIdentifierWithSection:section];
+    
+    // デキュー
+    CCTableHeaderFooterView *headerFooterView = (CCTableHeaderFooterView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:queueID];
+    
+    // データある場合
+    if ([titleString length] > 0 || titleView != nil)
+    {
+        // 生成
+        if (headerFooterView == nil)
+        {
+            headerFooterView = [[viewClass alloc] initWithReuseIdentifier:queueID];
+            [headerFooterView setMargin:[self callTableSectionMarginSizeWithController:(id)tableDelegate tableView:tableView]];
+        }
+        
+        // タイトル文字列がある場合
+        if ([titleString length] > 0)
+        {
+            [headerFooterView bindTitle:titleString];
+        }
+        
+        // タイトルビューがある場合
+        if (titleView != nil)
+        {
+            [headerFooterView bindView:titleView];
+        }
+    }
+    return headerFooterView;
 }
 
 @end
