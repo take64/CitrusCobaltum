@@ -61,4 +61,10 @@ typedef enum {
 // スタイル設定(disabled)
 - (void) setStyleDisabled:(CCStyle *)styleValue;
 
+// 自動テキストサイズ計算
+- (CGSize) calcTextAutoSize;
+
+// 自動テキストサイズ計算(パディング込み)
+- (CGSize) calcTextAutoSizeWithPadding;
+
 @end

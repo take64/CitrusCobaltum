@@ -163,6 +163,24 @@
     return [self floatStyleForKey:@"font-size" defaultValue:12];
 }
 
+// フォント要素取得
+- (NSMutableDictionary *) callFontAttributes
+{
+    // 文字列要素
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    // パラグラフ
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    [attributes addEntriesFromDictionary:@{NSParagraphStyleAttributeName:paragraph}];
+    // ラインブレイク
+    NSLineBreakMode lineBreakMode = [self callLineBreak];
+    [paragraph setLineBreakMode:lineBreakMode];
+    // フォント計算
+    UIFont *font = [self callFont];
+    [attributes addEntriesFromDictionary:@{NSFontAttributeName:font}];
+    
+    return attributes;
+}
+
 // サイズ取得
 - (CGSize) callSize
 {
@@ -172,6 +190,15 @@
     return CGSizeMake(width, height);
 }
 
+// サイズ設定
+- (void) setSize:(CGSize)size
+{
+    [self addStyleDictionary:@{
+                               @"width" :CCStr(size.width),
+                               @"height":CCStr(size.height),
+                               }];
+}
+
 // ポイント取得
 - (CGPoint) callPoint
 {
@@ -179,6 +206,15 @@
     CGFloat left = [self floatStyleForKey:@"left" defaultValue:0];
     
     return CGPointMake(left, top);
+}
+
+// ポイント設定
+- (void) setPoint:(CGPoint)point
+{
+    [self addStyleDictionary:@{
+                               @"left"  :CCStr(point.x),
+                               @"top"   :CCStr(point.y),
+                               }];
 }
 
 // フレーム取得
@@ -191,6 +227,13 @@
     rect.origin = point;
     rect.size = size;
     return rect;
+}
+
+// フレーム設定
+- (void) setFrame:(CGRect)frame
+{
+    [self setSize:frame.size];
+    [self setPoint:frame.origin];
 }
 
 // マージンの取得
@@ -287,8 +330,8 @@
     return lineBreak;
 }
 
-// 文字寄せ取得
-- (NSTextAlignment) callTextAlign
+// 横文字寄せ取得
+- (NSTextAlignment) callTextAlignment
 {
     NSString *textAlignString = [self styleForKey:@"text-align"];
     NSTextAlignment textAlign = NSTextAlignmentCenter;
@@ -306,6 +349,27 @@
         textAlign = NSTextAlignmentRight;
     }
     return textAlign;
+}
+
+// 縦文字寄せ取得
+- (CCVerticalAlignment) callVerticalAlignment
+{
+    NSString *verticalAlignString = [self styleForKey:@"vertical-align"];
+    CCVerticalAlignment verticalAlignment = CCVerticalAlignmentMiddle;
+    if (verticalAlignString == nil)
+    {
+        return verticalAlignment;
+    }
+    
+    if ([verticalAlignString isEqualToString:@"top"] == YES)
+    {
+        verticalAlignment = CCVerticalAlignmentTop;
+    }
+    else if ([verticalAlignString isEqualToString:@"bottom"] == YES)
+    {
+        verticalAlignment = CCVerticalAlignmentBottom;
+    }
+    return verticalAlignment;
 }
 
 // 背景色取得

@@ -126,6 +126,38 @@ static CGFloat const kControlHeight = 48;
     [[self callStyleDisabled] addStyleDictionary:[styleValue allStyles]];
 }
 
+// 自動テキストサイズ計算
+- (CGSize)calcTextAutoSize
+{
+    CGSize bounds = CGSizeZero;
+    CCStyle *stylesheet = [self callStyle];
+    CGFloat width = [stylesheet callSize].width;
+    
+    // フォント要素
+    NSMutableDictionary *attributes = [stylesheet callFontAttributes];
+    
+    // サイズ計算
+    CGSize fontBounds = [[self title] boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine) attributes:attributes context:nil].size;
+    bounds.width = ceil(fontBounds.width);
+    bounds.height = ceil(fontBounds.height);
+    
+    return bounds;
+}
+
+// 自動テキストサイズ計算(パディング込み)
+- (CGSize)calcTextAutoSizeWithPadding
+{
+    CGSize bounds = [self calcTextAutoSize];
+    CCStyle *stylesheet = [self callStyle];
+    
+    // パディング追加
+    CCPadding padding = [stylesheet callPadding];
+    bounds.width += (padding.left + padding.right);
+    bounds.height += (padding.top + padding.bottom);
+    
+    return bounds;
+}
+
 // 初期化
 - (id)initWithFrame:(CGRect)frame
 {
@@ -202,19 +234,7 @@ static CGFloat const kControlHeight = 48;
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // スタイルシート
-    CCStyle *stylesheet = [[self callStyleNormal] copy];
-    
-    // 状態
-    switch ([self controlState]) {
-        case CCControlStateHighlighted:
-            stylesheet = [[self callStyleHighlighted] copy];
-            break;
-        case CCControlStateDisabled:
-            stylesheet = [[self callStyleDisabled] copy];
-            break;
-        default:
-            break;
-    }
+    CCStyle *stylesheet = [self callControlStateStylesheet];
     
     // 文字列要素
     NSMutableDictionary *attributes = [@{} mutableCopy];
@@ -401,26 +421,48 @@ static CGFloat const kControlHeight = 48;
         
         // 文字寄せ
         CGRect titleFrame = CGRectMake(0, 0, (fontBounds.width), (fontBounds.height));
-        NSTextAlignment textAlign = [stylesheet callTextAlign];
-        if(textAlign == NSTextAlignmentLeft)
+        
+        // 横位置
+        NSTextAlignment textAlignment = [stylesheet callTextAlignment];
+        CGFloat titleFrameX = 0;
+        if (textAlignment == NSTextAlignmentLeft)
         {
             // 左寄せ
-            titleFrame.origin = CGPointMake(paddedRect.origin.x,
-                                            (paddedRect.size.height / 2 - fontBounds.height / 2) + paddedRect.origin.y);
+            titleFrameX = paddedRect.origin.x;
         }
-        else if(textAlign == NSTextAlignmentRight)
+        else if (textAlignment == NSTextAlignmentRight)
         {
             // 右寄せ
-            titleFrame.origin = CGPointMake((paddedRect.origin.x + paddedRect.size.width) - fontBounds.width,
-                                            (paddedRect.size.height / 2 - fontBounds.height / 2) + paddedRect.origin.y);
+            titleFrameX = (paddedRect.origin.x + paddedRect.size.width) - fontBounds.width;
         }
         else
         {
             // 中央寄せ
-            titleFrame.origin = CGPointMake((paddedRect.size.width / 2 - fontBounds.width / 2) + paddedRect.origin.x,
-                                            (paddedRect.size.height / 2 - fontBounds.height / 2) + paddedRect.origin.y);
+            titleFrameX = (paddedRect.size.width / 2 - fontBounds.width / 2) + paddedRect.origin.x;
         }
-        [paragraph setAlignment:textAlign];
+        
+        // 縦位置
+        CCVerticalAlignment verticalAlignment = [stylesheet callVerticalAlignment];
+        CGFloat titleFrameY = 0;
+        if (verticalAlignment == CCVerticalAlignmentTop)
+        {
+            // 上寄せ
+            titleFrameY = paddedRect.origin.y;
+        }
+        else if (verticalAlignment == CCVerticalAlignmentBottom)
+        {
+            // 下寄せ
+            titleFrameY = (paddedRect.size.height - fontBounds.height) + paddedRect.origin.y;
+        }
+        else
+        {
+            // 中央寄せ
+            titleFrameY = (paddedRect.size.height / 2 - fontBounds.height / 2) + paddedRect.origin.y;
+        }
+        
+        titleFrame.origin = CGPointMake(titleFrameX, titleFrameY);
+        
+        [paragraph setAlignment:textAlignment];
         
         // 文字列描画
         [[self title] drawInRect:titleFrame withAttributes:attributes];
@@ -495,6 +537,24 @@ static CGFloat const kControlHeight = 48;
     CGContextAddArcToPoint(context, maxx, maxy, midx, maxy, radius.bottom.left + offset);
     CGContextAddArcToPoint(context, minx, maxy, minx, midy, radius.bottom.right + offset);
     CGContextClosePath(context);
+}
+
+// コントロールステートに基づくスタイルシートの取得
+- (CCStyle *)callControlStateStylesheet
+{
+    CCStyle *stylesheet = [self callStyleNormal];
+    switch ([self controlState])
+    {
+        case CCControlStateHighlighted:
+            stylesheet = [self callStyleHighlighted];
+            break;
+        case CCControlStateDisabled:
+            stylesheet = [self callStyleDisabled];
+            break;
+        default:
+            break;
+    }
+    return [stylesheet copy];
 }
 
 @end
