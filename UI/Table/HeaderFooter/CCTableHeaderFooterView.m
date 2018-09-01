@@ -19,6 +19,8 @@
 // synthesize
 //
 @synthesize label;
+@synthesize labelColor;
+@synthesize labelBackgroundColor;
 @synthesize control;
 @synthesize margin;
 
@@ -46,15 +48,15 @@
                                                  @"font-size"       :@"14",
                                                  @"text-align"      :@"left",
                                                  @"vertical-align"  :@"top",
-                                                 @"padding"         :@"2 8"
+                                                 @"padding"         :@"2 8",
                                                  }];
         [self setLabel:_label];
         
         // view
         [self setControl:[[UIView alloc] initWithFrame:CGRectZero]];
         
-        // theme
-        [[self contentView] setBackgroundColor:[CCColor colorTableBackground]];
+        // テーマ適用
+        [self bindTheme];
     }
     return self;
 }
@@ -67,7 +69,7 @@
 }
 
 // タイトル or ビュー設定
-- (void)bindTitle:(NSString *)titleString orView:(UIView *)viewValue
+- (void) bindTitle:(NSString *)titleString orView:(UIView *)viewValue
 {
     // タイトル設定
     if ([titleString length] > 0)
@@ -126,6 +128,17 @@
     [self setFrame:rect];
 }
 
+// テーマ設定
+- (void) bindTheme
+{
+    [[[self label] callStyle] addStyleDictionary:@{
+                                                   @"color"             :[CCColor hexStringWithColor:[self labelColor]],
+                                                   @"background-color"  :[CCColor hexStringWithColor:[self labelBackgroundColor]]
+                                                   }];
+    
+    [[self contentView] setBackgroundColor:[CCColor colorTableBackground]];
+}
+
 
 
 #pragma mark - static method
@@ -136,7 +149,7 @@
 // リサイクルID取得
 + (NSString *) reuseIdentifierWithSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"CTTableHeaderFooterView_%03ld", (long)section];
+    return [NSString stringWithFormat:@"CCTableHeaderFooterView_%03ld", (long)section];
 }
 
 @end

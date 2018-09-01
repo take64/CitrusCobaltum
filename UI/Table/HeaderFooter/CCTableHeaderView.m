@@ -23,26 +23,27 @@
 // method
 //
 
-// 初期化
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+// テーマ設定
+- (void) bindTheme
 {
-    self = [super initWithReuseIdentifier:reuseIdentifier];
-    if (self)
-    {
-        // テーマ
-        CCTheme *theme = [CitrusCobaltumApplication callTheme];
-        
-        // スタイル
-        [[[self label] callStyle] addStyleDictionary:@{
-                                                       @"color"             :[CCColor hexStringWithColor:[theme callTableCellHeadTextColor]],
-                                                       @"background-color"  :[CCColor hexStringWithColor:[theme callTableCellHeadBackColor]]
-                                                       }];
-    }
-    return self;
+    // テーマ
+    CCTheme *theme = [CitrusCobaltumApplication callTheme];
+    [self setLabelColor:[theme callTableCellHeadTextColor]];
+    [self setLabelBackgroundColor:[theme callTableCellHeadBackColor]];
+    
+    // 適用
+    [super bindTheme];
 }
 
+
+
+#pragma mark - static method
+//
+// static method
+//
+
 // リサイクルID取得
-+ (NSString *)reuseIdentifierWithSection:(NSInteger)section
++ (NSString *) reuseIdentifierWithSection:(NSInteger)section
 {
     return [NSString stringWithFormat:@"CCTableHeaderView_%03ld", (long)section];
 }

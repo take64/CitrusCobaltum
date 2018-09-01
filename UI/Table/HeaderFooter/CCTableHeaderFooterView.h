@@ -14,6 +14,8 @@
 {
     // label
     CCLabel *label;
+    UIColor *labelColor;
+    UIColor *labelBackgroundColor;
     
     // view
     UIView *control;
@@ -26,6 +28,8 @@
 // property
 //
 @property (nonatomic, retain) CCLabel *label;
+@property (nonatomic, retain) UIColor *labelColor;
+@property (nonatomic, retain) UIColor *labelBackgroundColor;
 @property (nonatomic, retain) UIView *control;
 @property (nonatomic, assign) CGFloat margin;
 
@@ -43,6 +47,9 @@
 
 // ビュー設定
 - (void) bindView:(UIView *)viewValue;
+
+// テーマ設定
+- (void) bindTheme;
 
 
 
