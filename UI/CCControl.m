@@ -29,7 +29,6 @@ static CGFloat const kControlHeight = 48;
 //
 // property
 //
-
 @property (nonatomic) CCStyle *styleNormal;
 @property (nonatomic) CCStyle *styleHighlighted;
 @property (nonatomic) CCStyle *styleDisabled;
