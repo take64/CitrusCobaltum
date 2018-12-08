@@ -43,7 +43,7 @@
     self = [super init];
     if (self)
     {
-        [self setTheme:[[CTTheme alloc] init]];
+        [self setTheme:[[CCTheme alloc] init]];
     }
     return self;
 }

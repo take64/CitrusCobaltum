@@ -56,12 +56,14 @@ static CGFloat const kImageSizeOneSide = 64;
         CCView *view;
         view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, panelWidth, panelWidth)];
         [view setUserInteractionEnabled:YES];
+        [[view callStyle] addStyleKey:@"background-color" value:[CTColor hexStringWithColor:[[CitrusTouchApplication callTheme] callDrawerPanelBackColor]]];
         [self addSubview:view];
         [self setHeadView:view];
         
         // テーブルビュー
         UITableView *tableView;
         tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelWidth, panelWidth, (panelHeight - panelWidth)) style:UITableViewStylePlain];
+        [tableView setBackgroundColor:[[CitrusTouchApplication callTheme] callDrawerPanelBackColor]];
         [self addSubview:tableView];
         [self setMenuTableView:tableView];
     }
@@ -80,6 +82,7 @@ static CGFloat const kImageSizeOneSide = 64;
         [imageView setCenter:[[self headView] center]];
         [imageView setClipsToBounds:YES];
         [[imageView layer] setCornerRadius:8];
+        [imageView setImage:[[CitrusTouchApplication callTheme] callDrawerPanelIconImage]];
         [[self headView] addSubview:imageView];
         [self setHeadImageView:imageView];
     }

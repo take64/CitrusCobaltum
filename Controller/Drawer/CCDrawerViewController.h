@@ -10,7 +10,7 @@
 
 @class CCDrawerMenuSection;
 
-@interface CCDrawerViewController : UINavigationController<UITableViewDataSource, UITableViewDelegate>
+@interface CCDrawerViewController : CTNavigationController<UITableViewDataSource, UITableViewDelegate, CTTableViewDelegate, UIGestureRecognizerDelegate>
 
 //
 // method
