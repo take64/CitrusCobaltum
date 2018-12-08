@@ -65,6 +65,24 @@ static CGFloat const kControlHeight = 48;
     return self;
 }
 
+// 初期化
+- (instancetype) initWithTitle:(NSString *)titleValue styleKeys:(NSDictionary *)styleKeys
+{
+    self = [self initWithTitle:titleValue];
+    if (self)
+    {
+        // スタイル
+        [[self callStyle] addStyleKeys:styleKeys];
+    }
+    return self;
+}
+
+// タイトルが設定されているか
+- (BOOL) hasTitle
+{
+    return ([self title] != nil && [[self title] length] > 0);
+}
+
 // スタイル取得(normalのエイリアス)
 - (CCStyle *) callStyle
 {
@@ -126,7 +144,7 @@ static CGFloat const kControlHeight = 48;
 }
 
 // 自動テキストサイズ計算
-- (CGSize)calcTextAutoSize
+- (CGSize) calcTextAutoSize
 {
     CGSize bounds = CGSizeZero;
     CCStyle *stylesheet = [self callStyle];
@@ -144,7 +162,7 @@ static CGFloat const kControlHeight = 48;
 }
 
 // 自動テキストサイズ計算(パディング込み)
-- (CGSize)calcTextAutoSizeWithPadding
+- (CGSize) calcTextAutoSizeWithPadding
 {
     CGSize bounds = [self calcTextAutoSize];
     CCStyle *stylesheet = [self callStyle];
@@ -158,7 +176,7 @@ static CGFloat const kControlHeight = 48;
 }
 
 // 初期化
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     // デフォルトサイズ処理
     if(CGRectIsEmpty(frame) == YES)
