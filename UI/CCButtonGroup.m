@@ -12,6 +12,8 @@
 #import "CCButton.h"
 #import "CCBarButtonItem.h"
 #import "CCColor.h"
+#import "CCTheme.h"
+#import "CCStyle.h"
 
 
 
@@ -67,16 +69,20 @@
 // ボタンの追加(文字列から)
 - (CCButton *) addButtonWithTitle:(NSString *)titleString complete:(CCButtonTappedBlock)completeBlock
 {
+    // アプリケーションテーマ
+    CCTheme *theme = [CitrusCobaltumApplication callTheme];
+    
+    // ボタン
     CCButton *button = [[CCButton alloc] initWithTitle:titleString];
     [button setOnTappedComplete:completeBlock];
-    [[button callStyle] addStyles:@{
-                                    @"width"            :@"32",
-                                    @"height"           :@"16",
-                                    @"font-size"        :@"14",
-                                    @"padding"          :@"4 8 4 8",
-                                    @"color"            :[CCColor hexStringWithColor:[[CitrusCobaltumApplication callTheme] callNavigationBarTextColor]],
-                                    @"background-color" :[CCColor hexStringWithColor:[[CitrusCobaltumApplication callTheme] callNavigationBarTintColor]],
-                                    }];
+    [[button callStyle] addStyleDictionary:@{
+                                             @"width"           :@"32",
+                                             @"height"          :@"16",
+                                             @"font-size"       :@"14",
+                                             @"padding"         :@"4 8 4 8",
+                                             @"color"           :[CCColor hexStringWithColor:[theme callNavigationBarTextColor]],
+                                             @"background-color":[CCColor hexStringWithColor:[theme callNavigationBarTintColor]],
+                                             }];
     [self addButton:button];
 
     return button;
@@ -116,11 +122,11 @@
         CGSize buttonSize = [button calcTextAutoSizeWithPadding];
 
         // ボタンの横位置調整
-        [[button callStyle] addStyles:@{
-                                        @"left"     :CCStr(width),
-                                        @"width"    :CCStr(buttonSize.width),
-                                        @"height"   :CCStr(buttonSize.height),
-                                        }];
+        [[button callStyle] addStyleDictionary:@{
+                                                 @"left"    :CCStr(width),
+                                                 @"width"   :CCStr(buttonSize.width),
+                                                 @"height"  :CCStr(buttonSize.height),
+                                                 }];
         // ボタングループ用のサイズスタック
         width += buttonSize.width;
         height = MAX(height, buttonSize.height);
@@ -133,10 +139,10 @@
     }
     
     // ボタングループのサイズ調整
-    [[self callStyle] addStyles:@{
-                                 @"width"   :CCStr(width),
-                                 @"height"  :CCStr(height),
-                                 }];
+    [[self callStyle] addStyleDictionary:@{
+                                           @"width" :CCStr(width),
+                                           @"height":CCStr(height),
+                                           }];
     // ボタンの角丸め
     if (firstButton == lastButton)
     {
