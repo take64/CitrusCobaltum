@@ -92,4 +92,10 @@ typedef NS_ENUM(NSInteger, CCVerticalAlignment)
     CCVerticalAlignmentBottom
 };
 
+
+@class CCButton;
+
+// ボタンタップ用のブロック
+typedef void (^CCButtonTappedBlock)(CCButton *buttonValue);
+
 #endif /* CCStyleStruct_h */
