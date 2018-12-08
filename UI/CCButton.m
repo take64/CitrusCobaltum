@@ -26,14 +26,6 @@
 
 @implementation CCButton
 
-#pragma mark - synthesize
-//
-// synthesize
-//
-@synthesize tappedBlock;
-
-
-
 #pragma mark - method
 //
 // method

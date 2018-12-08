@@ -8,9 +8,9 @@
 
 #import "CCControl.h"
 
-@class CCButton;
+#import "CCUIStruct.h"
 
-typedef void (^CCButtonTappedBlock)(CCButton *buttonValue);
+@class CCButton;
 
 @interface CCButton : CCControl
 
