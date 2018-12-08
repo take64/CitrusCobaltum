@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "CCTableViewDelegate.h"
+
 @interface CCTableViewTrait : NSObject
 
 //
@@ -16,12 +18,12 @@
 //
 
 // ヘッダビュー取得
-+ (UIView *) callTableHeaderViewWithController:(id<CTTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView section:(NSInteger)section;
++ (UIView *) callTableHeaderViewWithController:(id<CCTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView section:(NSInteger)section;
 
 // フッタビュー取得
-+ (UIView *) callTableFooterViewWithController:(id<CTTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView section:(NSInteger)section;
++ (UIView *) callTableFooterViewWithController:(id<CCTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView section:(NSInteger)section;
 
 // ヘッダ/フッタ セクションマージン取得
-+ (CGFloat) callTableSectionMarginSizeWithController:(id<CTTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView;
++ (CGFloat) callTableSectionMarginSizeWithController:(id<CCTableViewDelegate>)tableDelegate tableView:(UITableView *)tableView;
 
 @end
