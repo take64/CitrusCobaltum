@@ -94,10 +94,17 @@ typedef NS_ENUM(NSInteger, CCVerticalAlignment)
 
 // テーブルセルの表示優先順
 typedef NS_ENUM(NSInteger, CCTableCellPartPriority) {
-    CCTableCellPartPriorityHidden, // 非表示
-    CCTableCellPartPriorityHigh,   // 高
-    CCTableCellPartPriorityMiddle, // 中
-    CCTableCellPartPriorityLow     // 低
+    CCTableCellPartPriorityHidden,  // 非表示
+    CCTableCellPartPriorityHigh,    // 高
+    CCTableCellPartPriorityMiddle,  // 中
+    CCTableCellPartPriorityLow      // 低
+};
+
+// テーブルセルの表示場所
+typedef NS_ENUM(NSInteger, CCTableCellPartPosition) {
+    CCTableCellPartPositionPrefix,  // prefix
+    CCTableCellPartPositionContent, // content
+    CCTableCellPartPositionSuffix,  // suffix
 };
 
 
