@@ -24,7 +24,7 @@
 - (void) addStyleKey:(NSString *)keyValue value:(NSString *)dataValue;
 
 // スタイルの一括追加
-- (void) addStyleDictionary:(NSDictionary *)dictionaryValue;
+- (void) addStyleKeys:(NSDictionary *)keyValues;
 
 // キーの削除
 - (void) removeStyleKey:(NSString *)keyValue;
