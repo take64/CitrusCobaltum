@@ -43,13 +43,13 @@
         
         // label
         _label = [[CCLabel alloc] initWithTitle:@""];
-        [[_label callStyle] addStyleDictionary:@{
-                                                 @"width"           :@"320",
-                                                 @"font-size"       :@"14",
-                                                 @"text-align"      :@"left",
-                                                 @"vertical-align"  :@"top",
-                                                 @"padding"         :@"2 8",
-                                                 }];
+        [[_label callStyle] addStyleKeys:@{
+                                           @"width"         :@"320",
+                                           @"font-size"     :@"14",
+                                           @"text-align"    :@"left",
+                                           @"vertical-align":@"top",
+                                           @"padding"       :@"2 8",
+                                           }];
         [self setLabel:_label];
         
         // view
@@ -131,10 +131,10 @@
 // テーマ設定
 - (void) bindTheme
 {
-    [[[self label] callStyle] addStyleDictionary:@{
-                                                   @"color"             :[CCColor hexStringWithColor:[self labelColor]],
-                                                   @"background-color"  :[CCColor hexStringWithColor:[self labelBackgroundColor]]
-                                                   }];
+    [[[self label] callStyle] addStyleKeys:@{
+                                             @"color"           :[CCColor hexStringWithColor:[self labelColor]],
+                                             @"background-color":[CCColor hexStringWithColor:[self labelBackgroundColor]]
+                                             }];
     
     [[self contentView] setBackgroundColor:[CCColor colorTableBackground]];
 }

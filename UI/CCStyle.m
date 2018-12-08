@@ -78,11 +78,11 @@
 }
 
 // スタイルの一括追加
-- (void) addStyleDictionary:(NSDictionary *)dictionaryValue
+- (void) addStyleKeys:(NSDictionary *)keyValues
 {
-    for (NSString *keyValue in [dictionaryValue allKeys])
+    for (NSString *keyValue in [keyValues allKeys])
     {
-        [self addStyleKey:keyValue value:[dictionaryValue objectForKey:keyValue]];
+        [self addStyleKey:keyValue value:[keyValues objectForKey:keyValue]];
     }
 }
 
@@ -116,7 +116,7 @@
 // スタイルの一括設定
 - (void) setStyleDictionary:(NSDictionary *)dictionaryValue
 {
-    [self addStyleDictionary:dictionaryValue];
+    [self addStyleKeys:dictionaryValue];
 }
 
 // スタイルの全取得
@@ -193,10 +193,10 @@
 // サイズ設定
 - (void) setSize:(CGSize)size
 {
-    [self addStyleDictionary:@{
-                               @"width" :CCStr(size.width),
-                               @"height":CCStr(size.height),
-                               }];
+    [self addStyleKeys:@{
+                         @"width"   :CCStr(size.width),
+                         @"height"  :CCStr(size.height),
+                         }];
 }
 
 // ポイント取得
@@ -211,10 +211,10 @@
 // ポイント設定
 - (void) setPoint:(CGPoint)point
 {
-    [self addStyleDictionary:@{
-                               @"left"  :CCStr(point.x),
-                               @"top"   :CCStr(point.y),
-                               }];
+    [self addStyleKeys:@{
+                         @"left":CCStr(point.x),
+                         @"top" :CCStr(point.y),
+                         }];
 }
 
 // フレーム取得

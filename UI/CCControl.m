@@ -90,7 +90,7 @@ static CGFloat const kControlHeight = 48;
 // スタイル設定(normal)
 - (void) setStyleNormal:(CCStyle *)styleValue
 {
-    [[self callStyleNormal] addStyleDictionary:[styleValue allStyles]];
+    [[self callStyleNormal] addStyleKeys:[styleValue allStyles]];
 }
 
 // スタイル取得(highlighted)
@@ -106,7 +106,7 @@ static CGFloat const kControlHeight = 48;
 // スタイル設定(highlighted)
 - (void) setStyleHighlighted:(CCStyle *)styleValue
 {
-    [[self callStyleHighlighted] addStyleDictionary:[styleValue allStyles]];
+    [[self callStyleHighlighted] addStyleKeys:[styleValue allStyles]];
 }
 
 // スタイル取得(disabled)
@@ -122,7 +122,7 @@ static CGFloat const kControlHeight = 48;
 // スタイル設定(disabled)
 - (void) setStyleDisabled:(CCStyle *)styleValue
 {
-    [[self callStyleDisabled] addStyleDictionary:[styleValue allStyles]];
+    [[self callStyleDisabled] addStyleKeys:[styleValue allStyles]];
 }
 
 // 自動テキストサイズ計算
@@ -171,13 +171,13 @@ static CGFloat const kControlHeight = 48;
         // ビュー自体の背景
         [self setBackgroundColor:[UIColor clearColor]];
         // 初期設定
-        [[self callStyleNormal] addStyleDictionary:@{
-                                                     @"background-color"    :@"00000000",
-                                                     @"left"                :@"0",
-                                                     @"top"                 :@"0",
-                                                     @"width"               :[@(frame.size.width) stringValue],
-                                                     @"height"              :[@(frame.size.height) stringValue],
-                                                     }];
+        [[self callStyleNormal] addStyleKeys:@{
+                                               @"background-color"  :@"00000000",
+                                               @"left"              :@"0",
+                                               @"top"               :@"0",
+                                               @"width"             :CCStr(frame.size.width),
+                                               @"height"            :CCStr(frame.size.height),
+                                               }];
         
         // 値監視
         [[[self callStyleNormal] allStyles] addObserver:self forKeyPath:@"width" options:NSKeyValueObservingOptionNew context:NULL];
