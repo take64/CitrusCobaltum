@@ -107,11 +107,11 @@ typedef NS_ENUM(NSInteger, CCTableCellPartPosition) {
     CCTableCellPartPositionSuffix,  // suffix
 };
 
-
-
-@class CCButton;
+// 汎用ブロック
+typedef void (^CitrusCobaltumBlock)(void);
 
 // ボタンタップ用のブロック
+@class CCButton;
 typedef void (^CCButtonTappedBlock)(CCButton *buttonValue);
 
 #endif /* CCStyleStruct_h */
