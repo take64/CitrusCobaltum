@@ -13,6 +13,7 @@
 #import "CCColor.h"
 #import "CCStyle.h"
 #import "CFString.h"
+#import "CFNVL.h"
 
 #pragma mark - static variables
 //
@@ -59,6 +60,8 @@ static CGFloat const kControlHeight = 48;
     self = [self initWithFrame:CGRectZero];
     if (self)
     {
+        titleValue = [CFNVL compare:titleValue replace:@""];
+        
         // タイトル
         [self setTitle:titleValue];
     }
