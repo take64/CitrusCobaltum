@@ -40,9 +40,7 @@
         return;
     }
     
-    [[self label] setFrame:[[self contentView] frame]];
-    
-    CGRect labelRect = [[self label] frame];
+    CGRect labelRect = [[self contentView] frame];
     labelRect.size.width -= 16;
     labelRect.origin.x += 8;
     [[self label] setFrame:labelRect];
@@ -87,24 +85,21 @@
     self = [super initWithPrefix:prefixString suffix:suffixString reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        // part
-        CCLabel *_Label;
-        
         // ラベル
-        _Label = [[CCLabel alloc] initWithTitle:textString styleKeys:@{
-                                                                       @"font-size"    :@"14",
-                                                                       @"color"        :@"000000",
-                                                                       @"text-align"   :@"left",
-                                                                       @"line-break"   :@"clipping",
-                                                                       }];
-        [_Label setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin |
-                                     UIViewAutoresizingFlexibleRightMargin |
-                                     UIViewAutoresizingFlexibleTopMargin |
-                                     UIViewAutoresizingFlexibleBottomMargin |
-                                     UIViewAutoresizingFlexibleWidth |
-                                     UIViewAutoresizingFlexibleHeight)];
-        [[self contentView] addSubview:_Label];
-        [self setLabel:_Label];
+        CCLabel *contentLabel = [[CCLabel alloc] initWithTitle:textString styleKeys:@{
+                                                                                      @"font-size"    :@"14",
+                                                                                      @"color"        :@"000000",
+                                                                                      @"text-align"   :@"left",
+                                                                                      @"line-break"   :@"clipping",
+                                                                                      }];
+        [contentLabel setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin |
+                                           UIViewAutoresizingFlexibleRightMargin |
+                                           UIViewAutoresizingFlexibleTopMargin |
+                                           UIViewAutoresizingFlexibleBottomMargin |
+                                           UIViewAutoresizingFlexibleWidth |
+                                           UIViewAutoresizingFlexibleHeight)];
+        [[self contentView] addSubview:contentLabel];
+        [self setLabel:contentLabel];
         
         // セル選択
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
