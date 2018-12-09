@@ -1,5 +1,5 @@
 //
-//  CCTableCellLabel.h
+//  CCTableCellTextView.h
 //  CitrusCobaltum
 //
 //  Created by kouhei.takemoto on 2018/12/10.
@@ -8,7 +8,7 @@
 
 #import "CCTableCell.h"
 
-@interface CCTableCellLabel : CCTableCell
+@interface CCTableCellTextView : CCTableCell <UITextViewDelegate>
 
 //
 // method
@@ -18,9 +18,6 @@
 - (instancetype) initWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 // 初期化
-- (instancetype) initWithPrefix:(NSString *)prefixString reuseIdentifier:(NSString *)reuseIdentifier;
-
-// 初期化
 - (instancetype) initWithPrefix:(NSString *)prefixString content:(NSString *)textString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier;
 
 // テキスト取得
@@ -28,8 +25,5 @@
 
 // テキスト設定
 - (void) setContentText:(NSString *)stringValue;
-
-// 文字寄せ
-- (void) setTextAlignment:(NSTextAlignment)textAlignment;
 
 @end

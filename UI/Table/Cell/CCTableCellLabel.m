@@ -111,13 +111,13 @@
 }
 
 // テキスト取得
-- (NSString *) labelText
+- (NSString *) contentText
 {
     return [[self label] title];
 }
 
 // テキスト設定
-- (void) setLabelText:(NSString *)stringValue
+- (void) setContentText:(NSString *)stringValue
 {
     [[self label] setTitle:stringValue];
 }
