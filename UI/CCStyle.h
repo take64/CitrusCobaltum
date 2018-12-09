@@ -98,6 +98,9 @@
 // 横文字寄せ取得
 - (NSTextAlignment) callTextAlignment;
 
+// 横文字寄せ設定
+- (void) setTextAlignment:(NSTextAlignment)textAlignment;
+
 // 縦文字寄せ取得
 - (CCVerticalAlignment) callVerticalAlignment;
 

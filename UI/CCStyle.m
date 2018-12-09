@@ -351,6 +351,23 @@
     return textAlign;
 }
 
+// 横文字寄せ設定
+- (void) setTextAlignment:(NSTextAlignment)textAlignment
+{
+    NSString *alignmentString = @"";
+    switch (textAlignment)
+    {
+        case NSTextAlignmentLeft:   alignmentString = @"left";    break;
+        case NSTextAlignmentCenter: alignmentString = @"center";  break;
+        case NSTextAlignmentRight:  alignmentString = @"right";   break;
+        case NSTextAlignmentJustified:
+        case NSTextAlignmentNatural:
+        default:                    alignmentString = @"left";    break;
+    }
+    
+    [self setStyleKey:@"text-align" value:alignmentString];
+}
+
 // 縦文字寄せ取得
 - (CCVerticalAlignment) callVerticalAlignment
 {
