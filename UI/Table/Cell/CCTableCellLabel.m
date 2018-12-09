@@ -49,37 +49,7 @@
     [self setSubLayouted:YES];
 }
 
-
-
-#pragma mark - method
-//
-// method
-//
-
 // 初期化
-- (instancetype) initWithReuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [self initWithPrefix:nil reuseIdentifier:reuseIdentifier];
-    if (self)
-    {
-        
-    }
-    return self;
-}
-
-// 初期化
-- (instancetype) initWithPrefix:(NSString *)prefixString reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [self initWithPrefix:prefixString content:nil suffix:nil reuseIdentifier:reuseIdentifier];
-    if (self)
-    {
-        
-    }
-    return self;
-}
-
-// 初期化
-
 - (instancetype) initWithPrefix:(NSString *)prefixString content:(NSString *)textString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithPrefix:prefixString suffix:suffixString reuseIdentifier:reuseIdentifier];
@@ -106,6 +76,35 @@
         
         // タッチイベントは透過
         [[self label] setUserInteractionEnabled:NO];
+    }
+    return self;
+}
+
+
+
+#pragma mark - method
+//
+// method
+//
+
+// 初期化
+- (instancetype) initWithReuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [self initWithPrefix:nil reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        
+    }
+    return self;
+}
+
+// 初期化
+- (instancetype) initWithPrefix:(NSString *)prefixString reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [self initWithPrefix:prefixString content:nil suffix:nil reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        
     }
     return self;
 }
