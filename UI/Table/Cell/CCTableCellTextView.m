@@ -43,7 +43,7 @@
         return;
     }
     
-    [[self textView] setFrame:[[self contentView] frame]];
+    [[self textView] setFrame:[self contentFrame]];
     
     // レイアウト済み
     [self setSubLayouted:YES];
