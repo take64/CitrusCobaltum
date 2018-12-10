@@ -18,7 +18,7 @@
 //
 
 // 初期化
-- (instancetype) initWithStyleDictionary:(NSDictionary *)dictionaryValue;
+- (instancetype) initWithStyleKeys:(NSDictionary *)dictionaryValue;
 
 // スタイルの追加
 - (void) addStyleKey:(NSString *)keyValue value:(NSString *)dataValue;
