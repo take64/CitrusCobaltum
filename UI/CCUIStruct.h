@@ -107,6 +107,13 @@ typedef NS_ENUM(NSInteger, CCTableCellPartPosition) {
     CCTableCellPartPositionSuffix,  // suffix
 };
 
+// テーブルセル日付ピッカーのモード
+typedef NS_ENUM(NSInteger, CCTableCellDatePickerMode) {
+    CCTableCellDatePickerModeNone,
+    CCTableCellDatePickerModeStandard,
+    CCTableCellDatePickerModeDate,
+};
+
 // 汎用ブロック
 typedef void (^CitrusCobaltumBlock)(void);
 

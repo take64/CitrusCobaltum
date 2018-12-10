@@ -42,7 +42,7 @@
 }
 
 // 初期化
-- (instancetype) initWithStyleDictionary:(NSDictionary *)dictionaryValue
+- (instancetype) initWithStyleKeys:(NSDictionary *)dictionaryValue
 {
     self = [self init];
     if(self)

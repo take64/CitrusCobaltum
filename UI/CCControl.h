@@ -20,13 +20,18 @@ typedef enum {
 
 @interface CCControl : UIControl
 {
+    // パーツタイトル
     NSString *title;
+    
+    // 拡張用情報
+    NSMutableDictionary *userInfo;
 }
 
 //
 // property
 //
 @property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSMutableDictionary *userInfo;
 
 
 
