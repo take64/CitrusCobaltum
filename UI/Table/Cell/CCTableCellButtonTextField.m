@@ -43,12 +43,8 @@
     self = [super initWithPrefix:nil suffix:suffixString reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        // part
-        CCButton *button;
-        CCImageButton *imageButton;
-        
         // 削除ボタン
-        imageButton = [[CCImageButton alloc] initWithImageView:[CCMark markClearWithSize:CGSizeMake(24, 24)]];
+        CCImageButton *imageButton = [[CCImageButton alloc] initWithImageView:[CCMark markClearWithSize:CGSizeMake(24, 24)]];
         [[imageButton callStyle] addStyleKeys:@{
                                                 @"width"    :@"44",
                                                 @"height"   :@"44",
@@ -57,18 +53,18 @@
         [self setClearButton:imageButton];
         
         // 選択ボタン
-        button = [[CCButton alloc] initWithTitle:@"..." styleKeys:@{
-                                                                    @"left"             :@"40",
-                                                                    @"width"            :@"80",
-                                                                    @"font-size"        :@"14",
-                                                                    @"font-weight"      :@"bold",
-                                                                    @"color"            :@"333333",
-                                                                    @"background-color" :@"FFFFFF",
-                                                                    @"border-color"     :@"CCCCCC",
-                                                                    @"border-width"     :@"1",
-                                                                    @"border-radius"    :@"4",
-                                                                    @"margin"           :@"4 4 8 4",
-                                                                    }];
+        CCButton *button = [[CCButton alloc] initWithTitle:@"..." styleKeys:@{
+                                                                              @"left"               :@"40",
+                                                                              @"width"              :@"80",
+                                                                              @"font-size"          :@"14",
+                                                                              @"font-weight"        :@"bold",
+                                                                              @"color"              :@"333333",
+                                                                              @"background-color"   :@"FFFFFF",
+                                                                              @"border-color"       :@"CCCCCC",
+                                                                              @"border-width"       :@"1",
+                                                                              @"border-radius"      :@"4",
+                                                                              @"margin"             :@"4 4 8 4",
+                                                                              }];
         [[button callStyleHighlighted] addStyleKeys:@{
                                                       @"background-image" :@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
                                                       }];
