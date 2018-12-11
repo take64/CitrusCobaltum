@@ -46,6 +46,7 @@ static CGFloat const kControlHeight = 48;
 // synthesize
 //
 @synthesize title;
+@synthesize userInfo;
 
 
 
@@ -444,44 +445,12 @@ static CGFloat const kControlHeight = 48;
         
         // 横位置
         NSTextAlignment textAlignment = [stylesheet callTextAlignment];
-        CGFloat titleFrameX = 0;
-        if (textAlignment == NSTextAlignmentLeft)
-        {
-            // 左寄せ
-            titleFrameX = paddedRect.origin.x;
-        }
-        else if (textAlignment == NSTextAlignmentRight)
-        {
-            // 右寄せ
-            titleFrameX = (paddedRect.origin.x + paddedRect.size.width) - fontBounds.width;
-        }
-        else
-        {
-            // 中央寄せ
-            titleFrameX = (paddedRect.size.width / 2 - fontBounds.width / 2) + paddedRect.origin.x;
-        }
-        
+        CGFloat titleFrameX = [self xOfTitleWithHorizontal:textAlignment paddedRect:paddedRect fontBounds:fontBounds];
         // 縦位置
         CCVerticalAlignment verticalAlignment = [stylesheet callVerticalAlignment];
-        CGFloat titleFrameY = 0;
-        if (verticalAlignment == CCVerticalAlignmentTop)
-        {
-            // 上寄せ
-            titleFrameY = paddedRect.origin.y;
-        }
-        else if (verticalAlignment == CCVerticalAlignmentBottom)
-        {
-            // 下寄せ
-            titleFrameY = (paddedRect.size.height - fontBounds.height) + paddedRect.origin.y;
-        }
-        else
-        {
-            // 中央寄せ
-            titleFrameY = (paddedRect.size.height / 2 - fontBounds.height / 2) + paddedRect.origin.y;
-        }
-        
+        CGFloat titleFrameY = [self yOfTitleWithVertical:verticalAlignment paddedRect:paddedRect fontBounds:fontBounds];
+
         titleFrame.origin = CGPointMake(titleFrameX, titleFrameY);
-        
         [paragraph setAlignment:textAlignment];
         
         // 文字列描画
@@ -575,6 +544,54 @@ static CGFloat const kControlHeight = 48;
             break;
     }
     return [stylesheet copy];
+}
+
+// 文字寄せ済みタイトル文字列の横位置を取得
+- (CGFloat) xOfTitleWithHorizontal:(NSTextAlignment)textAlignment paddedRect:(CGRect)paddedRect fontBounds:(CGSize)fontBounds
+{
+    // 横位置
+    CGFloat titleFrameX = 0;
+    if (textAlignment == NSTextAlignmentLeft)
+    {
+        // 左寄せ
+        titleFrameX = paddedRect.origin.x;
+    }
+    else if (textAlignment == NSTextAlignmentRight)
+    {
+        // 右寄せ
+        titleFrameX = (paddedRect.origin.x + paddedRect.size.width) - fontBounds.width;
+    }
+    else
+    {
+        // 中央寄せ
+        titleFrameX = (paddedRect.size.width / 2 - fontBounds.width / 2) + paddedRect.origin.x;
+    }
+    
+    return titleFrameX;
+}
+
+// 文字寄せ済みタイトル文字列の縦位置を取得
+- (CGFloat) yOfTitleWithVertical:(CCVerticalAlignment)verticalAlignment paddedRect:(CGRect)paddedRect fontBounds:(CGSize)fontBounds
+{
+    // 縦位置
+    CGFloat titleFrameY = 0;
+    if (verticalAlignment == CCVerticalAlignmentTop)
+    {
+        // 上寄せ
+        titleFrameY = paddedRect.origin.y;
+    }
+    else if (verticalAlignment == CCVerticalAlignmentBottom)
+    {
+        // 下寄せ
+        titleFrameY = (paddedRect.size.height - fontBounds.height) + paddedRect.origin.y;
+    }
+    else
+    {
+        // 中央寄せ
+        titleFrameY = (paddedRect.size.height / 2 - fontBounds.height / 2) + paddedRect.origin.y;
+    }
+    
+    return titleFrameY;
 }
 
 @end
