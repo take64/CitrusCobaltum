@@ -224,13 +224,8 @@
 // 値変更時(前後ボタン)
 - (void) onChangePrevNextSegmented:(UISegmentedControl *)segmentedControl
 {
-    // デフォルトは前へ
-    CCTableCellTextField *tableCellTextField = [self prevCell];
-    if ([segmentedControl selectedSegmentIndex] == 1)
-    {
-        // 次へ
-        tableCellTextField = [self nextCell];
-    }
+    // セグメントインデックスが0なら前へ
+    CCTableCellTextField *tableCellTextField = ([segmentedControl selectedSegmentIndex] == 0 ? [self prevCell] : [self nextCell]);
     
     if (tableCellTextField != nil && [tableCellTextField responder] != nil && [[tableCellTextField responder] canBecomeFirstResponder] == YES)
     {
