@@ -28,6 +28,9 @@
     
     // 背景ビュー
     CCControl *bgView;
+    
+    // コンテンツサイズ
+    CGRect contentFrame;
 }
 
 //
@@ -38,6 +41,7 @@
 @property (nonatomic, assign, getter = isLayouted) BOOL layouted;
 @property (nonatomic, assign, getter = isSubLayouted) BOOL subLayouted;
 @property (nonatomic, retain) CCControl *bgView;
+@property (nonatomic, assign) CGRect contentFrame;
 
 
 //
@@ -55,5 +59,8 @@
 
 // bind object
 - (void) bindObject:(NSObject *)objectValue;
+
+// コンテンツサイズ
+- (CGRect) contentFrame;
 
 @end

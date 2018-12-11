@@ -24,7 +24,6 @@
 @property CCLabel *suffixLabel;
 //@property CGFloat prefixWidth;
 //@property CGFloat suffixWidth;
-@property CGRect contentFrame;
 @property CCTableCellPartPriority prefixPriority;
 @property CCTableCellPartPriority contentPriority;
 @property CCTableCellPartPriority suffixPriority;
@@ -45,6 +44,52 @@
 @synthesize layouted;
 @synthesize subLayouted;
 @synthesize bgView;
+
+
+
+#pragma mark - extends
+//
+// extends
+//
+
+// レイアウト
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    // レイアウト済みの場合
+    if ([self isLayouted] == YES)
+    {
+        return;
+    }
+    // コンテンツフレーム
+    CGRect contentRect = [[self contentView] frame];
+    
+    // 背景
+    [[self bgView] setFrame:contentRect];
+    
+    // アクセサリがある場合(アクセサリ分を縮める)
+    if ([self accessoryType] != UITableViewCellAccessoryNone)
+    {
+        contentRect.size.width -= 8;
+    }
+    
+    // プレフィックスサイズ
+    CGRect prefixRect = [self calcRectPosition:CCTableCellPartPositionPrefix contentRect:contentRect];
+    [[self prefixLabel] setFrame:prefixRect];
+    
+    // サフィックスサイズ
+    CGRect suffixRect = [self calcRectPosition:CCTableCellPartPositionSuffix contentRect:contentRect];
+    [[self suffixLabel] setFrame:suffixRect];
+    
+    // コンテンツサイズ変更
+    contentRect.origin.x += prefixRect.size.width;
+    contentRect.size.width -= (prefixRect.size.width + suffixRect.size.width);
+    [self setContentFrame:contentRect];
+    
+    // レイアウト済み
+    [self setLayouted:YES];
+}
 
 
 
@@ -102,45 +147,6 @@
     [self setPrefixPriority:prefix];
     [self setContentPriority:content];
     [self setSuffixPriority:suffix];
-}
-
-// レイアウト
-- (void) layoutSubviews
-{
-    [super layoutSubviews];
-    
-    // レイアウト済みの場合
-    if ([self isLayouted] == YES)
-    {
-        return;
-    }
-    // コンテンツフレーム
-    CGRect contentRect = [[self contentView] frame];
-    
-    // 背景
-    [[self bgView] setFrame:contentRect];
-    
-    // アクセサリがある場合(アクセサリ分を縮める)
-    if ([self accessoryType] != UITableViewCellAccessoryNone)
-    {
-        contentRect.size.width -= 8;
-    }
-    
-    // プレフィックスサイズ
-    CGRect prefixRect = [self calcRectPosition:CCTableCellPartPositionPrefix contentRect:contentRect];
-    [[self prefixLabel] setFrame:prefixRect];
-    
-    // サフィックスサイズ
-    CGRect suffixRect = [self calcRectPosition:CCTableCellPartPositionSuffix contentRect:contentRect];
-    [[self suffixLabel] setFrame:suffixRect];
-    
-    // コンテンツサイズ変更
-    contentRect.origin.x += prefixRect.size.width;
-    contentRect.size.width -= (prefixRect.size.width + suffixRect.size.width);
-    [self setContentFrame:contentRect];
-    
-    // レイアウト済み
-    [self setLayouted:YES];
 }
 
 // bind entity

@@ -14,7 +14,6 @@
 //
 // property
 //
-@property BOOL enableMenu;
 @property CCTableCellTextFieldInnerTextFieldEditingEndBlock editingEndBlock;
 
 @end
@@ -22,6 +21,14 @@
 
 
 @implementation CCTableCellTextFieldInnerTextField
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize enableMenu;
+
+
 
 #pragma mark - extends
 //

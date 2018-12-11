@@ -11,6 +11,17 @@
 typedef void (^CCTableCellTextFieldInnerTextFieldEditingEndBlock)(CCTableCellTextFieldInnerTextField *textFieldValue);
 
 @interface CCTableCellTextFieldInnerTextField : UITextField
+{
+    // メニュー状態
+    BOOL enableMenu;
+}
+
+//
+// property
+//
+@property (nonatomic, assign) BOOL enableMenu;
+
+
 
 //
 // method

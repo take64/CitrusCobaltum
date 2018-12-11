@@ -40,7 +40,7 @@
         return;
     }
     
-    CGRect labelRect = [[self contentView] frame];
+    CGRect labelRect = [self contentFrame];
     labelRect.size.width -= 16;
     labelRect.origin.x += 8;
     [[self label] setFrame:labelRect];
