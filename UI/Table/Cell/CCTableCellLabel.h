@@ -23,12 +23,6 @@
 // 初期化
 - (instancetype) initWithPrefix:(NSString *)prefixString content:(NSString *)textString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier;
 
-// テキスト取得
-- (NSString *) contentText;
-
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue;
-
 // 文字寄せ
 - (void) setTextAlignment:(NSTextAlignment)textAlignment;
 

@@ -48,6 +48,18 @@
     [self setSubLayouted:YES];
 }
 
+// テキスト取得
+- (NSString *) contentText
+{
+    return [[self button] title];
+}
+
+// テキスト設定
+- (void) setContentText:(NSString *)stringValue
+{
+    [[self button] setTitle:stringValue];
+}
+
 
 
 #pragma mark - method
@@ -93,18 +105,6 @@
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return self;
-}
-
-// テキスト取得
-- (NSString *) contentText
-{
-    return [[self button] title];
-}
-
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue
-{
-    [[self button] setTitle:stringValue];
 }
 
 @end

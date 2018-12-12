@@ -60,7 +60,10 @@
 // bind object
 - (void) bindObject:(NSObject *)objectValue;
 
-// コンテンツサイズ
-- (CGRect) contentFrame;
+// テキスト取得
+- (NSString *) contentText;
+
+// テキスト設定
+- (void) setContentText:(NSString *)stringValue;
 
 @end

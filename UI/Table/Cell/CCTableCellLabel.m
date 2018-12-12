@@ -80,6 +80,18 @@
     return self;
 }
 
+// テキスト設定
+- (void) setContentText:(NSString *)stringValue
+{
+    [[self label] setTitle:stringValue];
+}
+
+// 文字寄せ
+- (void) setTextAlignment:(NSTextAlignment)textAlignment
+{
+    [[[self label] callStyle] setTextAlignment:textAlignment];
+}
+
 
 
 #pragma mark - method
@@ -113,18 +125,6 @@
 - (NSString *) contentText
 {
     return [[self label] title];
-}
-
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue
-{
-    [[self label] setTitle:stringValue];
-}
-
-// 文字寄せ
-- (void) setTextAlignment:(NSTextAlignment)textAlignment
-{
-    [[[self label] callStyle] setTextAlignment:textAlignment];
 }
 
 @end

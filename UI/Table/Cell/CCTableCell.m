@@ -22,8 +22,6 @@
 //
 @property CCLabel *prefixLabel;
 @property CCLabel *suffixLabel;
-//@property CGFloat prefixWidth;
-//@property CGFloat suffixWidth;
 @property CCTableCellPartPriority prefixPriority;
 @property CCTableCellPartPriority contentPriority;
 @property CCTableCellPartPriority suffixPriority;
@@ -159,6 +157,18 @@
 - (void) bindObject:(NSObject *)objectValue
 {
     [self setObject:objectValue];
+}
+
+// テキスト取得
+- (NSString *) contentText
+{
+    return @"";
+}
+
+// テキスト設定
+- (void) setContentText:(NSString *)stringValue
+{
+    return;
 }
 
 

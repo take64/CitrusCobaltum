@@ -80,6 +80,17 @@
     return self;
 }
 
+// テキスト取得
+- (NSString *) contentText
+{
+    return [[self textView] text];
+}
+// テキスト設定
+- (void) setContentText:(NSString *)stringValue
+{
+    [[self textView] setText:stringValue];
+}
+
 
 
 #pragma mark - UITextViewDelegate
@@ -130,17 +141,6 @@
         [[self textView] setText:textString];
     }
     return self;
-}
-
-// テキスト取得
-- (NSString *) contentText
-{
-    return [[self textView] text];
-}
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue
-{
-    [[self textView] setText:stringValue];
 }
 
 @end

@@ -127,6 +127,17 @@
     }
 }
 
+// テキスト取得
+- (NSString *) contentText
+{
+    return [CFNVL compare:[[self innerTextField] text] replace:@""];
+}
+// テキスト設定
+- (void) setContentText:(NSString *)stringValue
+{
+    [[self innerTextField] setText:stringValue];
+}
+
 
 
 #pragma mark - method
@@ -149,21 +160,6 @@
         [self setContentText:textString];
     }
     return self;
-}
-
-// テキスト取得
-- (NSString *) contentText
-{
-    if ([[self innerTextField] text] == nil)
-    {
-        return @"";
-    }
-    return [[self innerTextField] text];
-}
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue
-{
-    [[self innerTextField] setText:stringValue];
 }
 
 // レスポンダ設定(前へ)

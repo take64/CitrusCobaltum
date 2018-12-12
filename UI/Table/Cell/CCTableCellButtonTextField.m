@@ -103,6 +103,7 @@
 //- (void) setSelected:(BOOL)selected animated:(BOOL)animated
 
 
+
 #pragma mark - method
 //
 // method
@@ -123,18 +124,6 @@
         [[self innerTextField] setText:textString];
     }
     return self;
-}
-
-// テキスト取得
-- (NSString *) contentText
-{
-    return [CFNVL compare:[[self innerTextField] text] replace:@""];
-}
-
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue
-{
-    [[self innerTextField] setText:stringValue];
 }
 
 
