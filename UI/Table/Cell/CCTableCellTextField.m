@@ -54,12 +54,6 @@
     {
         // テキストフィールド
         CCTableCellTextFieldInnerTextField *textField = [[CCTableCellTextFieldInnerTextField alloc] initWithFrame:CGRectZero];
-        [textField setFont:[UIFont systemFontOfSize:14.0]];
-        [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
-        [textField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-        [textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-        [textField setReturnKeyType:UIReturnKeyDone];
-        [textField setAutoresizingMask:CCViewAutoresizingMaskAll()];
         [textField setDelegate:self];
         [[self contentView] addSubview:textField];
         [self setInnerTextField:textField];
@@ -73,7 +67,6 @@
         [[self toolbar] setBarStyle:UIBarStyleBlackOpaque];
         [[self toolbar] setTranslucent:YES];
         [self setPrevNextSegmented:[[UISegmentedControl alloc] initWithItems:@[@"前へ", @"次へ"]]];
-        //        [[self prevNextSegmented] setSegmentedControlStyle:UISegmentedControlStyleBar];
         [[self prevNextSegmented] addTarget:self action:@selector(onChangePrevNextSegmented:) forControlEvents:UIControlEventValueChanged];
         [[self prevNextSegmented] setTintColor:[UIColor whiteColor]];
         UIBarButtonItem *barButtonPrevNext = [[UIBarButtonItem alloc] initWithCustomView:[self prevNextSegmented]];

@@ -8,6 +8,10 @@
 
 #import "CCTableCellTextFieldInnerTextField.h"
 
+#import "CCUIStruct.h"
+
+
+
 @interface CCTableCellTextFieldInnerTextField()
 
 #pragma mark - property
@@ -43,6 +47,14 @@
     {
         // メニュー表示ON
         [self setEnableMenu:YES];
+        
+        // デフォルト設定
+        [self setFont:[UIFont systemFontOfSize:14.0]];
+        [self setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+        [self setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+        [self setReturnKeyType:UIReturnKeyDone];
+        [self setAutoresizingMask:CCViewAutoresizingMaskAll()];
     }
     return self;
 }
