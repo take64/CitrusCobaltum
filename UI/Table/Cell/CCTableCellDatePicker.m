@@ -11,8 +11,8 @@
 #import "CCButton.h"
 #import "CCColor.h"
 #import "CCPlatformDevice.h"
-#import "CCTableCellTextFieldInnerTextField.h"
 #import "CCStyle.h"
+#import "CCTableCellTextFieldInnerTextField.h"
 #import "CFDate.h"
 
 
@@ -60,11 +60,7 @@
         [[self innerTextField] setClearButtonMode:UITextFieldViewModeNever];
         
         // パッキングビュー
-        CGFloat width = 320;
-        if ([CCPlatformDevice isIPad] == YES)
-        {
-            width = 1024;
-        }
+        CGFloat width = ([CCPlatformDevice isIPad] == YES ? 1024 : 320);
         [self setInputPackingView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, width, datePickerHeight)]];
         [[self inputPackingView] setBackgroundColor:[CCColor colorWithHEXString:@"999999"]];
         
@@ -101,6 +97,9 @@
     // 設定
     [self setPickerMode:pickerModeValue];
     
+    // ヘッダがある
+    BOOL hasHeader = NO;
+    
     // ピッカーモードなし
     if (pickerModeValue == CCTableCellDatePickerModeNone)
     {
@@ -110,12 +109,34 @@
     else if (pickerModeValue == CCTableCellDatePickerModeStandard)
     {
         [self changePickerModeStandard];
+        hasHeader = YES;
     }
     // ピッカーモード日付
     else if (pickerModeValue == CCTableCellDatePickerModeDate)
     {
         [self changePickerModeDate];
+        hasHeader = YES;
     }
+    
+    // オフセット
+    CGFloat offsetY = 0;
+    CGFloat heightPicker = 216;
+    CGFloat heightPackingView = 216;
+    if (hasHeader == YES)
+    {
+        offsetY = 32;
+        heightPackingView = heightPicker + offsetY;
+    }
+    
+    // 位置変更
+    [[self datePicker] setFrame:CGRectMake(0, offsetY, 320, heightPicker)];
+    CGPoint center = [[self inputPackingView] center];
+    center.y += offsetY;
+    [[self datePicker] setCenter:[[self inputPackingView] center]];
+    
+    // パッキングビュー
+    [[self inputPackingView] setFrame:CGRectMake(0, 0, 320, heightPackingView)];
+    [[self inputPackingView] addSubview:[self datePicker]];
 }
 
 // 取得(日付)
@@ -174,8 +195,6 @@
     NSInteger hour = 0;
     NSInteger minute = 0;
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
     if ([timeString isEqual:[NSNull null]] == YES)
     {
         NSDateComponents *workComponents = [CFDate componentsWithDate:[NSDate date]];
@@ -193,7 +212,7 @@
     [components setHour:hour];
     [components setMinute:minute];
     [components setSecond:0];
-    [self setDate:[calendar dateFromComponents:components]];
+    [self setDate:[[NSCalendar currentCalendar] dateFromComponents:components]];
     [[self datePicker] sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
@@ -208,28 +227,11 @@
             [childView removeFromSuperview];
         }
     }
-    
-    // 位置変更
-    [[self datePicker] setFrame:CGRectMake(0, 0, 320, 216)];
-    [[self datePicker] setCenter:[[self inputPackingView] center]];
-    
-    // 配置
-    [[self inputPackingView] addSubview:[self datePicker]];
 }
 
 // ピッカーモード変更(標準)
 - (void) changePickerModeStandard
 {
-    // 位置変更
-    [[self datePicker] setFrame:CGRectMake(0, 32, 320, 216)];
-    CGPoint center = [[self inputPackingView] center];
-    center.y += 32;
-    [[self datePicker] setCenter:center];
-    
-    // パッキングビュー
-    [[self inputPackingView] setFrame:CGRectMake(0, 0, 320, 248)];
-    [[self inputPackingView] addSubview:[self datePicker]];
-    
     // ボタンスタイル
     NSDictionary *buttonStyleKeys = @{
                                       @"top"                :@"0",
@@ -300,14 +302,6 @@
 {
     // 日付モード
     [[self datePicker] setDatePickerMode:UIDatePickerModeDate];
-    
-    // 位置変更
-    [[self datePicker] setFrame:CGRectMake(0, 0, 320, 216)];
-    [[self datePicker] setCenter:[[self inputPackingView] center]];
-    
-    // パッキングビュー
-    [[self inputPackingView] setFrame:CGRectMake(0, 0, 320, 248)];
-    [[self inputPackingView] addSubview:[self datePicker]];
 }
 
 @end
