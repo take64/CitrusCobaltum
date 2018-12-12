@@ -99,21 +99,8 @@
     [self setSubLayouted:YES];
 }
 
-- (void) setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    if (selected == NO)
-    {
-        return;
-    }
-    
-    if ([[self innerTextField] canBecomeFirstResponder] == YES)
-    {
-        [[self innerTextField] becomeFirstResponder];
-    }
-}
-
+// CCTableCellTextField で実装
+//- (void) setSelected:(BOOL)selected animated:(BOOL)animated
 
 
 #pragma mark - method
