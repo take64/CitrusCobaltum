@@ -114,6 +114,16 @@ typedef NS_ENUM(NSInteger, CCTableCellDatePickerMode) {
     CCTableCellDatePickerModeDate,
 };
 
+// 全部の自動リサイズマスク
+UIViewAutoresizing CCViewAutoresizingMaskAll() {
+    return (UIViewAutoresizingFlexibleLeftMargin    |
+            UIViewAutoresizingFlexibleRightMargin   |
+            UIViewAutoresizingFlexibleTopMargin     |
+            UIViewAutoresizingFlexibleBottomMargin  |
+            UIViewAutoresizingFlexibleWidth         |
+            UIViewAutoresizingFlexibleHeight);
+}
+
 // 汎用ブロック
 typedef void (^CitrusCobaltumBlock)(void);
 

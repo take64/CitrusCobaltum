@@ -63,12 +63,7 @@
         [_textView setFont:[UIFont systemFontOfSize:16.0]];
         [_textView setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         [_textView setReturnKeyType:UIReturnKeyDone];
-        [_textView setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin    |
-                                        UIViewAutoresizingFlexibleRightMargin   |
-                                        UIViewAutoresizingFlexibleTopMargin     |
-                                        UIViewAutoresizingFlexibleBottomMargin  |
-                                        UIViewAutoresizingFlexibleWidth         |
-                                        UIViewAutoresizingFlexibleHeight)];
+        [_textView setAutoresizingMask:CCViewAutoresizingMaskAll()];
         [_textView setDelegate:self];
         [_textView setBackgroundColor:[UIColor clearColor]];
         [[self contentView] addSubview:_textView];

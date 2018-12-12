@@ -8,9 +8,12 @@
 
 #import "CCTableCellTextField.h"
 
+#import "CCTableCellDatePicker.h"
 #import "CCTableCellTextFieldInnerTextField.h"
 #import "CCTableCellTextView.h"
-#import "CCTableCellDatePicker.h"
+#import "CFNVL.h"
+
+
 
 @interface CCTableCellTextField()
 
@@ -56,13 +59,7 @@
         [textField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         [textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         [textField setReturnKeyType:UIReturnKeyDone];
-        [textField setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin    |
-                                        UIViewAutoresizingFlexibleRightMargin   |
-                                        UIViewAutoresizingFlexibleTopMargin     |
-                                        UIViewAutoresizingFlexibleBottomMargin  |
-                                        UIViewAutoresizingFlexibleWidth         |
-                                        UIViewAutoresizingFlexibleHeight
-                                        )];
+        [textField setAutoresizingMask:CCViewAutoresizingMaskAll()];
         [textField setDelegate:self];
         [[self contentView] addSubview:textField];
         [self setInnerTextField:textField];

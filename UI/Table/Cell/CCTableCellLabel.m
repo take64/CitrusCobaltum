@@ -62,12 +62,7 @@
                                                                                       @"text-align"   :@"left",
                                                                                       @"line-break"   :@"clipping",
                                                                                       }];
-        [contentLabel setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin |
-                                           UIViewAutoresizingFlexibleRightMargin |
-                                           UIViewAutoresizingFlexibleTopMargin |
-                                           UIViewAutoresizingFlexibleBottomMargin |
-                                           UIViewAutoresizingFlexibleWidth |
-                                           UIViewAutoresizingFlexibleHeight)];
+        [contentLabel setAutoresizingMask:CCViewAutoresizingMaskAll()];
         [[self contentView] addSubview:contentLabel];
         [self setLabel:contentLabel];
         

@@ -44,10 +44,8 @@
     self = [super initWithStyle:style];
     if (self)
     {
-        // part
+        // ボタンとグループ
         CCButton *button;
-        
-        // ボタングループ
         CCButtonGroup *buttonGroup = [[CCButtonGroup alloc] initWithFrame:CGRectZero];
         button = [buttonGroup addButtonWithTitle:@"追加" complete:^(CCButton *buttonValue) {
             [self onTapBarButtonAdd];
@@ -159,6 +157,8 @@
     // ボタン設定
     [[self navigationItem] setRightBarButtonItem:[self barButtonItem]];
 }
+
+
 
 #pragma mark - UITableViewDataSource
 //
