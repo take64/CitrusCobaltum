@@ -73,9 +73,6 @@
                                                    }];
         [self addSubview:button];
         [self setSelectButton:button];
-        
-        // セル選択
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return self;
 }
