@@ -11,6 +11,7 @@
 #import "CCTableCellDatePicker.h"
 #import "CCTableCellTextFieldInnerTextField.h"
 #import "CCTableCellTextView.h"
+#import "CCUIStruct.h"
 #import "CFNVL.h"
 
 
@@ -72,10 +73,9 @@
         UIBarButtonItem *barButtonPrevNext = [[UIBarButtonItem alloc] initWithCustomView:[self prevNextSegmented]];
         
         // ツールバーパーツ
-        UIBarButtonItem *barSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapBarButtonDone)];
         [barButtonDone setTintColor:[UIColor whiteColor]];
-        [[self toolbar] setItems:[NSArray arrayWithObjects:barButtonPrevNext, barSpacer, barButtonDone, nil]];
+        [[self toolbar] setItems:@[ barButtonPrevNext, CCBarButtonItemSpacer(), barButtonDone ]];
         
         // ツールバー(配置)
         [[self innerTextField] setInputAccessoryView:[self toolbar]];
