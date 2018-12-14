@@ -17,13 +17,20 @@
 //
 // property
 //
-@property CCLabel *label;
 
 @end
 
 
 
 @implementation CCTableCellLabel
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize label;
+
+
 
 #pragma mark - extends
 //

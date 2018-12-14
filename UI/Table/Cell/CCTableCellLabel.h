@@ -8,7 +8,17 @@
 
 #import "CCTableCell.h"
 
+@class CCLabel;
+
 @interface CCTableCellLabel : CCTableCell
+
+//
+// property
+//
+
+@property (nonatomic, retain) CCLabel *label;
+
+
 
 //
 // method
