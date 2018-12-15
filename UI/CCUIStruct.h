@@ -114,6 +114,21 @@ typedef NS_ENUM(NSInteger, CCTableCellDatePickerMode) {
     CCTableCellDatePickerModeDate,
 };
 
+// 全部の自動リサイズマスク
+UIViewAutoresizing CCViewAutoresizingMaskAll() {
+    return (UIViewAutoresizingFlexibleLeftMargin    |
+            UIViewAutoresizingFlexibleRightMargin   |
+            UIViewAutoresizingFlexibleTopMargin     |
+            UIViewAutoresizingFlexibleBottomMargin  |
+            UIViewAutoresizingFlexibleWidth         |
+            UIViewAutoresizingFlexibleHeight);
+}
+
+// スペース用バーボタンアイテム
+UIBarButtonItem * CCBarButtonItemSpacer() {
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+}
+
 // 汎用ブロック
 typedef void (^CitrusCobaltumBlock)(void);
 

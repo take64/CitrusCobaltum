@@ -17,13 +17,20 @@
 //
 // property
 //
-@property CCLabel *label;
 
 @end
 
 
 
 @implementation CCTableCellLabel
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize label;
+
+
 
 #pragma mark - extends
 //
@@ -62,12 +69,7 @@
                                                                                       @"text-align"   :@"left",
                                                                                       @"line-break"   :@"clipping",
                                                                                       }];
-        [contentLabel setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin |
-                                           UIViewAutoresizingFlexibleRightMargin |
-                                           UIViewAutoresizingFlexibleTopMargin |
-                                           UIViewAutoresizingFlexibleBottomMargin |
-                                           UIViewAutoresizingFlexibleWidth |
-                                           UIViewAutoresizingFlexibleHeight)];
+        [contentLabel setAutoresizingMask:CCViewAutoresizingMaskAll()];
         [[self contentView] addSubview:contentLabel];
         [self setLabel:contentLabel];
         
@@ -78,6 +80,18 @@
         [[self label] setUserInteractionEnabled:NO];
     }
     return self;
+}
+
+// テキスト設定
+- (void) setContentText:(NSString *)stringValue
+{
+    [[self label] setTitle:stringValue];
+}
+
+// 文字寄せ
+- (void) setTextAlignment:(NSTextAlignment)textAlignment
+{
+    [[[self label] callStyle] setTextAlignment:textAlignment];
 }
 
 
@@ -113,18 +127,6 @@
 - (NSString *) contentText
 {
     return [[self label] title];
-}
-
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue
-{
-    [[self label] setTitle:stringValue];
-}
-
-// 文字寄せ
-- (void) setTextAlignment:(NSTextAlignment)textAlignment
-{
-    [[[self label] callStyle] setTextAlignment:textAlignment];
 }
 
 @end

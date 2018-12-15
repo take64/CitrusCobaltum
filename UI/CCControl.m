@@ -46,6 +46,7 @@ static CGFloat const kControlHeight = 48;
 // synthesize
 //
 @synthesize title;
+@synthesize userInfo;
 
 
 
@@ -117,7 +118,7 @@ static CGFloat const kControlHeight = 48;
 // スタイル取得(highlighted)
 - (CCStyle *) callStyleHighlighted
 {
-    if([self styleHighlighted] == nil)
+    if ([self styleHighlighted] == nil)
     {
         [self setStyleHighlighted:[[self callStyleNormal] copy]];
     }
@@ -182,7 +183,7 @@ static CGFloat const kControlHeight = 48;
 - (instancetype) initWithFrame:(CGRect)frame
 {
     // デフォルトサイズ処理
-    if(CGRectIsEmpty(frame) == YES)
+    if (CGRectIsEmpty(frame) == YES)
     {
         frame = CGRectMake(0, 0, kControlWidth, kControlHeight);
     }
@@ -325,7 +326,7 @@ static CGFloat const kControlHeight = 48;
     
     // グラデーション
     NSString *_backgroundImageString = [stylesheet styleForKey:@"background-image"];
-    if([_backgroundImageString hasPrefix:@"linear-gradient"] == YES)
+    if ([_backgroundImageString hasPrefix:@"linear-gradient"] == YES)
     {
         // 描画範囲
         CGContextSaveGState(context);
@@ -356,14 +357,14 @@ static CGFloat const kControlHeight = 48;
         NSInteger count = 0;
         NSInteger locationCount = 0;
         NSInteger componentCount = 0;
-        for(NSString *column in component)
+        for (NSString *column in component)
         {
-            if(count >= size)
+            if (count >= size)
             {
                 break;
             }
             
-            if(((count + 1) % 5) == 0)
+            if (((count + 1) % 5) == 0)
             {
                 locations[locationCount] = [column floatValue];
                 locationCount++;
@@ -407,7 +408,7 @@ static CGFloat const kControlHeight = 48;
     }
     
     // テキストレンダリング
-    if([self title] != nil)
+    if ([self title] != nil)
     {
         CGContextSaveGState(context);
         
@@ -434,54 +435,19 @@ static CGFloat const kControlHeight = 48;
         [attributes addEntriesFromDictionary:@{NSFontAttributeName:font}];
         CGSize fontBounds = [CFString sizeWithString:[self title] font:font constrainedToSize:paddedRect.size];
         fontBounds.width = paddedRect.size.width;
-        if(fontBounds.height > paddedRect.size.height)
-        {
-            fontBounds.height = paddedRect.size.height;
-        }
+        fontBounds.height = (fontBounds.height > paddedRect.size.height ? paddedRect.size.height : fontBounds.height);
         
         // 文字寄せ
         CGRect titleFrame = CGRectMake(0, 0, (fontBounds.width), (fontBounds.height));
         
         // 横位置
         NSTextAlignment textAlignment = [stylesheet callTextAlignment];
-        CGFloat titleFrameX = 0;
-        if (textAlignment == NSTextAlignmentLeft)
-        {
-            // 左寄せ
-            titleFrameX = paddedRect.origin.x;
-        }
-        else if (textAlignment == NSTextAlignmentRight)
-        {
-            // 右寄せ
-            titleFrameX = (paddedRect.origin.x + paddedRect.size.width) - fontBounds.width;
-        }
-        else
-        {
-            // 中央寄せ
-            titleFrameX = (paddedRect.size.width / 2 - fontBounds.width / 2) + paddedRect.origin.x;
-        }
-        
+        CGFloat titleFrameX = [self xOfTitleWithHorizontal:textAlignment paddedRect:paddedRect fontBounds:fontBounds];
         // 縦位置
         CCVerticalAlignment verticalAlignment = [stylesheet callVerticalAlignment];
-        CGFloat titleFrameY = 0;
-        if (verticalAlignment == CCVerticalAlignmentTop)
-        {
-            // 上寄せ
-            titleFrameY = paddedRect.origin.y;
-        }
-        else if (verticalAlignment == CCVerticalAlignmentBottom)
-        {
-            // 下寄せ
-            titleFrameY = (paddedRect.size.height - fontBounds.height) + paddedRect.origin.y;
-        }
-        else
-        {
-            // 中央寄せ
-            titleFrameY = (paddedRect.size.height / 2 - fontBounds.height / 2) + paddedRect.origin.y;
-        }
-        
+        CGFloat titleFrameY = [self yOfTitleWithVertical:verticalAlignment paddedRect:paddedRect fontBounds:fontBounds];
+
         titleFrame.origin = CGPointMake(titleFrameX, titleFrameY);
-        
         [paragraph setAlignment:textAlignment];
         
         // 文字列描画
@@ -496,9 +462,9 @@ static CGFloat const kControlHeight = 48;
 {
     [super setNeedsDisplay];
     
-    for(id childView in [self subviews])
+    for (id childView in [self subviews])
     {
-        if([childView isKindOfClass:[CCControl class]] == YES)
+        if ([childView isKindOfClass:[CCControl class]] == YES)
         {
             [(CCControl *)childView setNeedsDisplay];
         }
@@ -575,6 +541,50 @@ static CGFloat const kControlHeight = 48;
             break;
     }
     return [stylesheet copy];
+}
+
+// 文字寄せ済みタイトル文字列の横位置を取得
+- (CGFloat) xOfTitleWithHorizontal:(NSTextAlignment)textAlignment paddedRect:(CGRect)paddedRect fontBounds:(CGSize)fontBounds
+{
+    // 横位置
+    CGFloat titleFrameX = 0;
+    switch (textAlignment) {
+        case NSTextAlignmentLeft:
+            // 左寄せ
+            titleFrameX = paddedRect.origin.x;
+            break;
+        case NSTextAlignmentRight:
+            // 右寄せ
+            titleFrameX = (paddedRect.origin.x + paddedRect.size.width) - fontBounds.width;
+            break;
+        default:
+            // 中央寄せ
+            titleFrameX = (paddedRect.size.width / 2 - fontBounds.width / 2) + paddedRect.origin.x;
+            break;
+    }
+    return titleFrameX;
+}
+
+// 文字寄せ済みタイトル文字列の縦位置を取得
+- (CGFloat) yOfTitleWithVertical:(CCVerticalAlignment)verticalAlignment paddedRect:(CGRect)paddedRect fontBounds:(CGSize)fontBounds
+{
+    // 縦位置
+    CGFloat titleFrameY = 0;
+    switch (verticalAlignment) {
+        case CCVerticalAlignmentTop:
+            // 上寄せ
+            titleFrameY = paddedRect.origin.y;
+            break;
+        case CCVerticalAlignmentBottom:
+            // 下寄せ
+            titleFrameY = (paddedRect.size.height - fontBounds.height) + paddedRect.origin.y;
+            break;
+        default:
+            // 中央寄せ
+            titleFrameY = (paddedRect.size.height / 2 - fontBounds.height / 2) + paddedRect.origin.y;
+            break;
+    }
+    return titleFrameY;
 }
 
 @end

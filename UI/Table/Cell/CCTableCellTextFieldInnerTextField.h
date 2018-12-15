@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class CCTableCellTextFieldInnerTextField;
+
 typedef void (^CCTableCellTextFieldInnerTextFieldEditingEndBlock)(CCTableCellTextFieldInnerTextField *textFieldValue);
 
 @interface CCTableCellTextFieldInnerTextField : UITextField

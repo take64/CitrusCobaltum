@@ -8,9 +8,13 @@
 
 #import "CCTableCellTextField.h"
 
+#import "CCTableCellDatePicker.h"
 #import "CCTableCellTextFieldInnerTextField.h"
 #import "CCTableCellTextView.h"
-#import "CCTableCellDatePicker.h"
+#import "CCUIStruct.h"
+#import "CFNVL.h"
+
+
 
 @interface CCTableCellTextField()
 
@@ -51,18 +55,6 @@
     {
         // テキストフィールド
         CCTableCellTextFieldInnerTextField *textField = [[CCTableCellTextFieldInnerTextField alloc] initWithFrame:CGRectZero];
-        [textField setFont:[UIFont systemFontOfSize:14.0]];
-        [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
-        [textField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-        [textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-        [textField setReturnKeyType:UIReturnKeyDone];
-        [textField setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin    |
-                                        UIViewAutoresizingFlexibleRightMargin   |
-                                        UIViewAutoresizingFlexibleTopMargin     |
-                                        UIViewAutoresizingFlexibleBottomMargin  |
-                                        UIViewAutoresizingFlexibleWidth         |
-                                        UIViewAutoresizingFlexibleHeight
-                                        )];
         [textField setDelegate:self];
         [[self contentView] addSubview:textField];
         [self setInnerTextField:textField];
@@ -76,16 +68,14 @@
         [[self toolbar] setBarStyle:UIBarStyleBlackOpaque];
         [[self toolbar] setTranslucent:YES];
         [self setPrevNextSegmented:[[UISegmentedControl alloc] initWithItems:@[@"前へ", @"次へ"]]];
-        //        [[self prevNextSegmented] setSegmentedControlStyle:UISegmentedControlStyleBar];
         [[self prevNextSegmented] addTarget:self action:@selector(onChangePrevNextSegmented:) forControlEvents:UIControlEventValueChanged];
         [[self prevNextSegmented] setTintColor:[UIColor whiteColor]];
         UIBarButtonItem *barButtonPrevNext = [[UIBarButtonItem alloc] initWithCustomView:[self prevNextSegmented]];
         
         // ツールバーパーツ
-        UIBarButtonItem *barSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapBarButtonDone)];
         [barButtonDone setTintColor:[UIColor whiteColor]];
-        [[self toolbar] setItems:[NSArray arrayWithObjects:barButtonPrevNext, barSpacer, barButtonDone, nil]];
+        [[self toolbar] setItems:@[ barButtonPrevNext, CCBarButtonItemSpacer(), barButtonDone ]];
         
         // ツールバー(配置)
         [[self innerTextField] setInputAccessoryView:[self toolbar]];
@@ -127,6 +117,17 @@
     }
 }
 
+// テキスト取得
+- (NSString *) contentText
+{
+    return [CFNVL compare:[[self innerTextField] text] replace:@""];
+}
+// テキスト設定
+- (void) setContentText:(NSString *)stringValue
+{
+    [[self innerTextField] setText:stringValue];
+}
+
 
 
 #pragma mark - method
@@ -149,21 +150,6 @@
         [self setContentText:textString];
     }
     return self;
-}
-
-// テキスト取得
-- (NSString *) contentText
-{
-    if ([[self innerTextField] text] == nil)
-    {
-        return @"";
-    }
-    return [[self innerTextField] text];
-}
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue
-{
-    [[self innerTextField] setText:stringValue];
 }
 
 // レスポンダ設定(前へ)

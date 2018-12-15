@@ -73,9 +73,6 @@
                                                    }];
         [self addSubview:button];
         [self setSelectButton:button];
-        
-        // セル選択
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return self;
 }
@@ -99,20 +96,8 @@
     [self setSubLayouted:YES];
 }
 
-- (void) setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    if (selected == NO)
-    {
-        return;
-    }
-    
-    if ([[self innerTextField] canBecomeFirstResponder] == YES)
-    {
-        [[self innerTextField] becomeFirstResponder];
-    }
-}
+// CCTableCellTextField で実装
+//- (void) setSelected:(BOOL)selected animated:(BOOL)animated
 
 
 
@@ -136,18 +121,6 @@
         [[self innerTextField] setText:textString];
     }
     return self;
-}
-
-// テキスト取得
-- (NSString *) contentText
-{
-    return [CFNVL compare:[[self innerTextField] text] replace:@""];
-}
-
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue
-{
-    [[self innerTextField] setText:stringValue];
 }
 
 

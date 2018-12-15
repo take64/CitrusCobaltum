@@ -8,16 +8,26 @@
 
 #import "CCDrawerViewController.h"
 
+#import "CitrusCobaltumApplication.h"
+#import "CCBarButtonItem.h"
 #import "CCColor.h"
 #import "CCDrawerMenuItem.h"
 #import "CCDrawerMenuPanel.h"
 #import "CCDrawerMenuSection.h"
+#import "CCLabel.h"
+#import "CCStyle.h"
+#import "CCTableCellLabel.h"
+#import "CCTheme.h"
+
+
 
 static const CGFloat CCDrawerViewControllerMenuWidth = 256;
 static CGFloat CCDrawerViewControllerMenuHeight()
 {
     return CGRectGetHeight([[[[UIApplication sharedApplication] delegate] window] frame]);
 }
+
+
 
 @interface CCDrawerViewController ()
 
@@ -35,10 +45,33 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 @property BOOL menuVisible;
 @property CCDrawerMenuPanel *menuPanel;
 
-
 @end
 
+
+
 @implementation CCDrawerViewController
+
+#pragma mark - extends
+//
+// extends
+//
+
+- (void) loadView
+{
+    [super loadView];
+    
+    // ビュー
+    [[self view] addSubview:[self callMenuPanel]];
+    
+    // メニューを隠す
+    [self setMenuVisible:YES];
+    [self closeSlide];
+    
+    // 再読み込み
+    [[self callMenuTableView] reloadData];
+}
+
+
 
 #pragma mark - method
 //
@@ -61,7 +94,7 @@ static CGFloat CCDrawerViewControllerMenuHeight()
         [[self view] addGestureRecognizer:[self generateScreenEdgePanGesture]];
         
         // メニューアイコンボタン
-        CTBarButtonItem *barButtonItem = [self generateMenuIconBarButton];
+        CCBarButtonItem *barButtonItem = [self generateMenuIconBarButton];
         [self setSlideMenuButton:barButtonItem];
         [[[self mainViewController] navigationItem] setLeftBarButtonItem:[self slideMenuButton]];
     }
@@ -69,7 +102,7 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 }
 
 // 色設定
-- (void)bindTintColor:(UIColor *)tintColorValue headColor:(UIColor *)headColorValue cellColor:(UIColor *)cellColorValue
+- (void) bindTintColor:(UIColor *)tintColorValue headColor:(UIColor *)headColorValue cellColor:(UIColor *)cellColorValue
 {
     [self setTintColor:tintColorValue];
     [self setHeadColor:headColorValue];
@@ -80,194 +113,9 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 }
 
 // ヘッダイメージ
-- (void)bindHeadImage:(UIImage *)imageValue
+- (void) bindHeadImage:(UIImage *)imageValue
 {
     [[self callMenuPanel] bindImage:imageValue];
-}
-
-- (void) viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void) didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-- (void) loadView
-{
-    [super loadView];
-    
-    // ビュー
-    [[self view] addSubview:[self callMenuPanel]];
-    
-    // メニューを隠す
-    [self setMenuVisible:YES];
-    [self closeSlide];
-    
-    // 再読み込み
-    [[self callMenuTableView] reloadData];
-}
-
-
-
-#pragma mark - UITableViewDataSource
-//
-// UITableViewDataSource
-//
-
-// セクション内セル数
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [[[[self menuSections] objectAtIndex:section] menuItems] count];
-}
-
-// セルを返す
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellID = @"CellID";
-    
-    CTTableCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
-    if (cell == nil)
-    {
-        cell = [[CTTableCellLabel alloc] initWithPrefix:nil reuseIdentifier:CellID];
-        [cell setBackgroundColor:[[CitrusTouchApplication callTheme] callDrawerCellBodyBackColor]];
-        [[[cell label] callStyle] addStyles:@{
-                                              @"font-size"  :@"14",
-                                              @"color"      :[CTColor hexStringWithColor:[[CitrusTouchApplication callTheme] callDrawerCellBodyTextColor]],
-                                              @"margin"     :@"0 0 0 8",
-                                              }];
-    }
-    if (cell != nil)
-    {
-        CTDrawerMenuItem *menuItem = [[[[self menuSections] objectAtIndex:[indexPath section]] menuItems] objectAtIndex:[indexPath row]];
-        [cell setContentText:[menuItem title]];
-    }
-    return cell;
-}
-
-// セクション数
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return [[self menuSections] count];
-}
-
-// セクションタイトル
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [[[self menuSections] objectAtIndex:section] title];
-}
-//- (nullable NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView;
-//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
-
-
-
-#pragma mark - UITableViewDelegate
-//
-// UITableViewDelegate
-//
-
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
-//{
-//    [view setTintColor:[self callHeadColor]];
-//    [[(UITableViewHeaderFooterView *)view textLabel] setTextColor:[UIColor whiteColor]];
-//}
-//- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section;
-//- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath;
-//- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section;
-//- (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section;
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-// セルヘッダ高さ
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return [CTTableViewTrait callTableHeaderHeightWithController:self tableView:tableView section:section];
-}
-// セルフッタ高さ
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return [CTTableViewTrait callTableFooterHeightWithController:self tableView:tableView section:section];
-}
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section;
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section;
-// セルヘッダを返す
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [CTTableViewTrait callTableHeaderViewWithController:self tableView:tableView section:section];
-}
-// セルフッタを返す
-- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return [CTTableViewTrait callTableFooterViewWithController:self tableView:tableView section:section];;
-}
-//- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath;
-//- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;
-//- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (nullable NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (nullable NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
-// セルタップ時
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CCDrawerMenuItem *menuItem = [[[[self menuSections] objectAtIndex:[indexPath section]] menuItems] objectAtIndex:[indexPath row]];
-    [self changeViewController:[menuItem controller]];
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath;
-//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath;
-//- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender;
-//- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender;
-//- (BOOL)tableView:(UITableView *)tableView canFocusRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (BOOL)tableView:(UITableView *)tableView shouldUpdateFocusInContext:(UITableViewFocusUpdateContext *)context;
-//- (void)tableView:(UITableView *)tableView didUpdateFocusInContext:(UITableViewFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator;
-//- (nullable NSIndexPath *)indexPathForPreferredFocusedViewInTableView:(UITableView *)tableView;
-
-
-
-#pragma mark - CTTableViewDelegate
-//
-// CTTableViewDelegate
-//
-
-// セルヘッダタイトル取得
-- (NSString *)callHeaderTitleWithSection:(NSInteger)section
-{
-    return [[[self menuSections] objectAtIndex:section] title];
-}
-
-// セルフッタタイトル取得
-- (NSString *)callFooterTitleWithSection:(NSInteger)section
-{
-    return @"";
-}
-
-// セルヘッダビュー取得
-- (UIView *)callHeaderViewWithSection:(NSInteger)section
-{
-    return nil;
-}
-
-// セルフッタビュー取得
-- (UIView *)callFooterViewWithSection:(NSInteger)section
-{
-    return nil;
 }
 
 
@@ -341,12 +189,13 @@ static CGFloat CCDrawerViewControllerMenuHeight()
     // アニメーション処理
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         // アニメーション内容
-        [[[self callMenuPanel] layer] setShadowOffset:shadowOffset];
-        [[[self callMenuPanel] layer] setShadowRadius:shadowRadius];
-        [[[self callMenuPanel] layer] setShadowOpacity:shadowOpacity];
-        [[[self callMenuPanel] layer] setShadowColor:[[UIColor blackColor] CGColor]];
-        [[[self callMenuPanel] layer] setShadowPath:[UIBezierPath bezierPathWithRect:[[self callMenuPanel] bounds]].CGPath];
-        [[self callMenuPanel] setFrame:menuFrame];
+        CCDrawerMenuPanel *menuPanel = [self callMenuPanel];
+        [[menuPanel layer] setShadowOffset:shadowOffset];
+        [[menuPanel layer] setShadowRadius:shadowRadius];
+        [[menuPanel layer] setShadowOpacity:shadowOpacity];
+        [[menuPanel layer] setShadowColor:[[UIColor blackColor] CGColor]];
+        [[menuPanel layer] setShadowPath:[UIBezierPath bezierPathWithRect:[[self callMenuPanel] bounds]].CGPath];
+        [menuPanel setFrame:menuFrame];
     } completion:nil];
     
     // メニュー表示フラグ切り替え
@@ -361,6 +210,7 @@ static CGFloat CCDrawerViewControllerMenuHeight()
         [self slideMenu];
     }
 }
+
 // スライドを閉じる
 - (void) closeSlide
 {
@@ -394,19 +244,10 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 // スワイプ処理
 - (void) onSwipeMenuPanel:(UISwipeGestureRecognizer*) swipe
 {
-    UISwipeGestureRecognizerDirection direction = [swipe direction];
-    
-    switch (direction)
+    if ([swipe direction] == UISwipeGestureRecognizerDirectionLeft
+        && [self menuVisible] == YES)
     {
-        case UISwipeGestureRecognizerDirectionLeft:
-            if ([self menuVisible] == YES)
-            {
-                [self slideMenu];
-            }
-            break;
-            
-        default:
-            break;
+        [self slideMenu];
     }
 }
 
@@ -427,16 +268,16 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 }
 
 // メニューアイコンボタンの生成
-- (CTBarButtonItem *)generateMenuIconBarButton
+- (CCBarButtonItem *)generateMenuIconBarButton
 {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     [[[button widthAnchor] constraintEqualToConstant:32] setActive:YES];
     [[[button heightAnchor] constraintEqualToConstant:32] setActive:YES];
-    [button setBackgroundImage:[[CitrusTouchApplication callTheme] callAppIconImage] forState:UIControlStateNormal];
+    [button setBackgroundImage:[[CitrusCobaltumApplication callTheme] callAppIconImage] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(slideMenu) forControlEvents:UIControlEventTouchUpInside];
-    CTBarButtonItem *barButtonItem = [[CTBarButtonItem alloc] initWithCustomView:button];
-    return barButtonItem;
+    return [[CCBarButtonItem alloc] initWithCustomView:button];
 }
+
 
 
 
@@ -473,6 +314,163 @@ static CGFloat CCDrawerViewControllerMenuHeight()
         [[[self menuPanel] headView] addGestureRecognizer:swipe];
     }
     return [self menuPanel];
+}
+
+
+
+#pragma mark - UITableViewDataSource
+//
+// UITableViewDataSource
+//
+
+// セクション内セル数
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [[[[self menuSections] objectAtIndex:section] menuItems] count];
+}
+
+// セルを返す
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellID = @"CellID";
+    
+    CCTableCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
+    if (cell == nil)
+    {
+        CCTheme *theme = [CitrusCobaltumApplication callTheme];
+        cell = [[CCTableCellLabel alloc] initWithPrefix:nil reuseIdentifier:CellID];
+        [cell setBackgroundColor:[theme callDrawerCellBodyBackColor]];
+        [[[cell label] callStyle] addStyleKeys:@{
+                                                 @"font-size"   :@"14",
+                                                 @"color"       :[CCColor hexStringWithColor:[theme callDrawerCellBodyTextColor]],
+                                                 @"margin"      :@"0 0 0 8",
+                                                 }];
+    }
+    if (cell != nil)
+    {
+        CCDrawerMenuItem *menuItem = [[[[self menuSections] objectAtIndex:[indexPath section]] menuItems] objectAtIndex:[indexPath row]];
+        [cell setContentText:[menuItem title]];
+    }
+    return cell;
+}
+
+// セクション数
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[self menuSections] count];
+}
+
+// セクションタイトル
+- (nullable NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[self menuSections] objectAtIndex:section] title];
+}
+//- (nullable NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView;
+//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
+
+
+
+#pragma mark - UITableViewDelegate
+//
+// UITableViewDelegate
+//
+
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+//- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section;
+//- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath;
+//- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section;
+//- (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section;
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+// セルヘッダ高さ
+- (CGFloat) tableView:(UITableView *) tableView heightForHeaderInSection:(NSInteger)section
+{
+    return [[CCTableViewTrait callTableHeaderViewWithController:self tableView:tableView section:section] frame].size.height;
+}
+// セルフッタ高さ
+- (CGFloat) tableView:(UITableView *) tableView heightForFooterInSection:(NSInteger)section
+{
+    return [[CCTableViewTrait callTableFooterViewWithController:self tableView:tableView section:section] frame].size.height;
+}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section;
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section;
+// セルヘッダを返す
+- (nullable UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [CCTableViewTrait callTableHeaderViewWithController:self tableView:tableView section:section];
+}
+// セルフッタを返す
+- (nullable UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [CCTableViewTrait callTableFooterViewWithController:self tableView:tableView section:section];;
+}
+//- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath;
+//- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;
+//- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (nullable NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (nullable NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
+// セルタップ時
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CCDrawerMenuItem *menuItem = [[[[self menuSections] objectAtIndex:[indexPath section]] menuItems] objectAtIndex:[indexPath row]];
+    [self changeViewController:[menuItem controller]];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath;
+//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath;
+//- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender;
+//- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender;
+//- (BOOL)tableView:(UITableView *)tableView canFocusRowAtIndexPath:(NSIndexPath *)indexPath;
+//- (BOOL)tableView:(UITableView *)tableView shouldUpdateFocusInContext:(UITableViewFocusUpdateContext *)context;
+//- (void)tableView:(UITableView *)tableView didUpdateFocusInContext:(UITableViewFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator;
+//- (nullable NSIndexPath *)indexPathForPreferredFocusedViewInTableView:(UITableView *)tableView;
+
+
+
+#pragma mark - CTTableViewDelegate
+//
+// CTTableViewDelegate
+//
+
+// セルヘッダタイトル取得
+- (NSString *) callHeaderTitleWithSection:(NSInteger)section
+{
+    return [[[self menuSections] objectAtIndex:section] title];
+}
+
+// セルフッタタイトル取得
+- (NSString *) callFooterTitleWithSection:(NSInteger)section
+{
+    return @"";
+}
+
+// セルヘッダビュー取得
+- (UIView *) callHeaderViewWithSection:(NSInteger)section
+{
+    return nil;
+}
+
+// セルフッタビュー取得
+- (UIView *) callFooterViewWithSection:(NSInteger)section
+{
+    return nil;
 }
 
 @end

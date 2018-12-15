@@ -10,28 +10,6 @@
 
 
 @interface CCTableCellDatePicker : CCTableCellTextField
-{
-//    // ピッカー
-//    UIDatePicker *datePicker;
-//
-//    // フォーマット
-//    NSDateFormatter *dateFormatter;
-//
-//    // ピッカーモード
-//    CCTableCellDatePickerMode pickerMode;
-//
-//    // パッキングビュー
-//    UIView *inputPackingView;
-}
-
-//
-// property
-////
-//@property (nonatomic, retain) UIDatePicker *datePicker;
-//@property (nonatomic, retain) NSDateFormatter *dateFormatter;
-//@property (nonatomic) CCTableCellDatePickerMode pickerMode;
-//@property (nonatomic, retain) UIView *inputPackingView;
-
 
 //
 // method

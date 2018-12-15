@@ -34,12 +34,6 @@
 // 初期化
 - (instancetype) initWithPrefix:(NSString *)prefixString content:(NSString *)textString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier;
 
-// テキスト取得
-- (NSString *) contentText;
-
-// テキスト設定
-- (void) setContentText:(NSString *)stringValue;
-
 // レスポンダ設定(前へ)
 - (void) setPrevCellResponder:(CCTableCell *)tableCell;
 
