@@ -199,10 +199,6 @@
     
     // ツールバーボタン表示
     barButtonItems = [[self toolbarItems] mutableCopy];
-    if (barButtonItems == nil)
-    {
-        barButtonItems = [@[] mutableCopy];
-    }
     if ([self visibleRemoveButton] == YES
         && [barButtonItems indexOfObject:[self removeBarButton]] == NSNotFound)
     {
