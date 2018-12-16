@@ -1,43 +1,41 @@
 //
-//  CCBaseSelectModal.m
+//  CCBaseEditModal.m
 //  CitrusCobaltum
 //
-//  Created by kouhei.takemoto on 2018/12/16.
+//  Created by kouhei.takemoto on 2018/12/17.
 //  Copyright © 2018 citrus.tk. All rights reserved.
 //
 
-#import "CCBaseSelectModal.h"
+#import "CCBaseEditModal.h"
 
 #import "CCBarButtonItem.h"
 #import "CCBasePresentationController.h"
-#import "CCControllerStruct.h"
 #import "CCNavigationController.h"
 
 
 
-@interface CCBaseSelectModal ()
+@interface CCBaseEditModal ()
+
 
 #pragma mark - property
 //
 // property
 //
-
 @property CCNavigationController *_navigationController;
 @property CitrusCobaltumModalBlock modalComplete;
-@property NSMutableArray *selectedList;
 
 @end
 
 
 
-@implementation CCBaseSelectModal
+@implementation CCBaseEditModal
 
 #pragma mark - extends
 //
 // extends
 //
 
-// 初期化
+// init
 - (instancetype) initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -45,24 +43,12 @@
     {
         // modal style
         [self setModalPresentationStyle:UIModalPresentationPageSheet];
-
+        
         // バーボタン(閉じる)
         CCBarButtonItem *barButtonItem = [[CCBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStyleDone target:self action:@selector(onTapBarButtonClose)];
         [[self navigationItem] setLeftBarButtonItems:@[ barButtonItem ]];
     }
     return self;
-}
-
-// 表示(選択ボタン)
-- (BOOL) visibleSelectButton
-{
-    return YES;
-}
-
-// 編集時(移動可能)
-- (BOOL) canMoveEditing
-{
-    return NO;
 }
 
 
@@ -115,7 +101,7 @@
 //
 
 // ボタン押下時(閉じる)
-- (void) onTapBarButtonClose
+- (void)onTapBarButtonClose
 {
     [self hide];
 }
@@ -128,9 +114,9 @@
 //
 
 // call navigation controller
-- (CCNavigationController *) callNavigationController
+- (CCNavigationController *)callNavigationController
 {
-    if([self _navigationController] == nil)
+    if ([self _navigationController] == nil)
     {
         CCNavigationController *navigation = [[CCNavigationController alloc] initWithRootViewController:self];
         [navigation setTransitioningDelegate:self];
@@ -146,12 +132,12 @@
 // UIViewControllerTransitioningDelegate
 //
 
-//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
-//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed;
-//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator;
-//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator;
+//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator
+//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator
 
-- (nullable UIPresentationController *) presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(nullable UIViewController *)presenting sourceViewController:(UIViewController *)source
+- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(nullable UIViewController *)presenting sourceViewController:(UIViewController *)source
 {
     return [[CCBasePresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
 }

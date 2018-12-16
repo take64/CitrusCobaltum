@@ -6,7 +6,7 @@
 //  Copyright © 2018 citrus.tk. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CCNavigationController.h"
 
 #import "CCTableViewTrait.h"
 
