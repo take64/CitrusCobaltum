@@ -129,11 +129,10 @@
     // CCTableCellTextField
     // CCTableCellTextView
     // のいずれか、か？
-    NSArray *enabledClasses = @[
-                                [CCTableCellTextField class],
-                                [CCTableCellTextView class],
-                                ];
-    if ([enabledClasses containsObject:cellClass] == NO)
+    if ([@[
+           [CCTableCellTextField class],
+           [CCTableCellTextView class],
+           ] containsObject:cellClass] == NO)
     {
         return;
     }
