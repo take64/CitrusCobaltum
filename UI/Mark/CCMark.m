@@ -10,34 +10,30 @@
 
 @implementation CCMark
 
-#pragma mark - method
+#pragma mark - static method
 //
-// method
+// static method
 //
 
 // マーク(クリア)
 + (UIImageView *) markClearWithSize:(CGSize)size
 {
-    return [CTMark markWithName:@"mark-clear" size:size];
+    return [CCMark markWithName:@"mark-clear" size:size];
 }
 
 
 
-#pragma mark - private
+#pragma mark - static private
 //
-// private
+// static private
 //
 
 // マーク(クリア)の生成
 + (UIImageView *) markWithName:(NSString *)filename size:(CGSize)size
 {
-    UIImageView *imageView;
-    UIImage *image;
-    
-    image = [UIImage imageNamed:filename];
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *image = [UIImage imageNamed:filename];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     [imageView setImage:image];
-    
     return imageView;
 }
 

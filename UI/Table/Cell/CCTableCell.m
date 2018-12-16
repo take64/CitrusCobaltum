@@ -42,6 +42,7 @@
 @synthesize layouted;
 @synthesize subLayouted;
 @synthesize bgView;
+@synthesize contentFrame;
 
 
 

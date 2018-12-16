@@ -8,11 +8,15 @@
 
 #import "CCDrawerMenuPanel.h"
 
-#import "CCStyle.h"
-#import "CCView.h"
+#import "CitrusCobaltumApplication.h"
 #import "CCColor.h"
+#import "CCStyle.h"
+#import "CCTheme.h"
+#import "CCView.h"
 
 static CGFloat const kImageSizeOneSide = 64;
+
+
 
 @interface CCDrawerMenuPanel()
 
@@ -56,14 +60,14 @@ static CGFloat const kImageSizeOneSide = 64;
         CCView *view;
         view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, panelWidth, panelWidth)];
         [view setUserInteractionEnabled:YES];
-        [[view callStyle] addStyleKey:@"background-color" value:[CTColor hexStringWithColor:[[CitrusTouchApplication callTheme] callDrawerPanelBackColor]]];
+        [[view callStyle] addStyleKey:@"background-color" value:[CCColor hexStringWithColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]]];
         [self addSubview:view];
         [self setHeadView:view];
         
         // テーブルビュー
         UITableView *tableView;
         tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelWidth, panelWidth, (panelHeight - panelWidth)) style:UITableViewStylePlain];
-        [tableView setBackgroundColor:[[CitrusTouchApplication callTheme] callDrawerPanelBackColor]];
+        [tableView setBackgroundColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]];
         [self addSubview:tableView];
         [self setMenuTableView:tableView];
     }
@@ -82,7 +86,7 @@ static CGFloat const kImageSizeOneSide = 64;
         [imageView setCenter:[[self headView] center]];
         [imageView setClipsToBounds:YES];
         [[imageView layer] setCornerRadius:8];
-        [imageView setImage:[[CitrusTouchApplication callTheme] callDrawerPanelIconImage]];
+        [imageView setImage:[[CitrusCobaltumApplication callTheme] callDrawerPanelIconImage]];
         [[self headView] addSubview:imageView];
         [self setHeadImageView:imageView];
     }
