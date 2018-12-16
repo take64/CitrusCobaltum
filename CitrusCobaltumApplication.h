@@ -11,22 +11,6 @@
 @class CCTheme;
 
 @interface CitrusCobaltumApplication : NSObject
-{
-//    // theme
-//    CTTheme *theme;
-//
-//    // coredata
-//    CTCoreDataManager *coreDataManager;
-//    NSManagedObjectContext * coreDataContext;
-}
-
-//
-// property
-//
-//@property (nonatomic, retain) CTTheme *theme;
-//@property (nonatomic, retain) CTCoreDataManager *coreDataManager;
-//@property (nonatomic, retain) NSManagedObjectContext * coreDataContext;
-
 
 //
 // static method

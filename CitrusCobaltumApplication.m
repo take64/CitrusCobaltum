@@ -10,6 +10,8 @@
 
 #import "CCTheme.h"
 
+
+
 @interface CitrusCobaltumApplication()
 
 #pragma mark - property
@@ -21,16 +23,8 @@
 @end
 
 
+
 @implementation CitrusCobaltumApplication
-
-//
-// synthesize
-//
-//@synthesize theme;
-//@synthesize coreDataManager;
-//@synthesize coreDataContext;
-
-
 
 #pragma mark - method
 //
@@ -104,4 +98,5 @@
     });
     return singleton;
 }
+
 @end

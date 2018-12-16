@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CCMark : NSObject
 
 //
-// method
+// static method
 //
 
 // mark clear
