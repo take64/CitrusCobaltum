@@ -1,13 +1,13 @@
 //
-//  CCStyleStruct.h
+//  CCUIStruct.h
 //  CitrusCobaltum
 //
 //  Created by kouhei.takemoto on 2018/08/30.
 //  Copyright © 2018 citrus.tk. All rights reserved.
 //
 
-#ifndef CCStyleStruct_h
-#define CCStyleStruct_h
+#ifndef CCUIStruct_h
+#define CCUIStruct_h
 
 __attribute__((unused)) static CGFloat CC8(CGFloat oct)
 {
@@ -136,4 +136,4 @@ typedef void (^CitrusCobaltumBlock)(void);
 @class CCButton;
 typedef void (^CCButtonTappedBlock)(CCButton *buttonValue);
 
-#endif /* CCStyleStruct_h */
+#endif /* CCUIStruct_h */
