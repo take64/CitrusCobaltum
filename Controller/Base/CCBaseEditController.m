@@ -120,47 +120,50 @@
 // フィールド内容変更処理
 - (void) changeFieldWithIndexPath:(NSIndexPath *)indexPath cellClass:(Class)cellClass valueClass:(Class)valueClass
 {
-    if ([[self tableView] cellForRowAtIndexPath:indexPath] != nil)
+    CCTableCell *tableCell = [[self tableView] cellForRowAtIndexPath:indexPath];
+    if (tableCell == nil)
     {
-        // 入力値
-        NSString *stringValue = nil;
-        
-        // CCTableCellTextField
-        // CCTableCellTextView
-        if (cellClass == [CCTableCellTextField class]
-            || cellClass == [CCTableCellTextField class])
-        {
-            stringValue = [[[self tableView] cellForRowAtIndexPath:indexPath] contentText];
-        }
-        else
-        {
-            return;
-        }
-        
-        // default
-        id defaultValue = [NSNull null];
-        id settingValue = [NSNull null];
-        // convert class
-        if (valueClass == [NSString class])
-        {
-            defaultValue = @"";
-            settingValue = stringValue;
-        }
-        else if (valueClass == [NSNumber class])
-        {
-            defaultValue = @0;
-            settingValue = @([stringValue integerValue]);
-        }
-        else if (valueClass == [NSDecimalNumber class])
-        {
-            defaultValue = [NSDecimalNumber zero];
-            settingValue = [CFDecimal decimalWithString:stringValue];
-        }
-        settingValue = [CFEmptyVL compare:stringValue value1:settingValue value2:defaultValue];
-        
-        // 設定
-        [[self temporary] setObject:settingValue forKey:indexPath];
+        return;
     }
+    
+    // 入力値
+    NSString *stringValue = nil;
+    
+    // CCTableCellTextField
+    // CCTableCellTextView
+    if (cellClass == [CCTableCellTextField class]
+        || cellClass == [CCTableCellTextField class])
+    {
+        stringValue = [tableCell contentText];
+    }
+    else
+    {
+        return;
+    }
+    
+    // default
+    id defaultValue = [NSNull null];
+    id settingValue = [NSNull null];
+    // convert class
+    if (valueClass == [NSString class])
+    {
+        defaultValue = @"";
+        settingValue = stringValue;
+    }
+    else if (valueClass == [NSNumber class])
+    {
+        defaultValue = @0;
+        settingValue = @([stringValue integerValue]);
+    }
+    else if (valueClass == [NSDecimalNumber class])
+    {
+        defaultValue = [NSDecimalNumber zero];
+        settingValue = [CFDecimal decimalWithString:stringValue];
+    }
+    settingValue = [CFEmptyVL compare:stringValue value1:settingValue value2:defaultValue];
+    
+    // 設定
+    [[self temporary] setObject:settingValue forKey:indexPath];
 }
 
 // 保存処理
