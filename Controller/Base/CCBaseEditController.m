@@ -126,14 +126,11 @@
         NSString *stringValue = nil;
         
         // CCTableCellTextField
-        if (cellClass == [CCTableCellTextField class])
-        {
-            stringValue = [(CCTableCellTextField *) [[self tableView] cellForRowAtIndexPath:indexPath] contentText];
-        }
         // CCTableCellTextView
-        else if (cellClass == [CCTableCellTextView class])
+        if (cellClass == [CCTableCellTextField class]
+            || cellClass == [CCTableCellTextField class])
         {
-            stringValue = [(CCTableCellTextView *) [[self tableView] cellForRowAtIndexPath:indexPath] contentText];
+            stringValue = [[[self tableView] cellForRowAtIndexPath:indexPath] contentText];
         }
         else
         {
