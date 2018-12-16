@@ -13,6 +13,8 @@
 #import "CCTableCellTextField.h"
 #import "CCTableCellTextView.h"
 #import "CCTheme.h"
+#import "CFDecimal.h"
+#import "CFEmptyVL.h"
 
 
 
@@ -120,61 +122,47 @@
 {
     if ([[self tableView] cellForRowAtIndexPath:indexPath] != nil)
     {
+        // 入力値
+        NSString *stringValue = nil;
+        
         // CCTableCellTextField
         if (cellClass == [CCTableCellTextField class])
         {
-            // 入力値
-            NSString *stringValue = [(CCTableCellTextField *) [[self tableView] cellForRowAtIndexPath:indexPath] contentText];
-            
-            // default
-            id defaultValue = [NSNull null];
-            id settingValue = [NSNull null];
-            // convert class
-            if (valueClass == [NSString class])
-            {
-                defaultValue = @"";
-                settingValue = stringValue;
-            }
-            else if (valueClass == [NSNumber class])
-            {
-                defaultValue = @0;
-                settingValue = @([stringValue integerValue]);
-            }
-            else if (valueClass == [NSDecimalNumber class])
-            {
-                defaultValue = [NSDecimalNumber zero];
-                settingValue = [CFDecimal decimalWithString:stringValue];
-            }
-            settingValue = [CFEmptyVL compare:settingValue value1:settingValue value2:defaultValue];
-            
-            // 設定
-            [[self temporary] setObject:settingValue forKey:indexPath];
+            stringValue = [(CCTableCellTextField *) [[self tableView] cellForRowAtIndexPath:indexPath] contentText];
         }
         // CCTableCellTextView
         else if (cellClass == [CCTableCellTextView class])
         {
-            // 入力値
-            NSString *stringValue = [(CCTableCellTextView *) [[self tableView] cellForRowAtIndexPath:indexPath] contentText];
-            
-            // default
-            id defaultValue = [NSNull null];
-            id settingValue = [NSNull null];
-            // convert class
-            if (valueClass == [NSString class])
-            {
-                defaultValue = @"";
-                settingValue = stringValue;
-            }
-            else if (valueClass == [NSNumber class])
-            {
-                defaultValue = @0;
-                settingValue = @([stringValue integerValue]);
-            }
-            settingValue = [CFEmptyVL compare:settingValue value1:settingValue value2:defaultValue];
-            
-            // 設定
-            [[self temporary] setObject:settingValue forKey:indexPath];
+            stringValue = [(CCTableCellTextView *) [[self tableView] cellForRowAtIndexPath:indexPath] contentText];
         }
+        else
+        {
+            return;
+        }
+        
+        // default
+        id defaultValue = [NSNull null];
+        id settingValue = [NSNull null];
+        // convert class
+        if (valueClass == [NSString class])
+        {
+            defaultValue = @"";
+            settingValue = stringValue;
+        }
+        else if (valueClass == [NSNumber class])
+        {
+            defaultValue = @0;
+            settingValue = @([stringValue integerValue]);
+        }
+        else if (valueClass == [NSDecimalNumber class])
+        {
+            defaultValue = [NSDecimalNumber zero];
+            settingValue = [CFDecimal decimalWithString:stringValue];
+        }
+        settingValue = [CFEmptyVL compare:stringValue value1:settingValue value2:defaultValue];
+        
+        // 設定
+        [[self temporary] setObject:settingValue forKey:indexPath];
     }
 }
 
@@ -216,12 +204,10 @@
     {
         barButtonItems = [@[] mutableCopy];
     }
-    if ([self visibleRemoveButton] == YES)
+    if ([self visibleRemoveButton] == YES
+        && [barButtonItems indexOfObject:[self removeBarButton]] == NSNotFound)
     {
-        if ([barButtonItems indexOfObject:[self removeBarButton]] == NSNotFound)
-        {
-            [barButtonItems insertObject:[self removeBarButton] atIndex:0];
-        }
+        [barButtonItems insertObject:[self removeBarButton] atIndex:0];
     }
     [self setToolbarItems:barButtonItems];
     [[self navigationController] setToolbarHidden:([barButtonItems count] == 0)];
