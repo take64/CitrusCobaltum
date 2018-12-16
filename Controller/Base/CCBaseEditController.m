@@ -126,20 +126,20 @@
         return;
     }
     
-    // 入力値
-    NSString *stringValue = nil;
-    
     // CCTableCellTextField
     // CCTableCellTextView
-    if (cellClass == [CCTableCellTextField class]
-        || cellClass == [CCTableCellTextField class])
-    {
-        stringValue = [tableCell contentText];
-    }
-    else
+    // のいずれか、か？
+    NSArray *enabledClasses = @[
+                                [CCTableCellTextField class],
+                                [CCTableCellTextView class],
+                                ];
+    if ([enabledClasses containsObject:cellClass] == NO)
     {
         return;
     }
+    
+    // 入力値
+    NSString *stringValue = [tableCell contentText];
     
     // default
     id defaultValue = [NSNull null];
