@@ -9,19 +9,6 @@
 #ifndef CCUIStruct_h
 #define CCUIStruct_h
 
-__attribute__((unused)) static CGFloat CC8(CGFloat oct)
-{
-    return oct * 8;
-}
-__attribute__((unused)) static NSString * CC8Str(CGFloat oct)
-{
-    return [@(CC8(oct)) stringValue];
-}
-__attribute__((unused)) static NSString * CCStr(CGFloat floatValue)
-{
-    return [@(floatValue) stringValue];
-}
-
 // 色構造体
 typedef struct {
     CGFloat red;
