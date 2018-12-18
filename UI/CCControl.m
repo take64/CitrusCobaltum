@@ -50,134 +50,10 @@ static CGFloat const kControlHeight = 48;
 
 
 
-#pragma mark - method
+#pragma mark - extends
 //
-// method
+// extends
 //
-
-// 初期化
-- (instancetype) initWithTitle:(NSString *)titleValue
-{
-    self = [self initWithFrame:CGRectZero];
-    if (self)
-    {
-        titleValue = [CFNVL compare:titleValue replace:@""];
-        
-        // タイトル
-        [self setTitle:titleValue];
-    }
-    return self;
-}
-
-// 初期化
-- (instancetype) initWithTitle:(NSString *)titleValue styleKeys:(NSDictionary *)styleKeys
-{
-    self = [self initWithTitle:titleValue];
-    if (self)
-    {
-        // スタイル
-        [[self callStyle] addStyleKeys:styleKeys];
-    }
-    return self;
-}
-
-// タイトルが設定されているか
-- (BOOL) hasTitle
-{
-    return ([self title] != nil && [[self title] length] > 0);
-}
-
-// スタイル取得(normalのエイリアス)
-- (CCStyle *) callStyle
-{
-    return [self callStyleNormal];
-}
-
-// スタイル設定(normalのエイリアス)
-- (void) setStyle:(CCStyle *)styleValue
-{
-    [self setStyleNormal:styleValue];
-}
-
-// スタイル取得(normal)
-- (CCStyle *) callStyleNormal
-{
-    if ([self styleNormal] == nil)
-    {
-        [self setStyleNormal:[[CCStyle alloc] init]];
-    }
-    return [self styleNormal];
-}
-
-// スタイル設定(normal)
-- (void) setStyleNormal:(CCStyle *)styleValue
-{
-    [[self callStyleNormal] addStyleKeys:[styleValue allStyles]];
-}
-
-// スタイル取得(highlighted)
-- (CCStyle *) callStyleHighlighted
-{
-    if ([self styleHighlighted] == nil)
-    {
-        [self setStyleHighlighted:[[self callStyleNormal] copy]];
-    }
-    return [self styleHighlighted];
-}
-
-// スタイル設定(highlighted)
-- (void) setStyleHighlighted:(CCStyle *)styleValue
-{
-    [[self callStyleHighlighted] addStyleKeys:[styleValue allStyles]];
-}
-
-// スタイル取得(disabled)
-- (CCStyle *) callStyleDisabled
-{
-    if ([self styleDisabled] == nil)
-    {
-        [self setStyleDisabled:[[self callStyleNormal] copy]];
-    }
-    return [self styleDisabled];
-}
-
-// スタイル設定(disabled)
-- (void) setStyleDisabled:(CCStyle *)styleValue
-{
-    [[self callStyleDisabled] addStyleKeys:[styleValue allStyles]];
-}
-
-// 自動テキストサイズ計算
-- (CGSize) calcTextAutoSize
-{
-    CGSize bounds = CGSizeZero;
-    CCStyle *stylesheet = [self callStyle];
-    CGFloat width = [stylesheet callSize].width;
-    
-    // フォント要素
-    NSMutableDictionary *attributes = [stylesheet callFontAttributes];
-    
-    // サイズ計算
-    CGSize fontBounds = [[self title] boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine) attributes:attributes context:nil].size;
-    bounds.width = ceil(fontBounds.width);
-    bounds.height = ceil(fontBounds.height);
-    
-    return bounds;
-}
-
-// 自動テキストサイズ計算(パディング込み)
-- (CGSize) calcTextAutoSizeWithPadding
-{
-    CGSize bounds = [self calcTextAutoSize];
-    CCStyle *stylesheet = [self callStyle];
-    
-    // パディング追加
-    CCPadding padding = [stylesheet callPadding];
-    bounds.width += (padding.left + padding.right);
-    bounds.height += (padding.top + padding.bottom);
-    
-    return bounds;
-}
 
 // 初期化
 - (instancetype) initWithFrame:(CGRect)frame
@@ -279,10 +155,10 @@ static CGFloat const kControlHeight = 48;
     CCPadding padding = [stylesheet callPadding];
     CGRect paddedRect = contentRect;
     paddedRect = CGRectMake((contentRect.origin.x + padding.left),
-                                   (contentRect.origin.y + padding.top),
-                                   (contentRect.size.width - (padding.left + padding.right)),
-                                   (contentRect.size.height - (padding.top + padding.bottom))
-                                   );
+                            (contentRect.origin.y + padding.top),
+                            (contentRect.size.width - (padding.left + padding.right)),
+                            (contentRect.size.height - (padding.top + padding.bottom))
+                            );
     
     // 背景描画
     CCColorStruct backgroundColor = [stylesheet callBackgroundColor];
@@ -446,7 +322,7 @@ static CGFloat const kControlHeight = 48;
         // 縦位置
         CCVerticalAlignment verticalAlignment = [stylesheet callVerticalAlignment];
         CGFloat titleFrameY = [self yOfTitleWithVertical:verticalAlignment paddedRect:paddedRect fontBounds:fontBounds];
-
+        
         titleFrame.origin = CGPointMake(titleFrameX, titleFrameY);
         [paragraph setAlignment:textAlignment];
         
@@ -469,6 +345,137 @@ static CGFloat const kControlHeight = 48;
             [(CCControl *)childView setNeedsDisplay];
         }
     }
+}
+
+
+
+#pragma mark - method
+//
+// method
+//
+
+// 初期化
+- (instancetype) initWithTitle:(NSString *)titleValue
+{
+    self = [self initWithFrame:CGRectZero];
+    if (self)
+    {
+        titleValue = [CFNVL compare:titleValue replace:@""];
+        
+        // タイトル
+        [self setTitle:titleValue];
+    }
+    return self;
+}
+
+// 初期化
+- (instancetype) initWithTitle:(NSString *)titleValue styleKeys:(NSDictionary *)styleKeys
+{
+    self = [self initWithTitle:titleValue];
+    if (self)
+    {
+        // スタイル
+        [[self callStyle] addStyleKeys:styleKeys];
+    }
+    return self;
+}
+
+// タイトルが設定されているか
+- (BOOL) hasTitle
+{
+    return ([self title] != nil && [[self title] length] > 0);
+}
+
+// スタイル取得(normalのエイリアス)
+- (CCStyle *) callStyle
+{
+    return [self callStyleNormal];
+}
+
+// スタイル設定(normalのエイリアス)
+- (void) setStyle:(CCStyle *)styleValue
+{
+    [self setStyleNormal:styleValue];
+}
+
+// スタイル取得(normal)
+- (CCStyle *) callStyleNormal
+{
+    if ([self styleNormal] == nil)
+    {
+        [self setStyleNormal:[[CCStyle alloc] init]];
+    }
+    return [self styleNormal];
+}
+
+// スタイル設定(normal)
+- (void) setStyleNormal:(CCStyle *)styleValue
+{
+    [[self callStyleNormal] addStyleKeys:[styleValue allStyles]];
+}
+
+// スタイル取得(highlighted)
+- (CCStyle *) callStyleHighlighted
+{
+    if ([self styleHighlighted] == nil)
+    {
+        [self setStyleHighlighted:[[self callStyleNormal] copy]];
+    }
+    return [self styleHighlighted];
+}
+
+// スタイル設定(highlighted)
+- (void) setStyleHighlighted:(CCStyle *)styleValue
+{
+    [[self callStyleHighlighted] addStyleKeys:[styleValue allStyles]];
+}
+
+// スタイル取得(disabled)
+- (CCStyle *) callStyleDisabled
+{
+    if ([self styleDisabled] == nil)
+    {
+        [self setStyleDisabled:[[self callStyleNormal] copy]];
+    }
+    return [self styleDisabled];
+}
+
+// スタイル設定(disabled)
+- (void) setStyleDisabled:(CCStyle *)styleValue
+{
+    [[self callStyleDisabled] addStyleKeys:[styleValue allStyles]];
+}
+
+// 自動テキストサイズ計算
+- (CGSize) calcTextAutoSize
+{
+    CGSize bounds = CGSizeZero;
+    CCStyle *stylesheet = [self callStyle];
+    CGFloat width = [stylesheet callSize].width;
+    
+    // フォント要素
+    NSMutableDictionary *attributes = [stylesheet callFontAttributes];
+    
+    // サイズ計算
+    CGSize fontBounds = [[self title] boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine) attributes:attributes context:nil].size;
+    bounds.width = ceil(fontBounds.width);
+    bounds.height = ceil(fontBounds.height);
+    
+    return bounds;
+}
+
+// 自動テキストサイズ計算(パディング込み)
+- (CGSize) calcTextAutoSizeWithPadding
+{
+    CGSize bounds = [self calcTextAutoSize];
+    CCStyle *stylesheet = [self callStyle];
+    
+    // パディング追加
+    CCPadding padding = [stylesheet callPadding];
+    bounds.width += (padding.left + padding.right);
+    bounds.height += (padding.top + padding.bottom);
+    
+    return bounds;
 }
 
 // ステート変更
