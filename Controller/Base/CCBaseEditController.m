@@ -323,9 +323,9 @@
 
 
 
-#pragma mark - CTTableViewDelagate
+#pragma mark - CCTableViewDelagate
 //
-// CTTableViewDelagate
+// CCTableViewDelagate
 //
 
 // セルヘッダタイトル取得

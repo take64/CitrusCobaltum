@@ -11,6 +11,13 @@
 @interface CCTableGroupedHead : CCControl
 
 //
+// property
+//
+@property (nonatomic, retain) CCControl *cellView;
+
+
+
+//
 // method
 //
 
