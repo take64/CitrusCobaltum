@@ -444,9 +444,9 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 
 
 
-#pragma mark - CTTableViewDelegate
+#pragma mark - CCTableViewDelegate
 //
-// CTTableViewDelegate
+// CCTableViewDelegate
 //
 
 // セルヘッダタイトル取得

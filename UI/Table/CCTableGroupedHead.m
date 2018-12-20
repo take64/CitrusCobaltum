@@ -15,17 +15,19 @@
 
 @interface CCTableGroupedHead()
 
-#pragma mark - property
-//
-// property
-//
-@property CCControl *cellView;
-
 @end
 
 
 
 @implementation CCTableGroupedHead
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize cellView;
+
+
 
 #pragma mark - extends
 //

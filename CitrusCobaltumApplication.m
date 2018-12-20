@@ -67,7 +67,7 @@
 //    CTCoreDataManager *_coreDataManager = [[CitrusTouchApplication sharedApplication] coreDataManager];
 //    if(_coreDataManager == nil)
 //    {
-//        CTLog(@"error : CitrusCobaltumApplication.callCoreDataManager");
+//        CFLog(@"error : CitrusCobaltumApplication.callCoreDataManager");
 //    }
 //    return _coreDataManager;
 //}
@@ -78,7 +78,7 @@
 //    NSManagedObjectContext *_coreDataContext = [[CitrusTouchApplication sharedApplication] coreDataContext];
 //    if(_coreDataContext == nil)
 //    {
-//        CTLog(@"error : CitrusCobaltumApplication.callCoreDataContext");
+//        CFLog(@"error : CitrusCobaltumApplication.callCoreDataContext");
 //    }
 //    return _coreDataContext;
 //}

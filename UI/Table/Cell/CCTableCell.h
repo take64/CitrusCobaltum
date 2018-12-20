@@ -12,36 +12,22 @@
 #import "CCUIStruct.h"
 
 @class CCControl;
+@class CCLabel;
 
 @interface CCTableCell : UITableViewCell
-{
-    // entity
-    NSManagedObject *entity;
-    
-    // object
-    NSObject *object;
-    
-    // レイアウト済み
-    BOOL layouted;
-    // サブクラスレイアウト済み
-    BOOL subLayouted;
-    
-    // 背景ビュー
-    CCControl *bgView;
-    
-    // コンテンツサイズ
-    CGRect contentFrame;
-}
 
 //
 // property
 //
-@property (nonatomic, retain) NSManagedObject *entity;
-@property (nonatomic, retain) NSObject *object;
-@property (nonatomic, assign, getter = isLayouted) BOOL layouted;
-@property (nonatomic, assign, getter = isSubLayouted) BOOL subLayouted;
-@property (nonatomic, retain) CCControl *bgView;
-@property (nonatomic, assign) CGRect contentFrame;
+@property (nonatomic, retain) NSManagedObject *entity;                  // entity
+@property (nonatomic, retain) NSObject *object;                         // object
+@property (nonatomic, retain) CCLabel *prefixLabel;                     // prefix label
+@property (nonatomic, retain) CCLabel *suffixLabel;                     // suffix label
+@property (nonatomic, assign, getter = isLayouted) BOOL layouted;       // レイアウト済み
+@property (nonatomic, assign, getter = isSubLayouted) BOOL subLayouted; // サブクラスレイアウト済み
+@property (nonatomic, retain) CCControl *bgView;                        // 背景ビュー
+@property (nonatomic, assign) CGRect contentFrame;                      // コンテンツサイズ
+
 
 
 //

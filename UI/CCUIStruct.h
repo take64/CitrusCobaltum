@@ -123,4 +123,7 @@ typedef void (^CitrusCobaltumBlock)(void);
 @class CCButton;
 typedef void (^CCButtonTappedBlock)(CCButton *buttonValue);
 
+// Switch用ブロック
+typedef void (^CitrusCobaltumSwitchBlock)(NSNumber *switchValue);
+
 #endif /* CCUIStruct_h */

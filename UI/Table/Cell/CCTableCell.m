@@ -20,8 +20,6 @@
 //
 // property
 //
-@property CCLabel *prefixLabel;
-@property CCLabel *suffixLabel;
 @property CCTableCellPartPriority prefixPriority;
 @property CCTableCellPartPriority contentPriority;
 @property CCTableCellPartPriority suffixPriority;
