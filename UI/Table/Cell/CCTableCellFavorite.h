@@ -8,11 +8,14 @@
 
 #import "CCTableCellLabel.h"
 
+#import "CCUIStruct.h"
+
 @interface CCTableCellFavorite : CCTableCellLabel
 
 //
 // property
 //
+@property (nonatomic, assign) CitrusCobaltumSwitchBlock switchBlock;
 @property (nonatomic, assign, getter=isOn) BOOL on;
 
 
