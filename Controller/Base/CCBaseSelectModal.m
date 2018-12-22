@@ -130,7 +130,7 @@
 // call navigation controller
 - (CCNavigationController *) callNavigationController
 {
-    if([self _navigationController] == nil)
+    if ([self _navigationController] == nil)
     {
         CCNavigationController *navigation = [[CCNavigationController alloc] initWithRootViewController:self];
         [navigation setTransitioningDelegate:self];

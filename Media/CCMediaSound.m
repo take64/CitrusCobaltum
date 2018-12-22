@@ -21,7 +21,7 @@
 + (void) playButtonSound
 {
     static SystemSoundID beepSoundId;
-    if(!beepSoundId)
+    if (!beepSoundId)
     {
         NSURL *beepWavURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ButtonSound" ofType:@"m4a"] isDirectory:NO];
         AudioServicesCreateSystemSoundID((__bridge CFURLRef)beepWavURL, &beepSoundId);
