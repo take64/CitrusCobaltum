@@ -45,7 +45,7 @@
 - (instancetype) initWithStyleKeys:(NSDictionary *)dictionaryValue
 {
     self = [self init];
-    if(self)
+    if (self)
     {
         [self setStyleDictionary:dictionaryValue];
     }
@@ -134,9 +134,9 @@
     // フォントボールド
     NSString *_fontWeight = [self styleForKey:@"font-weight"];
     BOOL isFontBold = NO;
-    if(_fontWeight != nil)
+    if (_fontWeight != nil)
     {
-        if([_fontWeight isEqualToString:@"bold"] == YES)
+        if ([_fontWeight isEqualToString:@"bold"] == YES)
         {
             isFontBold = YES;
         }
@@ -145,7 +145,7 @@
     // フォント生成
     UIFont *font;
     // ボールド
-    if(isFontBold == YES)
+    if (isFontBold == YES)
     {
         font = [UIFont boldSystemFontOfSize:fontSize];
     }
@@ -303,27 +303,27 @@
         return lineBreak;
     }
     
-    if([lineBreakString isEqualToString:@"word-wrapping"] == YES)
+    if ([lineBreakString isEqualToString:@"word-wrapping"] == YES)
     {
         lineBreak = NSLineBreakByWordWrapping;// Wrap at word boundaries, default
     }
-    else if([lineBreakString isEqualToString:@"char-wrapping"] == YES)
+    else if ([lineBreakString isEqualToString:@"char-wrapping"] == YES)
     {
         lineBreak = NSLineBreakByCharWrapping; // Wrap at character boundaries
     }
-    else if([lineBreakString isEqualToString:@"clipping"] == YES)
+    else if ([lineBreakString isEqualToString:@"clipping"] == YES)
     {
         lineBreak = NSLineBreakByClipping; // Simply clip
     }
-    else if([lineBreakString isEqualToString:@"truncating-head"] == YES)
+    else if ([lineBreakString isEqualToString:@"truncating-head"] == YES)
     {
         lineBreak = NSLineBreakByTruncatingHead; // Truncate at head of line: "abcd..."
     }
-    else if([lineBreakString isEqualToString:@"truncating-tail"] == YES)
+    else if ([lineBreakString isEqualToString:@"truncating-tail"] == YES)
     {
         lineBreak = NSLineBreakByTruncatingTail; // Truncate at head of line: "...wxyz"
     }
-    else if([lineBreakString isEqualToString:@"truncating-middle"] == YES)
+    else if ([lineBreakString isEqualToString:@"truncating-middle"] == YES)
     {
         lineBreak = NSLineBreakByTruncatingMiddle;  // Truncate middle of line:  "ab...yz"
     }

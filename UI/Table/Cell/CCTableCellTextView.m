@@ -105,7 +105,7 @@
 - (void) textViewDidEndEditing:(UITextView *)textView
 {
     // 編集後処理が登録されていて、呼べれば呼ぶ
-    if(self.didEndEditingBlock != nil)
+    if (self.didEndEditingBlock != nil)
     {
         self.didEndEditingBlock();
     }
@@ -131,7 +131,7 @@
 - (instancetype) initWithPrefix:(NSString *)prefixString content:(NSString *)textString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [self initWithPrefix:prefixString suffix:suffixString reuseIdentifier:reuseIdentifier];
-    if(self)
+    if (self)
     {
         [[self textView] setText:textString];
     }

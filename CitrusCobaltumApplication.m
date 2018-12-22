@@ -53,7 +53,7 @@
 + (CCTheme *)callTheme
 {
     CCTheme *theme = [[CitrusCobaltumApplication sharedApplication] theme];
-    if(theme == nil)
+    if (theme == nil)
     {
         theme = [[CCTheme alloc] init];
     }
@@ -65,7 +65,7 @@
 //+ (CTCoreDataManager *)callCoreDataManager
 //{
 //    CTCoreDataManager *_coreDataManager = [[CitrusTouchApplication sharedApplication] coreDataManager];
-//    if(_coreDataManager == nil)
+//    if (_coreDataManager == nil)
 //    {
 //        CFLog(@"error : CitrusCobaltumApplication.callCoreDataManager");
 //    }
@@ -76,7 +76,7 @@
 //+ (NSManagedObjectContext *)callCoreDataContext
 //{
 //    NSManagedObjectContext *_coreDataContext = [[CitrusTouchApplication sharedApplication] coreDataContext];
-//    if(_coreDataContext == nil)
+//    if (_coreDataContext == nil)
 //    {
 //        CFLog(@"error : CitrusCobaltumApplication.callCoreDataContext");
 //    }

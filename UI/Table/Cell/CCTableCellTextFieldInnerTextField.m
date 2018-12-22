@@ -94,7 +94,7 @@
 // ボタン押下時
 - (void) onEditingEndTextField:(CCTableCellTextFieldInnerTextField *)textFieldValue
 {
-    if(self.editingEndBlock != nil)
+    if (self.editingEndBlock != nil)
     {
         self.editingEndBlock(textFieldValue);
     }

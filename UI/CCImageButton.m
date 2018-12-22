@@ -46,7 +46,7 @@
 - (instancetype) initWithImageView:(UIImageView *)view
 {
     self = [super initWithFrame:[view frame]];
-    if(self)
+    if (self)
     {
         [self setImageView:view];
         [self addSubview:view];

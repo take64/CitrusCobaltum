@@ -116,7 +116,7 @@
 - (instancetype) initWithPrefix:(NSString *)prefixString content:(NSString *)textString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [self initWithPrefix:prefixString suffix:suffixString reuseIdentifier:reuseIdentifier];
-    if(self)
+    if (self)
     {
         [[self innerTextField] setText:textString];
     }
