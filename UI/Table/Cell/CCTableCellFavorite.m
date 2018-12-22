@@ -8,19 +8,12 @@
 
 #import "CCTableCellFavorite.h"
 
-#import "CCUIStruct.h"
 #import "CCLabel.h"
 #import "CCStyle.h"
 
 
 
 @interface CCTableCellFavorite()
-
-#pragma mark - property
-//
-// property
-//
-@property CitrusCobaltumSwitchBlock switchBlock;
 
 @end
 
@@ -32,6 +25,7 @@
 //
 // synthesize
 //
+@synthesize switchBlock;
 @synthesize on;
 
 
@@ -66,13 +60,13 @@
 //
 
 // スイッチ
-- (void)toggleSwitch
+- (void) toggleSwitch
 {
     [self switchOn:![self isOn]];
 }
 
 // スイッチ
-- (void)switchOn:(BOOL)onValue
+- (void) switchOn:(BOOL)onValue
 {
     [self setOn:onValue];
     
@@ -81,7 +75,7 @@
 }
 
 // 描画
-- (void)drawSwitch
+- (void) drawSwitch
 {
     NSString *starMark = ([self isOn] == YES ? @"★" : @"☆");
     [[self suffixLabel] setTitle:starMark];
@@ -96,7 +90,7 @@
 //
 
 // ボタン押下時
-- (void)onTapButton
+- (void) onTapButton
 {
     [self toggleSwitch];
     
