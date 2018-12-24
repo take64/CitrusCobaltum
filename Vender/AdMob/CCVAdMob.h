@@ -1,6 +1,6 @@
 //
 //  CCVAdMob.h
-//  CitrusCobaltum
+//  CitrusCobaltum Vender Wrapper
 //
 //  Created by kouhei.takemoto on 2018/12/24.
 //  Copyright © 2018 citrus.tk. All rights reserved.
