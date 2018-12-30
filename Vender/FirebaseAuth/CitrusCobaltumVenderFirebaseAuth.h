@@ -29,8 +29,9 @@ static NSString *CCVFirebaseAuthNotificationTypeMessage  = @"message";
 //#import <FBSDKLoginKit/FBSDKLoginKit.h>
 //#import <FBAudienceNetwork/FBAudienceNetwork.h>
 //
-//// twitter
-////#import <Twitter/Twitter.h>
+
+// twitter
+#import <TwitterKit/TWTRKit.h>
 //#import <Fabric/Fabric.h>
 //#import <TwitterKit/TwitterKit.h>
 
