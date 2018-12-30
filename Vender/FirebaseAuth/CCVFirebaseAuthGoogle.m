@@ -25,14 +25,6 @@
 
 @implementation CCVFirebaseAuthGoogle
 
-//
-// synthesize
-//
-@synthesize signInBlock;
-@synthesize signOutBlock;
-
-
-
 #pragma mark - method
 //
 // method
