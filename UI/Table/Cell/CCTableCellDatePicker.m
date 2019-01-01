@@ -23,8 +23,6 @@
 //
 // property
 //
-@property UIDatePicker *datePicker;
-@property NSDateFormatter *dateFormatter;
 @property CCTableCellDatePickerMode pickerMode;
 @property UIView *inputPackingView;
 
@@ -33,6 +31,15 @@
 
 
 @implementation CCTableCellDatePicker
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize datePicker;
+@synthesize dateFormatter;
+
+
 
 #pragma mark - extends
 //

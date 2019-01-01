@@ -26,11 +26,6 @@
 //
 @property CCBarButtonItem *saveBarButton;
 @property CCBarButtonItem *removeBarButton;
-@property NSArray *rowOfSection;
-@property NSArray *headTitles;
-@property NSMutableDictionary *datastore;
-@property NSMutableDictionary *temporary;
-@property NSMutableDictionary *relations;
 @property UIAlertController *removeAlertController;
 
 @end
@@ -38,6 +33,19 @@
 
 
 @implementation CCBaseEditController
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize entity;
+@synthesize rowOfSection;
+@synthesize headTitles;
+@synthesize datastore;
+@synthesize temporary;
+@synthesize relations;
+
+
 
 #pragma mark - extends
 //

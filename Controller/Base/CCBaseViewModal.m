@@ -16,7 +16,6 @@
 
 @interface CCBaseViewModal ()
 
-
 #pragma mark - property
 //
 // property

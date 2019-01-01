@@ -65,7 +65,7 @@
 {
     // 取得
     GADBannerView *bannerView = [self callBannerID:bannerID];
-    if(bannerView == nil)
+    if (bannerView == nil)
     {
         // 生成
         bannerView = [[GADBannerView alloc] initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
@@ -92,7 +92,7 @@
     
     // ビュー取得
     GADBannerView *bannerView = [self callBannerID:bannerID];
-    if(bannerView == nil)
+    if (bannerView == nil)
     {
         // 生成
         bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];

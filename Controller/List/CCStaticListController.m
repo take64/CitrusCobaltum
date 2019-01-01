@@ -12,13 +12,6 @@
 
 @interface CCStaticListController ()
 
-#pragma mark - property
-//
-// property
-//
-@property NSArray *rowOfSection;
-@property NSArray *headTitles;
-
 @end
 
 

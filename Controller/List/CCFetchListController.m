@@ -14,17 +14,19 @@
 
 @interface CCFetchListController ()
 
-#pragma mark - property
-//
-// property
-//
-@property NSFetchedResultsController *fetchedResultsController;
-
 @end
 
 
 
 @implementation CCFetchListController
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize fetchedResultsController;
+
+
 
 #pragma mark - method
 //

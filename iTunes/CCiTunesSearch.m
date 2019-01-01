@@ -54,7 +54,7 @@ static NSString * const kiTunesLookupURL = @"https://itunes.apple.com/lookup";
                 [results addObject:[[CCiTunesSearchResult alloc] initWithData:one]];
             }
         }
-        if(complete != nil)
+        if (complete != nil)
         {
             complete([results copy], error);
         }

@@ -9,9 +9,12 @@
 #ifndef CitrusCobaltumVenderFirebaseAuth_h
 #define CitrusCobaltumVenderFirebaseAuth_h
 
-static NSString * const kFirebaseAuthTypeFacebook   = @"facebook";  // facebook
 static NSString * const kFirebaseAuthTypeTwitter    = @"twitter";   // twitter
 static NSString * const kFirebaseAuthTypeGoogle     = @"google";    // google
+
+static NSString * const kFirebaseAuthNameTwitter    = @"Twitter";   // twitter
+static NSString * const kFirebaseAuthNameGoogle     = @"Google";    // google
+
 
 static NSString *CCVFirebaseAuthNotificationKey          = @"action";
 static NSString *CCVFirebaseAuthNotificationTypeMessage  = @"message";
@@ -45,8 +48,9 @@ typedef void (^CitrusCobaltumFirebaseAuthBlock)(FIRUser *user, NSError *error);
 // sign-in
 #import "CCVFirebaseAuth.h"
 #import "CCVFirebaseAuthGoogle.h"
+#import "CCVFirebaseAuthTwitter.h"
 //#import "CCVFirebaseSignInFacebook.h"
-//#import "CCVFirebaseSignInTwitter.h"
+
 //
 //// database
 //#import "CTFirebaseDatabase.h"

@@ -16,8 +16,6 @@
 //
 // property
 //
-@property CitrusCobaltumSearchBarBlock suggestBlock;
-@property CitrusCobaltumSearchBarBlock searchBlock;
 @property NSArray<NSString *> *_suggestList;
 @property UITableView *_tableView;
 @property NSNotificationCenter *keydoardNotification;
@@ -28,6 +26,15 @@
 
 
 @implementation CCSearchBar
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize suggestBlock;
+@synthesize searchBlock;
+
+
 
 #pragma mark - extends
 //
@@ -52,13 +59,13 @@
 
 
 
-#pragma mark - private
+#pragma mark - method
 //
-// private
+// method
 //
 
 // 検索結果表示
-- (void)showKeywords:(NSArray<NSString *> *)suggestList
+- (void) showKeywords:(NSArray<NSString *> *)suggestList
 {
     // キーワードの設定
     [self set_suggestList:suggestList];
@@ -84,26 +91,26 @@
 }
 
 // 検索結果非表示
-- (void)hideKeywords
+- (void) hideKeywords
 {
     [[self callTableView] removeFromSuperview];
 }
 
 
 
-#pragma mark - notification
+#pragma mark - private
 //
-// notification
+// private
 //
 
 // キーボード表示
-- (void)showKeyboard:(NSNotification *)notification
+- (void) showKeyboard:(NSNotification *)notification
 {
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     [self setKeyboardHeight:keyboardRect.size.height];
 }
 // キーボード非表示
-- (void)hideKeyboard:(NSNotification *)notification
+- (void) hideKeyboard:(NSNotification *)notification
 {
     [self setKeyboardHeight:0];
 }
@@ -206,12 +213,12 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
     
-    if(cell == nil)
+    if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
     }
     
-    if(cell != nil)
+    if (cell != nil)
     {
         [[cell textLabel] setText:[[self _suggestList] objectAtIndex:[indexPath row]]];
     }

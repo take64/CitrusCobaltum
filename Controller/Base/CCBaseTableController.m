@@ -8,8 +8,9 @@
 
 #import "CCBaseTableController.h"
 
+#import "CitrusCobaltumTypedef.h"
 #import "CCTableViewTrait.h"
-#import "CCUIStruct.h"
+
 
 
 @interface CCBaseTableController ()
@@ -19,14 +20,21 @@
 // property
 //
 @property BOOL cacheEnable;
-@property NSMutableDictionary *headerCaches;
-@property NSMutableDictionary *footerCaches;
 
 @end
 
 
 
 @implementation CCBaseTableController
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize headerCaches;
+@synthesize footerCaches;
+
+
 
 #pragma mark - method
 //
