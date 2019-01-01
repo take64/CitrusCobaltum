@@ -23,7 +23,6 @@
 //
 
 @property CCNavigationController *_navigationController;
-@property CitrusCobaltumModalBlock modalComplete;
 @property NSMutableArray *selectedList;
 
 @end
@@ -31,6 +30,14 @@
 
 
 @implementation CCBaseSelectModal
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize modalComplete;
+
+
 
 #pragma mark - extends
 //

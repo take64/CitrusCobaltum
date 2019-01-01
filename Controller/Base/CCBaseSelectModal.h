@@ -13,6 +13,14 @@
 @interface CCBaseSelectModal : CCBaseListController <UIViewControllerTransitioningDelegate>
 
 //
+// property
+//
+
+@property (nonatomic, copy) CitrusCobaltumModalBlock modalComplete;
+
+
+
+//
 // method
 //
 
