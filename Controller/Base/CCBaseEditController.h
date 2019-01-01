@@ -8,9 +8,23 @@
 
 #import "CCBaseTableController.h"
 
+#import <CoreData/CoreData.h>
+
 @class CCBarButtonItem;
 
 @interface CCBaseEditController : CCBaseTableController
+
+//
+// property
+//
+@property (nonatomic, retain) NSManagedObject *entity;
+@property (nonatomic, retain) NSArray *rowOfSection;
+@property (nonatomic, retain) NSArray *headTitles;
+@property (nonatomic, retain) NSMutableDictionary *datastore;
+@property (nonatomic, retain) NSMutableDictionary *temporary;
+@property (nonatomic, retain) NSMutableDictionary *relations;
+
+
 
 //
 // method

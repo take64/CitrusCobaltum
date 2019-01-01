@@ -13,6 +13,12 @@
 @interface CCFetchListController : CCBaseListController <NSFetchedResultsControllerDelegate>
 
 //
+// property
+//
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+
+
+//
 // method
 //
 

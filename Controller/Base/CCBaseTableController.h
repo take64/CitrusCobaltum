@@ -13,6 +13,14 @@
 @interface CCBaseTableController : UITableViewController <CCTableViewDelegate>
 
 //
+// property
+//
+@property (nonatomic, retain) NSMutableDictionary *headerCaches;
+@property (nonatomic, retain) NSMutableDictionary *footerCaches;
+
+
+
+//
 // method
 //
 

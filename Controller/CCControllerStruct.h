@@ -10,6 +10,6 @@
 #define CCControllerStruct_h
 
 // モーダル用ブロック
-typedef void (^CitrusCobaltumModalBlock)(UITableViewController *object);
+typedef void (^CitrusCobaltumModalBlock)(UIViewController *object);
 
 #endif /* CCControllerStruct_h */

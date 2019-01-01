@@ -8,6 +8,7 @@
 
 #import "CCTableViewTrait.h"
 
+#import "CitrusCobaltumTypedef.h"
 #import "CCTableViewDelegate.h"
 #import "CCTableHeaderView.h"
 #import "CCTableFooterView.h"

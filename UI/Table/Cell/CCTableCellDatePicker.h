@@ -12,6 +12,14 @@
 @interface CCTableCellDatePicker : CCTableCellTextField
 
 //
+// propery
+//
+@property (nonatomic, retain) UIDatePicker *datePicker;
+@property (nonatomic, retain) NSDateFormatter *dateFormatter;
+
+
+
+//
 // method
 //
 
