@@ -8,9 +8,15 @@
 
 #import "CCTableCell.h"
 
-@class CTButton;
+@class CCButton;
 
 @interface CCTableCellButton : CCTableCell
+
+//
+// property
+//
+@property (nonatomic, retain) CCButton *button;
+
 
 //
 // method

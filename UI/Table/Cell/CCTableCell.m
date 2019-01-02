@@ -16,14 +16,6 @@
 
 @interface CCTableCell()
 
-#pragma mark - property
-//
-// property
-//
-@property CCTableCellPartPriority prefixPriority;
-@property CCTableCellPartPriority contentPriority;
-@property CCTableCellPartPriority suffixPriority;
-
 @end
 
 

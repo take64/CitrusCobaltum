@@ -8,6 +8,8 @@
 
 #import "CCiTunesSearchResult.h"
 
+#import "CFDate.h"
+
 
 
 @implementation CCiTunesSearchResult
@@ -73,7 +75,7 @@
             
             if ([key isEqualToString:@"releaseDate"] == YES)
             {
-                [self setValue:[CTDate dateWithString:val] forKey:key];
+                [self setValue:[CFDate dateWithString:val] forKey:key];
             }
             else if ([key isEqualToString:@"artistLinkUrl"] == YES)
             {

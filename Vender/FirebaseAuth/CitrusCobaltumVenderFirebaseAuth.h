@@ -49,7 +49,7 @@ typedef void (^CitrusCobaltumFirebaseAuthBlock)(FIRUser *user, NSError *error);
 #import "CCVFirebaseAuth.h"
 #import "CCVFirebaseAuthGoogle.h"
 #import "CCVFirebaseAuthTwitter.h"
-//#import "CCVFirebaseSignInFacebook.h"
+#import "CCVFirebaseAuthModal.h"
 
 //
 //// database

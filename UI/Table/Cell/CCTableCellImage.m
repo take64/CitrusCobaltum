@@ -16,7 +16,7 @@
 //
 @property NSData *imageData;
 @property UIImage *image;
-@property UIImageView *imageView;
+@property UIImageView *_imageView;
 
 @end
 
@@ -36,7 +36,7 @@
     if (self)
     {
         // イメージ
-        [self setImageView:[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)]];
+        [self set_imageView:[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)]];
         [self setImage:[[UIImage alloc] init]];
         
         // セル選択
@@ -70,13 +70,13 @@
 //
 
 // 画像設定
-- (void) setImageData:(NSData *)dataValue
+- (void) bindImageData:(NSData *)dataValue
 {
     [self setImageData:dataValue];
     [self setImage:[UIImage imageWithData:dataValue]];
-    [[self imageView] setImage:[self image]];
-    [[self imageView] layoutIfNeeded];
-    [[self contentView] addSubview:[self imageView]];
+    [[self _imageView] setImage:[self image]];
+    [[self _imageView] layoutIfNeeded];
+    [[self contentView] addSubview:[self _imageView]];
 }
 
 @end
