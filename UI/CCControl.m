@@ -10,10 +10,14 @@
 
 #import <objc/runtime.h>
 
+#import "CitrusCobaltumTypedef.h"
 #import "CCColor.h"
 #import "CCStyle.h"
+
 #import "CFString.h"
 #import "CFNVL.h"
+
+
 
 #pragma mark - static variables
 //

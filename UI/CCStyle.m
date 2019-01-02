@@ -8,8 +8,12 @@
 
 #import "CCStyle.h"
 
+#import "CitrusCobaltumTypedef.h"
 #import "CCColor.h"
+
 #import "CFString.h"
+
+
 
 @interface CCStyle()
 

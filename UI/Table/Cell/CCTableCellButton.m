@@ -15,12 +15,6 @@
 
 @interface CCTableCellButton()
 
-#pragma mark - property
-//
-// property
-//
-@property CCButton *button;
-
 @end
 
 

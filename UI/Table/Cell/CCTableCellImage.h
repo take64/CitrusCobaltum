@@ -15,6 +15,6 @@
 //
 
 // 画像設定
-- (void) setImageData:(NSData *)dataValue;
+- (void) bindImageData:(NSData *)dataValue;
 
 @end

@@ -19,6 +19,10 @@
 //
 // property
 //
+
+@property (nonatomic, assign) CCTableCellPartPriority prefixPriority;
+@property (nonatomic, assign) CCTableCellPartPriority contentPriority;
+@property (nonatomic, assign) CCTableCellPartPriority suffixPriority;
 @property (nonatomic, retain) NSManagedObject *entity;                  // entity
 @property (nonatomic, retain) NSObject *object;                         // object
 @property (nonatomic, retain) CCLabel *prefixLabel;                     // prefix label
