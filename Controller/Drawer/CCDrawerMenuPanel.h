@@ -9,10 +9,6 @@
 #import "CCView.h"
 
 @interface CCDrawerMenuPanel : CCView
-{
-    CCView *headView;
-    UITableView *menuTableView;
-}
 
 //
 // property

@@ -52,25 +52,25 @@ typedef enum {
 - (CCStyle *) callStyle;
 
 // スタイル設定(normalのエイリアス)
-- (void) setStyle:(CCStyle *)styleValue;
+- (void) bindStyle:(CCStyle *)styleValue;
 
 // スタイル取得(normal)
 - (CCStyle *) callStyleNormal;
 
 // スタイル設定(normal)
-- (void) setStyleNormal:(CCStyle *)styleValue;
+- (void) bindStyleNormal:(CCStyle *)styleValue;
 
 // スタイル取得(highlighted)
 - (CCStyle *) callStyleHighlighted;
 
 // スタイル設定(highlighted)
-- (void) setStyleHighlighted:(CCStyle *)styleValue;
+- (void) bindStyleHighlighted:(CCStyle *)styleValue;
 
 // スタイル取得(disabled)
 - (CCStyle *) callStyleDisabled;
 
 // スタイル設定(disabled)
-- (void) setStyleDisabled:(CCStyle *)styleValue;
+- (void) bindStyleDisabled:(CCStyle *)styleValue;
 
 // 自動テキストサイズ計算
 - (CGSize) calcTextAutoSize;

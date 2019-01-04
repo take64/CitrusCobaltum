@@ -214,7 +214,6 @@
     }
     [self setToolbarItems:barButtonItems];
     [[self navigationController] setToolbarHidden:([barButtonItems count] == 0)];
-    [[[self navigationController] toolbar] setBarTintColor:[[CitrusCobaltumApplication callTheme] callNavigationBarTintColor]];
 }
 
 

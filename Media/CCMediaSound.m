@@ -10,16 +10,31 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
+static BOOL kEnableButtonSound = YES;
+
+
+
 @implementation CCMediaSound
 
-#pragma mark - method
+#pragma mark - static method
 //
-// method
+// static method
 //
+
+// ボタン押下音の許可
++ (void) enableButtonSound:(BOOL)enable
+{
+    kEnableButtonSound = enable;
+}
 
 // ボタン押下音
 + (void) playButtonSound
 {
+    if (kEnableButtonSound == NO)
+    {
+        return;
+    }
+    
     static SystemSoundID beepSoundId;
     if (!beepSoundId)
     {

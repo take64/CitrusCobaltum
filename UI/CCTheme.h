@@ -10,32 +10,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CCTheme : NSObject
-{
-    // application
-    UIImage *appIconImage;              // icon image
-    
-    // navigation setting
-    UIColor *navigationBarTintColor;    // tint color
-    UIColor *navigationBarTextColor;    // text color
-    
-    // drawer setting
-    UIColor *drawerBackColor;           // back color
-    UIImage *drawerPanelIconImage;      // panel icon image
-    UIColor *drawerPanelBackColor;      // panel back color
-    UIColor *drawerCellHeadBackColor;   // cell head back color
-    UIColor *drawerCellHeadTextColor;   // cell head text color
-    UIColor *drawerCellBodyBackColor;   // cell body back color
-    UIColor *drawerCellBodyTextColor;   // cell body text color
-    
-    // table setting
-    UIColor *tableCellHeadBackColor;    // table cell head back color
-    UIColor *tableCellHeadTextColor;    // table cell head text color
-    UIColor *tableCellFootBackColor;    // table cell foot back color
-    UIColor *tableCellFootTextColor;    // table cell foot text color
-    
-    // color theme
-    UIColor *themeColor0;               // theme color 0
-}
 
 //
 // property
@@ -68,28 +42,28 @@
 //
 
 // application
-- (UIImage *)callAppIconImage;              // icon image
+- (UIImage *) callAppIconImage;              // icon image
 
 // navigation color
-- (UIColor *)callNavigationBarTintColor;    // tint color
-- (UIColor *)callNavigationBarTextColor;    // text color
+- (UIColor *) callNavigationBarTintColor;    // tint color
+- (UIColor *) callNavigationBarTextColor;    // text color
 
 // drawer setting
-- (UIColor *)callDrawerBackColor;           // back color
-- (UIImage *)callDrawerPanelIconImage;      // panel icon
-- (UIColor *)callDrawerPanelBackColor;      // panel back color
-- (UIColor *)callDrawerCellHeadBackColor;   // cell head back color
-- (UIColor *)callDrawerCellHeadTextColor;   // cell head text color
-- (UIColor *)callDrawerCellBodyBackColor;   // cell body back color
-- (UIColor *)callDrawerCellBodyTextColor;   // cell body text color
+- (UIColor *) callDrawerBackColor;           // back color
+- (UIImage *) callDrawerPanelIconImage;      // panel icon
+- (UIColor *) callDrawerPanelBackColor;      // panel back color
+- (UIColor *) callDrawerCellHeadBackColor;   // cell head back color
+- (UIColor *) callDrawerCellHeadTextColor;   // cell head text color
+- (UIColor *) callDrawerCellBodyBackColor;   // cell body back color
+- (UIColor *) callDrawerCellBodyTextColor;   // cell body text color
 
 // table setting
-- (UIColor *)callTableCellHeadBackColor;    // table cell head back color
-- (UIColor *)callTableCellHeadTextColor;    // table cell head text color
-- (UIColor *)callTableCellFootBackColor;    // table cell head back color
-- (UIColor *)callTableCellFootTextColor;    // table cell head text color
+- (UIColor *) callTableCellHeadBackColor;    // table cell head back color
+- (UIColor *) callTableCellHeadTextColor;    // table cell head text color
+- (UIColor *) callTableCellFootBackColor;    // table cell head back color
+- (UIColor *) callTableCellFootTextColor;    // table cell head text color
 
 // theme color
-- (UIColor *)callThemeColor0;               // theme color 0
+- (UIColor *) callThemeColor0;               // theme color 0
 
 @end

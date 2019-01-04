@@ -10,21 +10,11 @@
 
 @implementation CCView
 
-#pragma mark - method
+#pragma mark - extends
 //
-// method
+// extends
 //
 
-// 初期化
-- (instancetype) initWithText:(NSString *)textString
-{
-    self = [self initWithFrame:CGRectZero];
-    if (self)
-    {
-        
-    }
-    return self;
-}
 // 初期化
 - (instancetype) initWithFrame:(CGRect)frame
 {

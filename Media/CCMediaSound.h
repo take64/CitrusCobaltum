@@ -11,8 +11,11 @@
 @interface CCMediaSound : NSObject
 
 //
-// method
+// static method
 //
+
+// ボタン押下音の許可
++ (void) enableButtonSound:(BOOL)enable;
 
 // ボタン押下音
 + (void) playButtonSound;

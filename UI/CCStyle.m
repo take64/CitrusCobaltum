@@ -40,7 +40,7 @@
     self = [super init];
     if (self)
     {
-        [self setStyleDictionary:[@{} mutableCopy]];
+        [self set_styles:[@{} mutableCopy]];
     }
     return self;
 }
@@ -51,7 +51,7 @@
     self = [self init];
     if (self)
     {
-        [self setStyleDictionary:dictionaryValue];
+        [self addStyleKeys:dictionaryValue];
     }
     return self;
 }
@@ -115,12 +115,6 @@
 - (void) setStyleKey:(NSString *)keyValue value:(NSString *)dataValue
 {
     [self addStyleKey:keyValue value:dataValue];
-}
-
-// スタイルの一括設定
-- (void) setStyleDictionary:(NSDictionary *)dictionaryValue
-{
-    [self addStyleKeys:dictionaryValue];
 }
 
 // スタイルの全取得
@@ -514,7 +508,7 @@
     NSString *colorString = [self styleForKey:keyValue];
     if (colorString == nil)
     {
-        return (CCColorStruct){1, 1, 1, 1};
+        return (CCColorStruct){1, 1, 1, 0};
     }
     return [CCColor colorStructWithHEXString:colorString];
 }
@@ -530,7 +524,7 @@
     CCStyle *result = [[self class] allocWithZone:zone];
     if (result)
     {
-        [result setStyleDictionary:[[self allStyles] mutableCopyWithZone:zone]];
+        [result addStyleKeys:[[self allStyles] mutableCopyWithZone:zone]];
     }
     return result;
 }
