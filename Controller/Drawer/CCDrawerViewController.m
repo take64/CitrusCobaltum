@@ -14,6 +14,7 @@
 #import "CCDrawerMenuItem.h"
 #import "CCDrawerMenuPanel.h"
 #import "CCDrawerMenuSection.h"
+#import "CCImageButton.h"
 #import "CCLabel.h"
 #import "CCStyle.h"
 #import "CCTableCellLabel.h"
@@ -252,13 +253,13 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 }
 
 // エッジジェスチャー処理
-- (void)onScreenEdgeMenuPanel:(UIScreenEdgePanGestureRecognizer *) gesture
+- (void) onScreenEdgeMenuPanel:(UIScreenEdgePanGestureRecognizer *) gesture
 {
     [self openSlide];
 }
 
 // エッジジェスチャーの生成
-- (UIScreenEdgePanGestureRecognizer *)generateScreenEdgePanGesture
+- (UIScreenEdgePanGestureRecognizer *) generateScreenEdgePanGesture
 {
     UIScreenEdgePanGestureRecognizer *gesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(onScreenEdgeMenuPanel:)];
     [gesture setMinimumNumberOfTouches:1];
@@ -268,16 +269,20 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 }
 
 // メニューアイコンボタンの生成
-- (CCBarButtonItem *)generateMenuIconBarButton
+- (CCBarButtonItem *) generateMenuIconBarButton
 {
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    [[[button widthAnchor] constraintEqualToConstant:32] setActive:YES];
-    [[[button heightAnchor] constraintEqualToConstant:32] setActive:YES];
-    [button setBackgroundImage:[[CitrusCobaltumApplication callTheme] callAppIconImage] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(slideMenu) forControlEvents:UIControlEventTouchUpInside];
-    return [[CCBarButtonItem alloc] initWithCustomView:button];
-}
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+    [imageView setClipsToBounds:YES];
+    [[imageView layer] setCornerRadius:8];
+    [imageView setImage:[[CitrusCobaltumApplication callTheme] callAppIconImage]];
 
+    CCImageButton *imageButton = [[CCImageButton alloc] initWithImageView:imageView];
+    [imageButton setOnTappedComplete:^(CCButton *buttonValue) {
+        [self slideMenu];
+    }];
+
+    return [[CCBarButtonItem alloc] initWithCustomView:imageButton];
+}
 
 
 
@@ -311,7 +316,7 @@ static CGFloat CCDrawerViewControllerMenuHeight()
         swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipeMenuPanel:)];
         [swipe setNumberOfTouchesRequired:1];
         [swipe setDirection:UISwipeGestureRecognizerDirectionLeft];
-        [[[self menuPanel] headView] addGestureRecognizer:swipe];
+        [[self menuPanel] addGestureRecognizer:swipe];
     }
     return [self menuPanel];
 }
@@ -324,13 +329,13 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 //
 
 // セクション内セル数
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [[[[self menuSections] objectAtIndex:section] menuItems] count];
 }
 
 // セルを返す
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellID = @"CellID";
     

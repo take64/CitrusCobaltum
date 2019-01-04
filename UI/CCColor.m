@@ -88,7 +88,7 @@
     long length = [hexString length];
     
     // 16進数値変換( 'FFFFFF' => 0xFFFFFF )
-    unsigned long hexcolor = [[self class] hexWithString:hexString];
+    long long hexcolor = [[self class] hexWithString:hexString];
     
     // 色型に変更
     int red     = 255.0;
@@ -109,16 +109,16 @@
         alpha   = ((hexcolor)&0xFF);
     }
     
-    return (CCColorStruct){red, green, blue, alpha};
+    return (CCColorStruct){(red / 255.0f), (green / 255.0f), (blue / 255.0f), (alpha / 255.0f)};
 }
 
 // 色構造体から UIColor オブジェクトを取得
 + (UIColor *) colorWithColorStruct:(CCColorStruct)colorStruct
 {
-    return [UIColor colorWithRed:(colorStruct.red / 255.0)
-                           green:(colorStruct.green / 255.0)
-                            blue:(colorStruct.blue / 255.0)
-                           alpha:(colorStruct.alpha / 255.0)
+    return [UIColor colorWithRed:colorStruct.red
+                           green:colorStruct.green
+                            blue:colorStruct.blue
+                           alpha:colorStruct.alpha
             ];
 }
 
@@ -141,7 +141,7 @@
 }
 
 // 16進数値変換( 'FFFFFF' => 0xFFFFFF )
-+ (unsigned long) hexWithString:(NSString *)hexString
++ (long long) hexWithString:(NSString *)hexString
 {
     // 16進文字列変換( 'FFFFFF' => '0xFFFFFF' )
     NSString *colorString = [NSString stringWithFormat:@"0x%@", hexString];

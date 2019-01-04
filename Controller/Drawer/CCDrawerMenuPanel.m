@@ -14,6 +14,8 @@
 #import "CCTheme.h"
 #import "CCView.h"
 
+#import "CFNVL.h"
+
 static CGFloat const kImageSizeOneSide = 64;
 
 
@@ -52,6 +54,8 @@ static CGFloat const kImageSizeOneSide = 64;
     self = [super initWithFrame:frame];
     if (self)
     {
+        [self setUserInteractionEnabled:YES];
+        
         // パネルサイズ
         CGFloat panelWidth = frame.size.width;
         CGFloat panelHeight = frame.size.height;
@@ -59,7 +63,6 @@ static CGFloat const kImageSizeOneSide = 64;
         // ヘッダビュー
         CCView *view;
         view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, panelWidth, panelWidth)];
-        [view setUserInteractionEnabled:YES];
         [[view callStyle] addStyleKey:@"background-color" value:[CCColor hexStringWithColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]]];
         [self addSubview:view];
         [self setHeadView:view];
@@ -70,6 +73,9 @@ static CGFloat const kImageSizeOneSide = 64;
         [tableView setBackgroundColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]];
         [self addSubview:tableView];
         [self setMenuTableView:tableView];
+        
+        // 初期画像設定
+        [self bindImage:nil];
     }
     return self;
 }
@@ -77,6 +83,8 @@ static CGFloat const kImageSizeOneSide = 64;
 // 画像設定
 - (void) bindImage:(UIImage *)imageValue
 {
+    imageValue = [CFNVL compare:imageValue replace:[[CitrusCobaltumApplication callTheme] callDrawerPanelIconImage]];
+    
     // 未生成なら生成
     if ([self headImageView] == nil)
     {
@@ -86,7 +94,6 @@ static CGFloat const kImageSizeOneSide = 64;
         [imageView setCenter:[[self headView] center]];
         [imageView setClipsToBounds:YES];
         [[imageView layer] setCornerRadius:8];
-        [imageView setImage:[[CitrusCobaltumApplication callTheme] callDrawerPanelIconImage]];
         [[self headView] addSubview:imageView];
         [self setHeadImageView:imageView];
     }

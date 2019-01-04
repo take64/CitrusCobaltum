@@ -69,12 +69,13 @@ static CGFloat const kControlHeight = 48;
     }
     
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // ビュー自体の背景
         [self setBackgroundColor:[UIColor clearColor]];
         // 初期設定
         [[self callStyleNormal] addStyleKeys:@{
-                                               @"background-color"  :@"00000000",
+                                               @"background-color"  :@"FFFFFF00",
                                                @"left"              :@"0",
                                                @"top"               :@"0",
                                                @"width"             :CCStr(frame.size.width),
@@ -397,7 +398,7 @@ static CGFloat const kControlHeight = 48;
 }
 
 // スタイル設定(normalのエイリアス)
-- (void) setStyle:(CCStyle *)styleValue
+- (void) bindStyle:(CCStyle *)styleValue
 {
     [self setStyleNormal:styleValue];
 }
@@ -413,7 +414,7 @@ static CGFloat const kControlHeight = 48;
 }
 
 // スタイル設定(normal)
-- (void) setStyleNormal:(CCStyle *)styleValue
+- (void) bindStyleNormal:(CCStyle *)styleValue
 {
     [[self callStyleNormal] addStyleKeys:[styleValue allStyles]];
 }
@@ -429,7 +430,7 @@ static CGFloat const kControlHeight = 48;
 }
 
 // スタイル設定(highlighted)
-- (void) setStyleHighlighted:(CCStyle *)styleValue
+- (void) bindStyleHighlighted:(CCStyle *)styleValue
 {
     [[self callStyleHighlighted] addStyleKeys:[styleValue allStyles]];
 }
@@ -445,7 +446,7 @@ static CGFloat const kControlHeight = 48;
 }
 
 // スタイル設定(disabled)
-- (void) setStyleDisabled:(CCStyle *)styleValue
+- (void) bindStyleDisabled:(CCStyle *)styleValue
 {
     [[self callStyleDisabled] addStyleKeys:[styleValue allStyles]];
 }
@@ -482,25 +483,18 @@ static CGFloat const kControlHeight = 48;
     return bounds;
 }
 
-// ステート変更
-- (void) setControlState:(CCControlState)state
-{
-    [self setControlState:state];
-    [self setNeedsDisplay];
-}
-
 // ステート変更(enable)
 - (void) setEnabled:(BOOL)enabled
 {
     [super setEnabled:enabled];
-    [self setControlState:(enabled == YES ? CCControlStateNormal : CCControlStateDisabled)];
+    [self changeControlState:(enabled == YES ? CCControlStateNormal : CCControlStateDisabled)];
 }
 
 // ステート変更(highlighted)
 - (void) setHighlighted:(BOOL)highlighted
 {
     [super setHighlighted:highlighted];
-    [self setControlState:(highlighted == YES ? CCControlStateHighlighted : CCControlStateNormal)];
+    [self changeControlState:(highlighted == YES ? CCControlStateHighlighted : CCControlStateNormal)];
 }
 
 
@@ -551,7 +545,7 @@ static CGFloat const kControlHeight = 48;
         default:
             break;
     }
-    return [stylesheet copy];
+    return stylesheet;
 }
 
 // 文字寄せ済みタイトル文字列の横位置を取得
@@ -596,6 +590,13 @@ static CGFloat const kControlHeight = 48;
             break;
     }
     return titleFrameY;
+}
+
+// ステート変更
+- (void) changeControlState:(CCControlState)state
+{
+    [self setControlState:state];
+    [self setNeedsDisplay];
 }
 
 @end

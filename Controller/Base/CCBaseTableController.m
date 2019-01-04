@@ -8,6 +8,9 @@
 
 #import "CCBaseTableController.h"
 
+#import "CitrusCobaltumApplication.h"
+#import "CCTheme.h"
+
 #import "CitrusCobaltumTypedef.h"
 #import "CCTableViewTrait.h"
 

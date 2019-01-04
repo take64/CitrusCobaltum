@@ -35,9 +35,6 @@
 // スタイル値の設定
 - (void) setStyleKey:(NSString *)keyValue value:(NSString *)dataValue;
 
-// スタイルの一括設定
-- (void) setStyleDictionary:(NSDictionary *)dictionaryValue;
-
 // スタイルの全取得
 - (NSMutableDictionary *) allStyles;
 

@@ -143,7 +143,7 @@
 //
 
 // バーボタン再描画
-- (void)redrawBarButton
+- (void) redrawBarButton
 {
     // 追加ボタン
     [[self addButton] setHidden:([self visibleAddButton] == NO)];

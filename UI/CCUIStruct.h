@@ -9,6 +9,18 @@
 #ifndef CCUIStruct_h
 #define CCUIStruct_h
 
+#if !defined(CC_INLINE)
+# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#  define CC_INLINE static inline
+# elif defined(__cplusplus)
+#  define CC_INLINE static inline
+# elif defined(__GNUC__)
+#  define CC_INLINE static __inline__
+# else
+#  define CC_INLINE static
+# endif
+#endif
+
 // 色構造体
 typedef struct {
     CGFloat red;
@@ -17,8 +29,8 @@ typedef struct {
     CGFloat alpha;
 } CCColorStruct;
 
-bool CCColorStructIsNull(CCColorStruct value) {
-    return (value.red == 1 && value.green == 1 && value.blue == 1 && value.alpha == 1);
+CC_INLINE bool CCColorStructIsNull(CCColorStruct value) {
+    return (value.red == 0 && value.green == 0 && value.blue == 0 && value.alpha == 0);
 }
 
 // オフセット構造体
@@ -29,7 +41,7 @@ typedef struct {
     CGFloat left;
 } CCOffset;
 
-bool CCOffsetIsNull(CCOffset value) {
+CC_INLINE bool CCOffsetIsNull(CCOffset value) {
     return (value.top == 0 && value.right == 0 && value.bottom == 0 && value.left == 0);
 }
 
@@ -45,7 +57,7 @@ typedef struct {
     CGFloat right;
 } CCHorizontal;
 
-bool CCHorizontalIsNull(CCHorizontal value) {
+CC_INLINE bool CCHorizontalIsNull(CCHorizontal value) {
     return (value.left == 0 && value.right == 0);
 }
 
@@ -55,7 +67,7 @@ typedef struct {
     CCHorizontal bottom;
 } CCRadius;
 
-bool CCRadiusIsNull(CCRadius value) {
+CC_INLINE bool CCRadiusIsNull(CCRadius value) {
     return (CCHorizontalIsNull(value.top) == true && CCHorizontalIsNull(value.bottom) == true);
 }
 
@@ -67,7 +79,7 @@ typedef struct {
     CCColorStruct color;
 } CCShadow;
 
-bool CCShadowIsNull(CCShadow value) {
+CC_INLINE bool CCShadowIsNull(CCShadow value) {
     return (value.horizontal == 0 && value.vertical == 0 && value.shading == 0 && CCColorStructIsNull(value.color) == true);
 }
 
@@ -102,7 +114,7 @@ typedef NS_ENUM(NSInteger, CCTableCellDatePickerMode) {
 };
 
 // 全部の自動リサイズマスク
-UIViewAutoresizing CCViewAutoresizingMaskAll() {
+CC_INLINE UIViewAutoresizing CCViewAutoresizingMaskAll() {
     return (UIViewAutoresizingFlexibleLeftMargin    |
             UIViewAutoresizingFlexibleRightMargin   |
             UIViewAutoresizingFlexibleTopMargin     |
@@ -112,7 +124,7 @@ UIViewAutoresizing CCViewAutoresizingMaskAll() {
 }
 
 // スペース用バーボタンアイテム
-UIBarButtonItem * CCBarButtonItemSpacer() {
+CC_INLINE UIBarButtonItem * CCBarButtonItemSpacer() {
     return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 }
 

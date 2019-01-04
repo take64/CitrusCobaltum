@@ -149,7 +149,7 @@
             
             [[[self navigationController] navigationBar] addSubview:[self progressView]];
             
-            if(progress == 1)
+            if (progress == 1)
             {
                 [[self progressView] removeFromSuperview];
             }
@@ -184,7 +184,7 @@
 // リクエスト取得
 - (NSMutableURLRequest *) callRequest
 {
-    if([self _request] == nil)
+    if ([self _request] == nil)
     {
         [self set_request:[[NSMutableURLRequest alloc] init]];
     }
@@ -227,7 +227,7 @@
 // WEBVIEW取得
 - (WKWebView *)callWebView
 {
-    if([self _webView] == nil)
+    if ([self _webView] == nil)
     {
         [self set_webView:[[WKWebView alloc] initWithFrame:[[self view] bounds]]];
         [[self _webView] setNavigationDelegate:self];
