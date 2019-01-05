@@ -385,6 +385,12 @@ static CGFloat const kControlHeight = 48;
     return self;
 }
 
+// 初期化
+- (instancetype) initWithStyleKeys:(NSDictionary *)styleKeys
+{
+    return [self initWithTitle:nil styleKeys:styleKeys];
+}
+
 // タイトルが設定されているか
 - (BOOL) hasTitle
 {
