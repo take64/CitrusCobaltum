@@ -26,10 +26,9 @@
 
 
 
-#pragma mark - method
-
+#pragma mark - extends
 //
-// method
+// extends
 //
 
 // 初期化
@@ -38,19 +37,14 @@
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self)
     {
-        // parts
-        CCLabel *_label;
-        
         // label
-        _label = [[CCLabel alloc] initWithTitle:@""];
-        [[_label callStyle] addStyleKeys:@{
-                                           @"width"         :@"320",
-                                           @"font-size"     :@"14",
-                                           @"text-align"    :@"left",
-                                           @"vertical-align":@"top",
-                                           @"padding"       :@"2 8",
-                                           }];
-        [self setLabel:_label];
+        [self setLabel:[[CCLabel alloc] initWithTitle:@"" styleKeys:@{
+                                                                      @"width"         :@"320",
+                                                                      @"font-size"     :@"14",
+                                                                      @"text-align"    :@"left",
+                                                                      @"vertical-align":@"top",
+                                                                      @"padding"       :@"2 8",
+                                                                      }]];
         
         // view
         [self setControl:[[UIView alloc] initWithFrame:CGRectZero]];

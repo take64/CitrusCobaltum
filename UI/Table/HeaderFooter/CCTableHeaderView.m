@@ -18,7 +18,6 @@
 @implementation CCTableHeaderView
 
 #pragma mark - method
-
 //
 // method
 //
