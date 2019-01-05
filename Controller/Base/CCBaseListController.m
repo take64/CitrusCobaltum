@@ -8,7 +8,6 @@
 
 #import "CCBaseListController.h"
 
-#import "CCTableViewTrait.h"
 #import "CCButton.h"
 #import "CCButtonGroup.h"
 #import "CCBarButtonItem.h"
@@ -249,16 +248,6 @@
 //
 //// Section header & footer information. Views are preferred over title should you decide to provide both
 //
-// セルヘッダを返す
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [CCTableViewTrait callTableHeaderViewWithController:self tableView:tableView section:section];
-}
-// セルフッタを返す
-- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return [CCTableViewTrait callTableFooterViewWithController:self tableView:tableView section:section];
-}
 //
 //// Accessories (disclosures).
 //
@@ -328,36 +317,5 @@
 //- (BOOL)tableView:(UITableView *)tableView shouldUpdateFocusInContext:(UITableViewFocusUpdateContext *)context NS_AVAILABLE_IOS(9_0);
 //- (void)tableView:(UITableView *)tableView didUpdateFocusInContext:(UITableViewFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator NS_AVAILABLE_IOS(9_0);
 //- (nullable NSIndexPath *)indexPathForPreferredFocusedViewInTableView:(UITableView *)tableView NS_AVAILABLE_IOS(9_0);
-
-
-
-#pragma mark - CCTableViewDelegate
-//
-// CCTableViewDelegate
-//
-
-// セルヘッダタイトル取得
-- (NSString *)callHeaderTitleWithSection:(NSInteger)section
-{
-    return @"";
-}
-
-// セルフッタタイトル取得
-- (NSString *)callFooterTitleWithSection:(NSInteger)section
-{
-    return @"";
-}
-
-// セルヘッダビュー取得
-- (UIView *)callHeaderViewWithSection:(NSInteger)section
-{
-    return nil;
-}
-
-// セルフッタビュー取得
-- (UIView *)callFooterViewWithSection:(NSInteger)section
-{
-    return nil;
-}
 
 @end

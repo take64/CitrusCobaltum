@@ -18,7 +18,10 @@
 #import "CCLabel.h"
 #import "CCStyle.h"
 #import "CCTableCellLabel.h"
+#import "CCTableViewContainer.h"
 #import "CCTheme.h"
+
+#import "CFNVL.h"
 
 
 
@@ -52,25 +55,11 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 
 @implementation CCDrawerViewController
 
-#pragma mark - extends
+#pragma mark - synthesize
 //
-// extends
+// synthesize
 //
-
-- (void) loadView
-{
-    [super loadView];
-    
-    // ビュー
-    [[self view] addSubview:[self callMenuPanel]];
-    
-    // メニューを隠す
-    [self setMenuVisible:YES];
-    [self closeSlide];
-    
-    // 再読み込み
-    [[self callMenuTableView] reloadData];
-}
+@synthesize tableViewContainer;
 
 
 
@@ -90,6 +79,18 @@ static CGFloat CCDrawerViewControllerMenuHeight()
         
         // 初期化
         [self setMainViewController:controllerValue];
+        
+        // メニュービュー
+        [[self view] addSubview:[self callMenuPanel]];
+        
+        // メニューを隠す
+        [self setMenuVisible:YES];
+        [self closeSlide];
+        
+        [[self callMenuTableView] reloadData];
+        
+        // テーブルビューコンテナ
+        [self setTableViewContainer:[[CCTableViewContainer alloc] initWithTableView:[self callMenuTableView] delegate:self]];
         
         // エッジジェスチャー
         [[self view] addGestureRecognizer:[self generateScreenEdgePanGesture]];
@@ -395,12 +396,16 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 // セルヘッダ高さ
 - (CGFloat) tableView:(UITableView *) tableView heightForHeaderInSection:(NSInteger)section
 {
-    return [[CCTableViewTrait callTableHeaderViewWithController:self tableView:tableView section:section] frame].size.height;
+    UIView *view = [[self tableViewContainer] callHeaderCacheWithSection:section];
+    NSNumber *height = [CFNVL compare:view value1:@([view frame].size.height) value2:@(0)];
+    return [height floatValue];
 }
 // セルフッタ高さ
 - (CGFloat) tableView:(UITableView *) tableView heightForFooterInSection:(NSInteger)section
 {
-    return [[CCTableViewTrait callTableFooterViewWithController:self tableView:tableView section:section] frame].size.height;
+    UIView *view = [[self tableViewContainer] callFooterCacheWithSection:section];
+    NSNumber *height = [CFNVL compare:view value1:@([view frame].size.height) value2:@(0)];
+    return [height floatValue];
 }
 //- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath;
 //- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section;
@@ -408,12 +413,12 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 // セルヘッダを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [CCTableViewTrait callTableHeaderViewWithController:self tableView:tableView section:section];
+    return [[self tableViewContainer] callHeaderCacheWithSection:section];
 }
 // セルフッタを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    return [CCTableViewTrait callTableFooterViewWithController:self tableView:tableView section:section];;
+    return [[self tableViewContainer] callFooterCacheWithSection:section];
 }
 //- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath;
 //- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;
@@ -446,36 +451,5 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 //- (BOOL)tableView:(UITableView *)tableView shouldUpdateFocusInContext:(UITableViewFocusUpdateContext *)context;
 //- (void)tableView:(UITableView *)tableView didUpdateFocusInContext:(UITableViewFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator;
 //- (nullable NSIndexPath *)indexPathForPreferredFocusedViewInTableView:(UITableView *)tableView;
-
-
-
-#pragma mark - CCTableViewDelegate
-//
-// CCTableViewDelegate
-//
-
-// セルヘッダタイトル取得
-- (NSString *) callHeaderTitleWithSection:(NSInteger)section
-{
-    return [[[self menuSections] objectAtIndex:section] title];
-}
-
-// セルフッタタイトル取得
-- (NSString *) callFooterTitleWithSection:(NSInteger)section
-{
-    return @"";
-}
-
-// セルヘッダビュー取得
-- (UIView *) callHeaderViewWithSection:(NSInteger)section
-{
-    return nil;
-}
-
-// セルフッタビュー取得
-- (UIView *) callFooterViewWithSection:(NSInteger)section
-{
-    return nil;
-}
 
 @end

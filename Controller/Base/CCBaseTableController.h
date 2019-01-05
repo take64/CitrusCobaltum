@@ -8,15 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CCTableViewDelegate.h"
+@class CCTableViewContainer;
 
-@interface CCBaseTableController : UITableViewController <CCTableViewDelegate>
+@interface CCBaseTableController : UITableViewController
 
 //
 // property
 //
-@property (nonatomic, retain) NSMutableDictionary *headerCaches;
-@property (nonatomic, retain) NSMutableDictionary *footerCaches;
+@property (nonatomic, retain) CCTableViewContainer *tableViewContainer;
 
 
 

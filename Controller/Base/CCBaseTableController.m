@@ -12,17 +12,15 @@
 #import "CCTheme.h"
 
 #import "CitrusCobaltumTypedef.h"
-#import "CCTableViewTrait.h"
+#import "CCTableHeaderView.h"
+#import "CCTableFooterView.h"
+#import "CCTableViewContainer.h"
+
+#import "CFNVL.h"
 
 
 
 @interface CCBaseTableController ()
-
-#pragma mark - property
-//
-// property
-//
-@property BOOL cacheEnable;
 
 @end
 
@@ -34,8 +32,7 @@
 //
 // synthesize
 //
-@synthesize headerCaches;
-@synthesize footerCaches;
+@synthesize tableViewContainer;
 
 
 
@@ -52,12 +49,10 @@
     {
         // タイトル
         [self setTitle:[self callTitle]];
-        
-        // cache
-        [self setCacheEnable:NO];
-        [self setHeaderCaches:[@{} mutableCopy]];
-        [self setFooterCaches:[@{} mutableCopy]];
-        
+
+        // テーブルビューコンテナ
+        [self setTableViewContainer:[[CCTableViewContainer alloc] initWithTableView:[self tableView] delegate:self]];
+
         // 長押し
         UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongTapCell:)];
         [[self tableView] addGestureRecognizer:longPressGestureRecognizer];
@@ -81,36 +76,29 @@
 // セルヘッダ高さ
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [self callHeaderCacheWithSection:section];
-    if (headerView == nil)
-    {
-        return 0;
-    }
-    
-    return CC8(3);
+    UIView *view = [[self tableViewContainer] callHeaderCacheWithSection:section];
+    NSNumber *height = [CFNVL compare:view value1:@([view frame].size.height) value2:@(0)];
+    return [height floatValue];
 }
 
 // セルフッタ高さ
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    UIView *footerView = [self callFooterCacheWithSection:section];
-    if (footerView == nil)
-    {
-        return 0;
-    }
-    return [footerView frame].size.height;
+    UIView *view = [[self tableViewContainer] callFooterCacheWithSection:section];
+    NSNumber *height = [CFNVL compare:view value1:@([view frame].size.height) value2:@(0)];
+    return [height floatValue];
 }
 
 // セルヘッダを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [self callHeaderCacheWithSection:section];
+    return [[self tableViewContainer] callHeaderCacheWithSection:section];
 }
 
 // セルフッタを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    return [self callFooterCacheWithSection:section];
+    return [[self tableViewContainer] callFooterCacheWithSection:section];
 }
 
 
@@ -119,40 +107,6 @@
 //
 // private
 //
-
-// ヘッダキャッシュの取得
-- (UIView *) callHeaderCacheWithSection:(NSInteger)section
-{
-    UIView *cacheView = [[self headerCaches] objectForKey:@(section)];
-    if (cacheView == nil)
-    {
-        cacheView = [CCTableViewTrait callTableHeaderViewWithController:self tableView:[self tableView] section:section];
-        [self saveCache:[self headerCaches] section:section view:cacheView];
-    }
-    return cacheView;
-}
-
-// フッタキャッシュの取得
-- (UIView *) callFooterCacheWithSection:(NSInteger)section
-{
-    UIView *cacheView = [[self footerCaches] objectForKey:@(section)];
-    if (cacheView == nil)
-    {
-        cacheView = [CCTableViewTrait callTableFooterViewWithController:self tableView:[self tableView] section:section];
-        [self saveCache:[self footerCaches] section:section view:cacheView];
-    }
-    return cacheView;
-}
-
-// ヘッダ/フッタキャッシュの追加
-- (void) saveCache:(NSMutableDictionary *)caches section:(NSInteger)section view:(UIView *)viewValue
-{
-    if (viewValue == nil)
-    {
-        return;
-    }
-    [caches setObject:viewValue forKey:@(section)];
-}
 
 // セルの長押し
 - (void) onLongTapCell:(UILongPressGestureRecognizer*)gestureRecognizer

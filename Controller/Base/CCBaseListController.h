@@ -17,9 +17,6 @@
 // method
 //
 
-// セルヘッダタイトル取得
-- (NSString *) callHeaderTitleWithSection:(NSInteger)section;
-
 // 表示(追加ボタン)
 - (BOOL) visibleAddButton;
 

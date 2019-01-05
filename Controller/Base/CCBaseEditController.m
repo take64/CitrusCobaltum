@@ -328,45 +328,4 @@
 //- (void)tableView:(UITableView *)tableView didUpdateFocusInContext:(UITableViewFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator NS_AVAILABLE_IOS(9_0);
 //- (nullable NSIndexPath *)indexPathForPreferredFocusedViewInTableView:(UITableView *)tableView NS_AVAILABLE_IOS(9_0);
 
-
-
-#pragma mark - CCTableViewDelagate
-//
-// CCTableViewDelagate
-//
-
-// セルヘッダタイトル取得
-- (NSString *) callHeaderTitleWithSection:(NSInteger)section
-{
-    if ([[self headTitles] count] >= (section + 1))
-    {
-        return [[self headTitles] objectAtIndex:section];
-    }
-    return @"";
-}
-
-// セルフッタタイトル取得
-- (NSString *) callFooterTitleWithSection:(NSInteger)section
-{
-    return @"";
-}
-
-// セルヘッダビュー取得
-- (UIView *) callHeaderViewWithSection:(NSInteger)section
-{
-    return nil;
-}
-
-// セルフッタビュー取得
-- (UIView *) callFooterViewWithSection:(NSInteger)section
-{
-    return nil;
-}
-
-// テーブルモード
-- (CCTableViewMode) callTableViewMode
-{
-    return CCTableViewModeEdit;
-}
-
 @end

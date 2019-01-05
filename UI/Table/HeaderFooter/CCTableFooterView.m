@@ -18,7 +18,6 @@
 @implementation CCTableFooterView
 
 #pragma mark - method
-
 //
 // method
 //

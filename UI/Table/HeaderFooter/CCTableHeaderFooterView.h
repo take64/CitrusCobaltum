@@ -39,6 +39,9 @@
 // method
 //
 
+// 初期化
+- (instancetype) initWithReuseIdentifierWithSection:(NSInteger)section;
+
 // タイトル or ビュー設定
 - (void) bindTitle:(NSString *)titleString orView:(UIView *)viewValue;
 

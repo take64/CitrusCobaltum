@@ -68,6 +68,19 @@
     [[[self label] callStyle] setFrame:rect];
 }
 
+
+
+#pragma mark - method
+//
+// method
+//
+
+// 初期化
+- (instancetype) initWithReuseIdentifierWithSection:(NSInteger)section
+{
+    return [self initWithReuseIdentifier:[[self class] reuseIdentifierWithSection:section]];
+}
+
 // タイトル or ビュー設定
 - (void) bindTitle:(NSString *)titleString orView:(UIView *)viewValue
 {
