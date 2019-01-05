@@ -8,6 +8,8 @@
 
 #import "CCSearchBar.h"
 
+#import "CitrusCobaltumTypedef.h"
+
 
 
 @interface CCSearchBar()
@@ -80,9 +82,11 @@
     CGRect statusBarRect = [[UIApplication sharedApplication] statusBarFrame];
     CGRect searchBarRect = [window convertRect:[self frame] toWindow:window];
     CGRect navigationBarRect = [window convertRect:[[self superview] frame] toWindow:window];
-    CGFloat left = searchBarRect.origin.x;
-    CGFloat top = statusBarRect.size.height + navigationBarRect.size.height;
-    CGFloat width = searchBarRect.size.width;
+    CGFloat verticalOffset = CC8(2); // ちょっと重なるくらいのオフセット
+    CGFloat horizontalOffset = CC8(1);
+    CGFloat left = searchBarRect.origin.x + horizontalOffset;
+    CGFloat top = statusBarRect.size.height + navigationBarRect.size.height + verticalOffset;
+    CGFloat width = searchBarRect.size.width - (horizontalOffset * 2);
     CGFloat height = [window frame].size.height - [self keyboardHeight] - top;
     [[self callTableView] setFrame:CGRectMake(left, top, width, height - 20)];
     
@@ -149,6 +153,8 @@
         [[tableView layer] setShadowRadius:8];
         [[tableView layer] setShadowOpacity:1];
         [[tableView layer] setShouldRasterize:YES];
+        [[tableView layer] setCornerRadius:8];
+        [tableView setClipsToBounds:YES];
         [[tableView layer] setRasterizationScale:[[UIScreen mainScreen] scale]];
         [[tableView layer] setMasksToBounds:NO];
         
@@ -210,19 +216,16 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellID = @"Cell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
-    
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
     }
-    
     if (cell != nil)
     {
+        [cell setBackgroundColor:[UIColor clearColor]];
         [[cell textLabel] setText:[[self _suggestList] objectAtIndex:[indexPath row]]];
     }
-    
     return cell;
 }
 
