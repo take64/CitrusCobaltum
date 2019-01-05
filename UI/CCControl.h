@@ -45,6 +45,9 @@ typedef enum {
 // 初期化
 - (instancetype) initWithTitle:(NSString *)titleValue styleKeys:(NSDictionary *)styleKeys;
 
+// 初期化
+- (instancetype) initWithStyleKeys:(NSDictionary *)styleKeys;
+
 // タイトルが設定されているか
 - (BOOL) hasTitle;
 
