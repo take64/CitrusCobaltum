@@ -8,11 +8,17 @@
 
 #import "CCNavigationController.h"
 
-#import "CCTableViewTrait.h"
-
 @class CCDrawerMenuSection;
+@class CCTableViewContainer;
 
-@interface CCDrawerViewController : CCNavigationController<UITableViewDataSource, UITableViewDelegate, CCTableViewDelegate, UIGestureRecognizerDelegate>
+@interface CCDrawerViewController : CCNavigationController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
+
+//
+// property
+//
+@property (nonatomic, retain) CCTableViewContainer *tableViewContainer;
+
+
 
 //
 // method
