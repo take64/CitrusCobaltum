@@ -57,6 +57,12 @@
 }
 
 // 初期化
+- (instancetype) initWithPrefix:(NSString *)prefixString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier
+{
+    return [self initWithPrefix:prefixString content:nil suffix:suffixString reuseIdentifier:reuseIdentifier];
+}
+
+// 初期化
 - (instancetype) initWithPrefix:(NSString *)prefixString content:(NSString *)textString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithPrefix:prefixString suffix:suffixString reuseIdentifier:reuseIdentifier];

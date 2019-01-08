@@ -104,6 +104,9 @@
 // 背景色取得
 - (CCColorStruct) callBackgroundColor;
 
+// ポジション取得
+- (CCOffset) callPosition;
+
 // フォントをアジャストさせる
 - (void) fontAdjustmentWithText:(NSString *)textValue rect:(CGRect)rect;
 

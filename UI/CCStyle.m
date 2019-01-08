@@ -393,6 +393,18 @@
     return [self parseColorWithKey:@"background-color"];
 }
 
+// ポジション取得
+- (CCOffset) callPosition
+{
+    CCOffset position = {
+        [self floatStyleForKey:@"top" defaultValue:-1],
+        [self floatStyleForKey:@"right" defaultValue:-1],
+        [self floatStyleForKey:@"bottom" defaultValue:-1],
+        [self floatStyleForKey:@"left" defaultValue:-1]
+    };
+    return position;
+}
+
 // フォントをアジャストさせる
 - (void) fontAdjustmentWithText:(NSString *)textValue rect:(CGRect)rect
 {
@@ -524,7 +536,7 @@
     CCStyle *result = [[self class] allocWithZone:zone];
     if (result)
     {
-        [result addStyleKeys:[[self allStyles] mutableCopyWithZone:zone]];
+        [result set_styles:[[self allStyles] mutableCopyWithZone:zone]];
     }
     return result;
 }

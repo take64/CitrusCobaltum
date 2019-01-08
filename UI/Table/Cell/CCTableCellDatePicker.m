@@ -66,6 +66,7 @@
         
         // テキストフィールド
         [[self innerTextField] setEnableMenu:NO];
+        [[self innerTextField] setTextAlignment:NSTextAlignmentCenter];
         [[self innerTextField] setClearButtonMode:UITextFieldViewModeNever];
         
         // パッキングビュー
@@ -128,6 +129,7 @@
     }
     
     // オフセット
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat offsetY = 0;
     CGFloat heightPicker = 216;
     CGFloat heightPackingView = 216;
@@ -138,13 +140,10 @@
     }
     
     // 位置変更
-    [[self datePicker] setFrame:CGRectMake(0, offsetY, 320, heightPicker)];
-    CGPoint center = [[self inputPackingView] center];
-    center.y += offsetY;
-    [[self datePicker] setCenter:[[self inputPackingView] center]];
+    [[self datePicker] setFrame:CGRectMake(0, offsetY, width, heightPicker)];
     
     // パッキングビュー
-    [[self inputPackingView] setFrame:CGRectMake(0, 0, 320, heightPackingView)];
+    [[self inputPackingView] setFrame:CGRectMake(0, 0, width, heightPackingView)];
     [[self inputPackingView] addSubview:[self datePicker]];
 }
 
@@ -242,67 +241,58 @@
 - (void) changePickerModeStandard
 {
     // ボタンスタイル
-    NSDictionary *buttonStyleKeys = @{
-                                      @"top"                :@"0",
-                                      @"height"             :@"32",
-                                      @"font-size"          :@"16",
-                                      @"color"              :@"333333",
-                                      @"background-color"   :@"FFFFFF",
-                                      @"background-image"   :@"linear-gradient(rgba(1.00, 1.00, 1.00, 0.75) 0.00, rgba(0.75, 0.75, 0.75, 0.75) 0.05, rgba(0.80, 0.80, 0.80, 0.80) 1.00)",
-                                      };
-    NSDictionary *buttonStyleHighlighedKeys = @{
-                                                @"background-image" :@"linear-gradient(rgba(1.00, 1.00, 1.00, 0.75) 0.00, rgba(0.75, 0.75, 0.75, 0.75) 0.05, rgba(0.80, 0.80, 0.80, 0.80) 1.00)",
-                                                };
+    NSDictionary *styleKeys = @{
+                                @"top"              :@"0",
+                                @"height"           :@"32",
+                                @"font-size"        :@"16",
+                                @"color"            :@"333333",
+                                @"background-color" :@"CCCCCC",
+                                @"margin"           :@"4 2 2 2",
+                                @"border-radius"    :@"4",
+                                @"border-color"     :@"CCCCCC",
+                                @"border-width"     :@"1",
+                                };
+    NSDictionary *highlighedStyleKeys = @{
+                                          @"color"              :@"FFFFFF",
+                                          @"background-color"   :@"999999",
+                                          };
     
     NSArray *buttonProperties = @[
                                   @{@"title"    :@"06:00",
                                     @"time"     :@"06:00",
-                                    @"width"    :@"51",
-                                    @"left"     :@"0",
                                     },
                                   @{@"title"    :@"09:00",
                                     @"time"     :@"09:00",
-                                    @"width"    :@"51",
-                                    @"left"     :@"52",
                                     },
                                   @{@"title"    :@"12:00",
                                     @"time"     :@"12:00",
-                                    @"width"    :@"51",
-                                    @"left"     :@"104",
                                     },
                                   @{@"title"    :@"18:00",
                                     @"time"     :@"18:00",
-                                    @"width"    :@"51",
-                                    @"left"     :@"156",
                                     },
                                   @{@"title"    :@"21:00",
                                     @"time"     :@"21:00",
-                                    @"width"    :@"51",
-                                    @"left"     :@"208",
                                     },
-                                  @{@"title"    :@"現時刻",
+                                  @{@"title"    :@"now",
                                     @"time"     :[NSNull null],
-                                    @"width"    :@"60",
-                                    @"left"     :@"260",
                                     },
                                   ];
+    // 幅計算
+    CGFloat width = ([[UIScreen mainScreen] bounds].size.width / [buttonProperties count]);
+    CGFloat left = 0;
     
     for (NSDictionary *buttonProperty in buttonProperties)
     {
-        CGFloat left = [[buttonProperty objectForKey:@"left"] floatValue];
-        if ([CCPlatformDevice isIPad] == YES)
-        {
-            left += ((1024 - 320) / 2);
-        }
-        CCButton *buttonTime = [[CCButton alloc] initWithTitle:[buttonProperty objectForKey:@"title"] styleKeys:buttonStyleKeys];
+        CCButton *buttonTime = [[CCButton alloc] initWithTitle:[buttonProperty objectForKey:@"title"] styleKeys:styleKeys];
         [[buttonTime callStyle] addStyleKeys:@{
                                                @"left"  :CCStr(left),
-                                               @"width" :[buttonProperty objectForKey:@"width"],
+                                               @"width" :CCStr(width),
                                                }];
-        [[buttonTime callStyleHighlighted] addStyleKeys:buttonStyleHighlighedKeys];
+        [[buttonTime callStyleHighlighted] addStyleKeys:highlighedStyleKeys];
         [buttonTime setUserInfo:[ @{ @"time" :[buttonProperty objectForKey:@"time"] } mutableCopy]];
         [buttonTime addTarget:self action:@selector(onTapButtonShortcut:) forControlEvents:UIControlEventTouchUpInside];
         [[self inputPackingView] addSubview:buttonTime];
+        left += width;
     }
 }
 

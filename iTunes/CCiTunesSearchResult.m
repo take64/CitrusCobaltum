@@ -8,6 +8,7 @@
 
 #import "CCiTunesSearchResult.h"
 
+#import "CFArray.h"
 #import "CFDate.h"
 
 
@@ -22,9 +23,7 @@
 @synthesize artistName;
 @synthesize artistType;
 @synthesize artistViewUrl;
-@synthesize artworkUrl100;
-@synthesize artworkUrl30;
-@synthesize artworkUrl60;
+@synthesize artworkUrlFormat;
 @synthesize collectionArtistId;
 @synthesize collectionArtistName;
 @synthesize collectionArtistViewUrl;
@@ -69,22 +68,35 @@
     self = [super init];
     if (self)
     {
-        for (NSString *key in [dataValue allKeys])
+        for (NSString *_key in [dataValue allKeys])
         {
+            NSString *key = [_key copy];
             id val = [dataValue objectForKey:key];
             
+            // 発売日をNSDateに
             if ([key isEqualToString:@"releaseDate"] == YES)
             {
-                [self setValue:[CFDate dateWithString:val] forKey:key];
+                val = [CFDate dateWithString:val];
             }
+            // アーティストURL
             else if ([key isEqualToString:@"artistLinkUrl"] == YES)
             {
-                [self setValue:val forKey:@"artistViewUrl"];
+                key = @"artistViewUrl";
             }
-            else
+            // パッケージ画像
+            else if ([key isEqualToString:@"artworkUrl30"] == YES)
             {
-                [self setValue:val forKey:key];
+                key = @"artworkUrlFormat";
+                val = [(NSString *)val stringByReplacingOccurrencesOfString:@"30x30" withString:@"%@x%@"];
             }
+            // パッケージ画像スルー
+            else if ([CFArray inString:key array:@[ @"artworkUrl60", @"artworkUrl100" ]] == YES)
+            {
+                continue;
+            }
+
+            // 設定
+            [self setValue:val forKey:key];
         }
     }
     return self;

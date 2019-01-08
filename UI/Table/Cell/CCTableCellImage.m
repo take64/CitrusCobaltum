@@ -29,22 +29,6 @@
 // extends
 //
 
-// 初期化
-- (instancetype) initWithPrefix:(NSString *)prefixString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithPrefix:prefixString suffix:suffixString reuseIdentifier:reuseIdentifier];
-    if (self)
-    {
-        // イメージ
-        [self set_imageView:[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)]];
-        [self setImage:[[UIImage alloc] init]];
-        
-        // セル選択
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-    }
-    return self;
-}
-
 - (void) layoutSubviews
 {
     [super layoutSubviews];
@@ -68,6 +52,27 @@
 //
 // method
 //
+
+// 初期化
+- (instancetype) initWithImageFrame:(CGRect)imageFrame reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithPrefix:nil suffix:nil reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        if (CGRectIsNull(imageFrame) == TRUE)
+        {
+            imageFrame = CGRectMake(0, 0, 100, 100);
+        }
+            
+        // イメージ
+        [self set_imageView:[[UIImageView alloc] initWithFrame:imageFrame]];
+        [self setImage:[[UIImage alloc] init]];
+        
+        // セル選択
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+    return self;
+}
 
 // 画像設定
 - (void) bindImageData:(NSData *)dataValue

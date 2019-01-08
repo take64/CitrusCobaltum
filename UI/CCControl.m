@@ -76,8 +76,6 @@ static CGFloat const kControlHeight = 48;
         // 初期設定
         [[self callStyleNormal] addStyleKeys:@{
                                                @"background-color"  :@"FFFFFF00",
-                                               @"left"              :@"0",
-                                               @"top"               :@"0",
                                                @"width"             :CCStr(frame.size.width),
                                                @"height"            :CCStr(frame.size.height),
                                                }];
@@ -87,6 +85,7 @@ static CGFloat const kControlHeight = 48;
         [[[self callStyleNormal] allStyles] addObserver:self forKeyPath:@"height" options:NSKeyValueObservingOptionNew context:NULL];
         [[[self callStyleNormal] allStyles] addObserver:self forKeyPath:@"top" options:NSKeyValueObservingOptionNew context:NULL];
         [[[self callStyleNormal] allStyles] addObserver:self forKeyPath:@"left" options:NSKeyValueObservingOptionNew context:NULL];
+        [[[self callStyleNormal] allStyles] addObserver:self forKeyPath:@"right" options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -94,10 +93,11 @@ static CGFloat const kControlHeight = 48;
 // 片付け
 - (void) dealloc
 {
-    [[[self callStyleNormal] allStyles] removeObserver:self forKeyPath:@"left"];
-    [[[self callStyleNormal] allStyles] removeObserver:self forKeyPath:@"top"];
     [[[self callStyleNormal] allStyles] removeObserver:self forKeyPath:@"width"];
     [[[self callStyleNormal] allStyles] removeObserver:self forKeyPath:@"height"];
+    [[[self callStyleNormal] allStyles] removeObserver:self forKeyPath:@"top"];
+    [[[self callStyleNormal] allStyles] removeObserver:self forKeyPath:@"left"];
+    [[[self callStyleNormal] allStyles] removeObserver:self forKeyPath:@"right"];
 }
 
 // キー値監視
@@ -125,6 +125,29 @@ static CGFloat const kControlHeight = 48;
     else if ([keyPath isEqualToString:@"left"] == YES)
     {
         rect.origin.x = [[stylesheet styleForKey:@"left"] floatValue];
+    }
+    // right 変更時
+    else if ([keyPath isEqualToString:@"right"] == YES)
+    {
+        // 親ビューがある場合だけ
+        if ([self superview] == nil)
+        {
+            return;
+        }
+        
+        CCOffset position = [stylesheet callPosition];
+        CGFloat parentWidth = [[self superview] bounds].size.width;
+        // left設定がない
+        if (position.left < 0)
+        {
+            CGFloat width = [stylesheet callSize].width;
+            rect.origin.x = (parentWidth - (width + position.right));
+        }
+        // left設定がある
+        else if (position.left >= 0)
+        {
+            rect.size.width = (parentWidth - (position.left + position.right));
+        }
     }
     [self setFrame:rect];
 }
@@ -349,6 +372,18 @@ static CGFloat const kControlHeight = 48;
         {
             [(CCControl *)childView setNeedsDisplay];
         }
+    }
+}
+
+// 再描画
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    // right要素がある場合
+    if ([[self callStyle] styleForKey:@"right"] != nil)
+    {
+        [self observeValueForKeyPath:@"right" ofObject:nil change:nil context:nil];
     }
 }
 

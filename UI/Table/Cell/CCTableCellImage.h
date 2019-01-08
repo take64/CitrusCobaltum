@@ -14,6 +14,9 @@
 // method
 //
 
+// 初期化
+- (instancetype) initWithImageFrame:(CGRect)imageFrame reuseIdentifier:(NSString *)reuseIdentifier;
+
 // 画像設定
 - (void) bindImageData:(NSData *)dataValue;
 

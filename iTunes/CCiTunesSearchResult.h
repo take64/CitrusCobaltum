@@ -17,9 +17,7 @@
 @property (nonatomic, retain) NSString *artistName;
 @property (nonatomic, retain) NSString *artistType;
 @property (nonatomic, retain) NSString *artistViewUrl;
-@property (nonatomic, retain) NSString *artworkUrl100;
-@property (nonatomic, retain) NSString *artworkUrl30;
-@property (nonatomic, retain) NSString *artworkUrl60;
+@property (nonatomic, retain) NSString *artworkUrlFormat;
 @property (nonatomic, retain) NSString *collectionArtistId;
 @property (nonatomic, retain) NSString *collectionArtistName;
 @property (nonatomic, retain) NSString *collectionArtistViewUrl;
