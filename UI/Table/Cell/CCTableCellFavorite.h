@@ -15,7 +15,7 @@
 //
 // property
 //
-@property (nonatomic, assign) CitrusCobaltumSwitchBlock switchBlock;
+@property (nonatomic, copy)   CitrusCobaltumSwitchBlock switchBlock;
 @property (nonatomic, assign, getter=isOn) BOOL on;
 
 
