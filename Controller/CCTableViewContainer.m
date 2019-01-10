@@ -41,6 +41,9 @@
     {
         [self setTableView:view];
         [self setTableViewDelegate:delegate];
+        
+        [self setHeaderCaches:[@{} mutableCopy]];
+        [self setFooterCaches:[@{} mutableCopy]];
     }
     return self;
 }
