@@ -572,7 +572,7 @@ static CGFloat const kControlHeight = 48;
 }
 
 // コントロールステートに基づくスタイルシートの取得
-- (CCStyle *)callControlStateStylesheet
+- (CCStyle *) callControlStateStylesheet
 {
     CCStyle *stylesheet = [self callStyleNormal];
     switch ([self controlState])
@@ -586,7 +586,7 @@ static CGFloat const kControlHeight = 48;
         default:
             break;
     }
-    return stylesheet;
+    return [stylesheet copy];
 }
 
 // 文字寄せ済みタイトル文字列の横位置を取得
