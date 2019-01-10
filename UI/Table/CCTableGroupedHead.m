@@ -60,8 +60,10 @@
 {
     // 自動で高さ調節しておく
     CGRect rect = [self frame];
-    CGFloat height = rect.size.height;
-    [[[self cellView] callStyle] addStyleKey:@"height" value:CCStr(height)];
+    [[[self cellView] callStyle] addStyleKeys:@{
+                                                @"width"    :CCStr(rect.size.width),
+                                                @"height"   :CCStr(rect.size.height),
+                                                }];
 }
 
 

@@ -13,8 +13,10 @@
 #import "CCTableCellTextField.h"
 #import "CCTableCellTextView.h"
 #import "CCTheme.h"
+
 #import "CFDecimal.h"
 #import "CFEmptyVL.h"
+#import "CFNVL.h"
 
 
 
@@ -75,6 +77,7 @@
         [self setSaveBarButton:barButtonItem];
         // バーボタン(削除)
         barButtonItem = [[CCBarButtonItem alloc] initWithTitle:@"削除" style:UIBarButtonItemStyleDone target:self action:@selector(onTapBarButtonRemove)];
+        [barButtonItem setTintColor:[UIColor redColor]];
         [self setRemoveBarButton:barButtonItem];
     }
     return self;
@@ -104,7 +107,7 @@
 // 表示(削除ボタン)
 - (BOOL) visibleRemoveButton
 {
-    return YES;
+    return ([self entity] != nil);
 }
 
 // ボタン押下時(保存)
@@ -206,7 +209,7 @@
     [[self navigationItem] setRightBarButtonItems:barButtonItems];
     
     // ツールバーボタン表示
-    barButtonItems = [[self toolbarItems] mutableCopy];
+    barButtonItems = [[CFNVL compare:[self toolbarItems] replace:@[]] mutableCopy];
     if ([self visibleRemoveButton] == YES
         && [barButtonItems indexOfObject:[self removeBarButton]] == NSNotFound)
     {
