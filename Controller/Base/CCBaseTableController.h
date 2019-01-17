@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+#import "CCControllerStruct.h"
+
 @class CCTableViewContainer;
 
-@interface CCBaseTableController : UITableViewController
+@interface CCBaseTableController : UITableViewController <UIViewControllerTransitioningDelegate>
 
 //
 // property
 //
 @property (nonatomic, retain) CCTableViewContainer *tableViewContainer;
+@property (nonatomic, copy)   CitrusCobaltumModalBlock modalComplete;
 
 
 
@@ -25,5 +28,14 @@
 
 // タイトル取得
 - (NSString *) callTitle;
+
+// 表示
+- (void) showWithParent:(UIViewController *)parent;
+
+// 表示
+- (void) showWithParent:(UIViewController *)parent complete:(CitrusCobaltumModalBlock)completeBlock;
+
+// 非表示
+- (void) hide;
 
 @end
