@@ -12,6 +12,8 @@
 #import "CCTheme.h"
 
 #import "CitrusCobaltumTypedef.h"
+#import "CCNavigationController.h"
+#import "CCBasePresentationController.h"
 #import "CCTableHeaderView.h"
 #import "CCTableFooterView.h"
 #import "CCTableViewContainer.h"
@@ -21,6 +23,13 @@
 
 
 @interface CCBaseTableController ()
+
+#pragma mark - property
+//
+// property
+//
+
+@property CCNavigationController *_navigationController;
 
 @end
 
@@ -33,6 +42,7 @@
 // synthesize
 //
 @synthesize tableViewContainer;
+@synthesize modalComplete;
 
 
 
@@ -64,6 +74,96 @@
 - (NSString *) callTitle
 {
     return @"";
+}
+
+// 表示
+- (void) showWithParent:(UIViewController *)parent
+{
+    if (parent == nil)
+    {
+        return;
+    }
+    
+    CCBasePresentationController *presentation NS_VALID_UNTIL_END_OF_SCOPE;
+    presentation = [[CCBasePresentationController alloc] initWithPresentedViewController:[self callNavigationController] presentingViewController:parent];
+    [[self callNavigationController] setTransitioningDelegate:presentation];
+    [parent presentViewController:[self callNavigationController] animated:YES completion:nil];
+}
+
+// 表示
+- (void) showWithParent:(UIViewController *)parent complete:(CitrusCobaltumModalBlock)completeBlock
+{
+    // 画面閉じ完了
+    [self setModalComplete:completeBlock];
+    // 表示
+    [self showWithParent:parent];
+}
+
+// 非表示
+- (void) hide
+{
+    [self dismissViewControllerAnimated:YES completion:^(void){
+        // 画面閉じ完了がある場合
+        if (self.modalComplete != nil)
+        {
+            self.modalComplete(self);
+        }
+    }];
+}
+
+
+
+#pragma mark - private
+//
+// private
+//
+
+// セルの長押し
+- (void) onLongTapCell:(UILongPressGestureRecognizer*)gestureRecognizer
+{
+    // 長押しの開始以外はreturn
+    if ([gestureRecognizer state] != UIGestureRecognizerStateBegan)
+    {
+        return;
+    }
+    
+    // 位置特定
+    CGPoint point = [gestureRecognizer locationInView:[self tableView]];
+    NSIndexPath *indexPath = [[self tableView] indexPathForRowAtPoint:point];
+    UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
+    // 処理を呼ぶ
+    [self longTapCell:cell indexPath:indexPath];
+}
+
+// セルの長押し処理
+- (void) longTapCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+// ボタン押下時(閉じる)
+- (void) onTapBarButtonClose
+{
+    [self hide];
+}
+
+
+
+#pragma mark - singleton
+//
+// singleton
+//
+
+// call navigation controller
+- (CCNavigationController *) callNavigationController
+{
+    if ([self _navigationController] == nil)
+    {
+        CCNavigationController *navigation = [[CCNavigationController alloc] initWithRootViewController:self];
+        [navigation setTransitioningDelegate:self];
+        [self set_navigationController:navigation];
+    }
+    return [self _navigationController];
 }
 
 
@@ -103,33 +203,19 @@
 
 
 
-#pragma mark - private
+#pragma mark - UIViewControllerTransitioningDelegate
 //
-// private
+// UIViewControllerTransitioningDelegate
 //
 
-// セルの長押し
-- (void) onLongTapCell:(UILongPressGestureRecognizer*)gestureRecognizer
-{
-    // 長押しの開始以外はreturn
-    if ([gestureRecognizer state] != UIGestureRecognizerStateBegan)
-    {
-        return;
-    }
-    
-    // 位置特定
-    CGPoint point = [gestureRecognizer locationInView:[self tableView]];
-    NSIndexPath *indexPath = [[self tableView] indexPathForRowAtPoint:point];
-    UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
-    // 処理を呼ぶ
-    [self longTapCell:cell indexPath:indexPath];
-    
-}
+//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
+//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed;
+//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator;
+//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator;
 
-// セルの長押し処理
-- (void) longTapCell:(UITableViewCell *)cellValue indexPath:(NSIndexPath *)indexPath
+- (nullable UIPresentationController *) presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(nullable UIViewController *)presenting sourceViewController:(UIViewController *)source
 {
-    
+    return [[CCBasePresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
 }
 
 @end
