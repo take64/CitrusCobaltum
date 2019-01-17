@@ -18,12 +18,6 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 
-//
-// method
-//
-
-// セルデータ設定
-- (void) bindCell:(CCTableCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 //
 // singleton
@@ -31,6 +25,5 @@
 
 // fetch
 - (NSFetchedResultsController *) callFetchedResultsController;
-
 
 @end

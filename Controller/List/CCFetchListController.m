@@ -30,19 +30,8 @@
 
 #pragma mark - method
 //
-// method
+// extends
 //
-
-// 初期化
-- (instancetype) initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        
-    }
-    return self;
-}
 
 - (void) viewDidAppear:(BOOL)animated
 {
@@ -70,24 +59,17 @@
 // extends
 //
 
+// セルデータ設定
+- (void) bindCell:(CCTableCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    [cell bindEntity:[[self callFetchedResultsController] objectAtIndexPath:indexPath]];
+}
+
 // セルヘッダタイトル取得
 - (NSString *) callHeaderTitleWithSection:(NSInteger)section
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[[self callFetchedResultsController] sections] objectAtIndex:section];
     return [sectionInfo name];
-}
-
-
-
-#pragma mark - private
-//
-// private
-//
-
-// セルデータ設定
-- (void) bindCell:(CCTableCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    [cell bindEntity:[[self callFetchedResultsController] objectAtIndexPath:indexPath]];
 }
 
 

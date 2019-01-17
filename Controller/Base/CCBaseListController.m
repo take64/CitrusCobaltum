@@ -76,6 +76,12 @@
     [[self tableView] reloadData];
 }
 
+// セルデータ設定
+- (void) bindCell:(CCTableCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
 // 表示(追加ボタン)
 - (BOOL) visibleAddButton
 {
