@@ -72,6 +72,7 @@
                                                                            @"height"        :@"32",
                                                                            @"font-size"     :@"16",
                                                                            @"font-weight"   :@"bold",
+                                                                           @"color"         :@"FFFFFF",
                                                                            }]];
         [panel addSubview:[self titleLabel]];
         
@@ -89,6 +90,7 @@
                                                                                      @"height"      :@"32",
                                                                                      @"font-size"   :@"16",
                                                                                      @"font-weight" :@"bold",
+                                                                                     @"color"       :@"FFFFFF",
                                                                                      }]];
         [panel addSubview:[self percentageLabel]];
         
@@ -105,6 +107,7 @@
                                                                              @"width"       :@"240",
                                                                              @"height"      :@"32",
                                                                              @"font-size"   :@"14",
+                                                                             @"color"       :@"FFFFFF",
                                                                              }]];
         [panel addSubview:[self messageLabel]];
         
@@ -157,24 +160,28 @@
 // 表示
 - (void) show
 {
-    // 回転開始
-    [[self activityIndicator] startAnimating];
-    
-    // 表示
-    [[self parentView] addSubview:self];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 回転開始
+        [[self activityIndicator] startAnimating];
+        
+        // 表示
+        [[self parentView] addSubview:self];
+    });
 }
 
 // 非表示
 - (void) hide
 {
-    // プログレス
-    [self updateNumerator:@1 denominator:@1];
-    
-    // 回転停止
-    [[self activityIndicator] stopAnimating];
-    
-    // 非表示
-    [self removeFromSuperview];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // プログレス
+        [self updateNumerator:@1 denominator:@1];
+        
+        // 回転停止
+        [[self activityIndicator] stopAnimating];
+        
+        // 非表示
+        [self removeFromSuperview];
+    });
 }
 
 // タイトル
@@ -192,20 +199,13 @@
 // パーセンテージ
 - (void) setPercentage:(NSString *)stringValue
 {
-    CFLog(@"CTOverlayProgressIndicator.setPercentage:%@", stringValue);
+    CFLog(@"CTOverlayProgressIndicator.setPercentage : %@", stringValue);
     [[self percentageLabel] setTitle:stringValue];
 }
 
 // 分子更新
 - (void) updateNumerator:(NSNumber *)numberValue
 {
-    CFLog(@"CTOverlayProgressIndicator.updateNumerator:%@", numberValue);
-    
-    if (numberValue == nil)
-    {
-        CFLog(@"%@", numberValue);
-    }
-    
     // 分子更新
     [self setNumerator:numberValue];
     
@@ -216,8 +216,6 @@
 // 分母更新
 - (void) updateDenominator:(NSNumber *)numberValue
 {
-    CFLog(@"CTOverlayProgressIndicator.updateDenominator:%@", numberValue);
-    
     // 分母更新
     [self setDenominator:numberValue];
     
@@ -228,7 +226,14 @@
 // 分子分母更新
 - (void) updateNumerator:(NSNumber *)numberValue1 denominator:(NSNumber *)numberValue2
 {
-    CFLog(@"CTOverlayProgressIndicator.updateNumerator:%@ denominator:%@", numberValue1, numberValue2);
+    // メインメソッドじゃなかったら再帰処理
+    if ([NSThread isMainThread] == NO)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateNumerator:numberValue1 denominator:numberValue2];
+        });
+        return;
+    }
     
     // 分子更新
     [self setNumerator:numberValue1];
@@ -249,21 +254,12 @@
         progress = 0;
     }
     
-    dispatch_async([self drawQueue], ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            usleep(50000);
-            
-            // バー更新
-            BOOL animated = (progress == 0 ? NO : YES);
-            CFLog(@"percentage : %f", progress);
-            [[self progressBar] setProgress:progress animated:animated];
-            
-            // パーセンテージ更新
-            [self setPercentage:[NSString stringWithFormat:@"%.2f %%", (progress * 100)]];
-            
-            [self layoutIfNeeded];
-        });
-    });
+    // バー更新
+    BOOL animated = (progress == 0 ? NO : YES);
+    [[self progressBar] setProgress:progress animated:animated];
+    
+    // パーセンテージ更新
+    [self setPercentage:[NSString stringWithFormat:@"%.2f %%", (progress * 100)]];
 }
 
 // 分子更新

@@ -13,6 +13,7 @@
 
 #import "CitrusCobaltumTypedef.h"
 #import "CCNavigationController.h"
+#import "CCBarButtonItem.h"
 #import "CCBasePresentationController.h"
 #import "CCTableHeaderView.h"
 #import "CCTableFooterView.h"
@@ -83,6 +84,13 @@
     {
         return;
     }
+    
+    // modal style
+    [self setModalPresentationStyle:UIModalPresentationPageSheet];
+    
+    // バーボタン(閉じる)
+    CCBarButtonItem *barButtonItem = [[CCBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStyleDone target:self action:@selector(onTapBarButtonClose)];
+    [[self navigationItem] setLeftBarButtonItems:@[ barButtonItem ]];
     
     CCBasePresentationController *presentation NS_VALID_UNTIL_END_OF_SCOPE;
     presentation = [[CCBasePresentationController alloc] initWithPresentedViewController:[self callNavigationController] presentingViewController:parent];

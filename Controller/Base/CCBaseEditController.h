@@ -51,4 +51,7 @@
 // 削除処理
 - (void) remove;
 
+// バーボタン再描画
+- (void) redrawBarButton;
+
 @end

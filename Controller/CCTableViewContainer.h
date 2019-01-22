@@ -37,4 +37,13 @@
 // ヘッダ/フッタキャッシュの追加
 - (void) saveCache:(NSMutableDictionary *)caches section:(NSInteger)section view:(UIView *)viewValue;
 
+
+
+//
+// static method
+//
+
+// IndexPath配列からCellIDの生成
++ (NSDictionary *) cellIds:(NSArray<NSIndexPath *> *)indexPaths;
+
 @end

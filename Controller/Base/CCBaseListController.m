@@ -32,6 +32,14 @@
 
 @implementation CCBaseListController
 
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize selectionData;
+
+
+
 #pragma mark - method
 //
 // method

@@ -19,6 +19,9 @@ typedef void (^CitrusCobaltumFirebaseDatabaseBlock)(NSDictionary *result);
 // データ保存
 + (void) saveWithPath:(NSString *)path key:(NSString *)keyValue data:(NSDictionary *)dicValue;
 
+// データ保存(一括)
++ (void) saveWithPath:(NSString *)path keyPath:(NSString *)keyPath data:(NSArray<NSDictionary *> *)dicValues;
+
 // データ読込
 + (void) loadWithPath:(NSString *)path result:(CitrusCobaltumFirebaseDatabaseBlock)completeBlock;
 
