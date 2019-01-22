@@ -15,6 +15,13 @@
 @interface CCBaseListController : CCBaseTableController
 
 //
+// property
+//
+@property (nonatomic, retain) id selectionData;
+
+
+
+//
 // method
 //
 
