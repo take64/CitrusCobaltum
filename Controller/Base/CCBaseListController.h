@@ -28,6 +28,9 @@
 // セルデータ設定
 - (void) bindCell:(CCTableCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
+// バーボタン再描画
+- (void) redrawBarButton;
+
 // 表示(追加ボタン)
 - (BOOL) visibleAddButton;
 

@@ -71,6 +71,7 @@ static CGFloat const kImageSizeOneSide = 64;
         UITableView *tableView;
         tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelWidth, panelWidth, (panelHeight - panelWidth)) style:UITableViewStylePlain];
         [tableView setBackgroundColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]];
+        [tableView setSeparatorColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]];
         [self addSubview:tableView];
         [self setMenuTableView:tableView];
         

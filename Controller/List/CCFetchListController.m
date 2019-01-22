@@ -50,6 +50,7 @@
     
     // フェッチ
     [[self callFetchedResultsController] setDelegate:nil];
+    [self setFetchedResultsController:nil];
 }
 
 
