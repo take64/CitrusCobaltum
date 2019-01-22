@@ -188,13 +188,6 @@
     
 }
 
-
-
-#pragma mark - private
-//
-// private
-//
-
 // バーボタン再描画
 - (void) redrawBarButton
 {

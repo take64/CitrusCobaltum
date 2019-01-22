@@ -80,7 +80,7 @@
 // singleton
 //
 
-// section
+// section datastore
 - (CFSectionDatastore *) callSectionDatastore
 {
     return nil;

@@ -192,20 +192,13 @@
 // パーセンテージ
 - (void) setPercentage:(NSString *)stringValue
 {
-    CFLog(@"CTOverlayProgressIndicator.setPercentage:%@", stringValue);
+    CFLog(@"CTOverlayProgressIndicator.setPercentage : %@", stringValue);
     [[self percentageLabel] setTitle:stringValue];
 }
 
 // 分子更新
 - (void) updateNumerator:(NSNumber *)numberValue
 {
-    CFLog(@"CTOverlayProgressIndicator.updateNumerator:%@", numberValue);
-    
-    if (numberValue == nil)
-    {
-        CFLog(@"%@", numberValue);
-    }
-    
     // 分子更新
     [self setNumerator:numberValue];
     
@@ -216,8 +209,6 @@
 // 分母更新
 - (void) updateDenominator:(NSNumber *)numberValue
 {
-    CFLog(@"CTOverlayProgressIndicator.updateDenominator:%@", numberValue);
-    
     // 分母更新
     [self setDenominator:numberValue];
     
@@ -228,7 +219,6 @@
 // 分子分母更新
 - (void) updateNumerator:(NSNumber *)numberValue1 denominator:(NSNumber *)numberValue2
 {
-    CFLog(@"CTOverlayProgressIndicator.updateNumerator:%@ denominator:%@", numberValue1, numberValue2);
     
     // 分子更新
     [self setNumerator:numberValue1];

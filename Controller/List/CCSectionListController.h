@@ -24,7 +24,7 @@
 // singleton
 //
 
-// section
+// section datastore
 - (CFSectionDatastore *) callSectionDatastore;
 
 @end
