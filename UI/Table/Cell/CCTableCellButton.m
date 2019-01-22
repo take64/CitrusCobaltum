@@ -82,6 +82,7 @@
                                                                                 @"border-color"     :@"FFFFFF",
                                                                                 @"border-width"     :@"1",
                                                                                 @"border-radius"    :@"4",
+                                                                                @"color"            :@"FFFFFF",
                                                                                 @"margin"           :@"4 12 4 12",
                                                                                 @"box-shadow"       :@"0 1 4 000000",
                                                                                 @"background-image" :@"linear-gradient(rgba(1.00, 1.00, 1.00, 0.75) 0.00, rgba(0.75, 0.75, 0.75, 0.50) 0.05, rgba(0.50, 0.50, 0.50, 0.50) 0.95, rgba(0.25, 0.25, 0.25, 0.75) 1.00)",
