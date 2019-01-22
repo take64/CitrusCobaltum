@@ -13,6 +13,8 @@
 #import "CCTableFooterView.h"
 #import "CCUIStruct.h"
 
+#import "CFString.h"
+
 
 
 @implementation CCTableViewContainer
@@ -106,6 +108,24 @@
         return;
     }
     [caches setObject:viewValue forKey:@(section)];
+}
+
+
+
+#pragma mark - static method
+//
+// static method
+//
+
+// IndexPath配列からCellIDの生成
++ (NSDictionary *) cellIds:(NSArray<NSIndexPath *> *)indexPaths
+{
+    NSMutableDictionary<NSIndexPath *, NSString *> *cellIds = [@{} mutableCopy];
+    for (NSIndexPath *indexPath in indexPaths)
+    {
+        [cellIds addEntriesFromDictionary:@{ indexPath: CFStringf(@"CellID%ld_%ld", (long)[indexPath section], (long)[indexPath row]) }];
+    }
+    return [cellIds copy];
 }
 
 @end
