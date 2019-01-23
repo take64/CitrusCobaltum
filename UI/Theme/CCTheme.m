@@ -8,7 +8,8 @@
 
 #import "CCTheme.h"
 
-#import "CCColor.h"
+//#import "CCThemeTableView.h"
+//#import "CCColor.h"
 #import "CFNVL.h"
 
 @implementation CCTheme
@@ -31,10 +32,10 @@
 @synthesize drawerCellBodyBackColor;
 @synthesize drawerCellBodyTextColor;
 
-@synthesize tableCellHeadBackColor;
-@synthesize tableCellHeadTextColor;
-@synthesize tableCellFootBackColor;
-@synthesize tableCellFootTextColor;
+//@synthesize tableCellHeadBackColor;
+//@synthesize tableCellHeadTextColor;
+//@synthesize tableCellFootBackColor;
+//@synthesize tableCellFootTextColor;
 
 @synthesize themeColor0;
 
@@ -61,13 +62,23 @@
 - (UIColor *) callDrawerCellBodyBackColor{ return [CFNVL compare:[self drawerCellBodyBackColor]  replace:[UIColor whiteColor]]; }
 - (UIColor *) callDrawerCellBodyTextColor{ return [CFNVL compare:[self drawerCellBodyTextColor]  replace:[UIColor whiteColor]]; }
 
-// table setting
-- (UIColor *) callTableCellHeadBackColor { return [CFNVL compare:[self tableCellHeadBackColor]   replace:[UIColor whiteColor]]; }
-- (UIColor *) callTableCellHeadTextColor { return [CFNVL compare:[self tableCellHeadTextColor]   replace:[UIColor whiteColor]]; }
-- (UIColor *) callTableCellFootBackColor { return [CFNVL compare:[self tableCellFootBackColor]   replace:[UIColor whiteColor]]; }
-- (UIColor *) callTableCellFootTextColor { return [CFNVL compare:[self tableCellFootTextColor]   replace:[UIColor whiteColor]]; }
+//// table setting
+//- (UIColor *) callTableCellHeadBackColor { return [CFNVL compare:[self tableCellHeadBackColor]   replace:[UIColor whiteColor]]; }
+//- (UIColor *) callTableCellHeadTextColor { return [CFNVL compare:[self tableCellHeadTextColor]   replace:[UIColor whiteColor]]; }
+//- (UIColor *) callTableCellFootBackColor { return [CFNVL compare:[self tableCellFootBackColor]   replace:[UIColor whiteColor]]; }
+//- (UIColor *) callTableCellFootTextColor { return [CFNVL compare:[self tableCellFootTextColor]   replace:[UIColor whiteColor]]; }
 
 // theme color
 - (UIColor *) callThemeColor0            { return [CFNVL compare:[self themeColor0]              replace:[UIColor whiteColor]]; }
+
+// theme table view
+- (CCThemeTableView *) callTableView
+{
+    if ([self tableView] == nil)
+    {
+        [self setTableView:[[CCThemeTableView alloc] init]];
+    }
+    return [self tableView];
+}
 
 @end

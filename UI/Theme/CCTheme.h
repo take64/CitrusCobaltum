@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+
+#import "CCThemeTableView.h"
 
 @interface CCTheme : NSObject
 
@@ -28,13 +29,14 @@
 @property (nonatomic, retain) UIColor *drawerCellHeadTextColor;   // cell head text color
 @property (nonatomic, retain) UIColor *drawerCellBodyBackColor;   // cell body back color
 @property (nonatomic, retain) UIColor *drawerCellBodyTextColor;   // cell body text color
-// table setting
-@property (nonatomic, retain) UIColor *tableCellHeadBackColor;    // table cell head back color
-@property (nonatomic, retain) UIColor *tableCellHeadTextColor;    // table cell head text color
-@property (nonatomic, retain) UIColor *tableCellFootBackColor;    // table cell foot back color
-@property (nonatomic, retain) UIColor *tableCellFootTextColor;    // table cell foot text color
+//// table setting
+//@property (nonatomic, retain) UIColor *tableCellHeadBackColor;    // table cell head back color
+//@property (nonatomic, retain) UIColor *tableCellHeadTextColor;    // table cell head text color
+//@property (nonatomic, retain) UIColor *tableCellFootBackColor;    // table cell foot back color
+//@property (nonatomic, retain) UIColor *tableCellFootTextColor;    // table cell foot text color
 @property (nonatomic, retain) UIColor *themeColor0;               // theme color 0
 
+@property (nonatomic, retain) CCThemeTableView *tableView;      // theme table view
 
 
 //
@@ -57,13 +59,16 @@
 - (UIColor *) callDrawerCellBodyBackColor;   // cell body back color
 - (UIColor *) callDrawerCellBodyTextColor;   // cell body text color
 
-// table setting
-- (UIColor *) callTableCellHeadBackColor;    // table cell head back color
-- (UIColor *) callTableCellHeadTextColor;    // table cell head text color
-- (UIColor *) callTableCellFootBackColor;    // table cell head back color
-- (UIColor *) callTableCellFootTextColor;    // table cell head text color
+//// table setting
+//- (UIColor *) callTableCellHeadBackColor;    // table cell head back color
+//- (UIColor *) callTableCellHeadTextColor;    // table cell head text color
+//- (UIColor *) callTableCellFootBackColor;    // table cell head back color
+//- (UIColor *) callTableCellFootTextColor;    // table cell head text color
 
 // theme color
 - (UIColor *) callThemeColor0;               // theme color 0
+
+// theme table view
+- (CCThemeTableView *) callTableView;
 
 @end

@@ -26,9 +26,9 @@
 - (void) bindTheme
 {
     // テーマ
-    CCTheme *theme = [CitrusCobaltumApplication callTheme];
-    [self setLabelColor:[theme callTableCellFootTextColor]];
-    [self setLabelBackgroundColor:[theme callTableCellFootBackColor]];
+    CCThemeTableView *theme = [[CitrusCobaltumApplication callTheme] callTableView];
+    [self setLabelColor:[theme callFootTextColor]];
+    [self setLabelBackgroundColor:[theme callFootBackgroundColor]];
     
     // 適用
     [super bindTheme];
