@@ -15,12 +15,14 @@
 //
 
 // background color
+@property (nonatomic, retain) UIColor *backgroundColor;
 @property (nonatomic, retain) UIColor *headBackgroundColor;
-@property (nonatomic, retain) UIColor *bodyBackgroundColor;
+@property (nonatomic, retain) UIColor *cellBackgroundColor;
 @property (nonatomic, retain) UIColor *footBackgroundColor;
 
 // text color
 @property (nonatomic, retain) UIColor *headTextColor;
+@property (nonatomic, retain) UIColor *cellTextColor;
 @property (nonatomic, retain) UIColor *footTextColor;
 
 // separator color
@@ -32,13 +34,17 @@
 // method
 //
 
+
+
 // background color
+- (UIColor *) callBackgroundColor;
 - (UIColor *) callHeadBackgroundColor;
-- (UIColor *) callBodyBackgroundColor;
+- (UIColor *) callCellBackgroundColor;
 - (UIColor *) callFootBackgroundColor;
 
 // text color
 - (UIColor *) callHeadTextColor;
+- (UIColor *) callCellTextColor;
 - (UIColor *) callFootTextColor;
 
 // separator color
@@ -48,9 +54,9 @@
 - (instancetype) initWithBackgroudColor:(UIColor *)bodyColor head:(UIColor *)headColor foot:(UIColor *)footColor;
 
 // bind background color
-- (void) bindBackgroudColor:(UIColor *)bodyColor head:(UIColor *)headColor foot:(UIColor *)footColor;
+- (void) bindBackgroudColor:(UIColor *)cellColor head:(UIColor *)headColor foot:(UIColor *)footColor;
 
 // bind text color
-- (void) bindTextColorHead:(UIColor *)headColor foot:(UIColor *)footColor;
+- (void) bindTextColor:(UIColor *)cellColor head:(UIColor *)headColor foot:(UIColor *)footColor;
 
 @end

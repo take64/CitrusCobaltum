@@ -23,6 +23,7 @@
 @synthesize labelBackgroundColor;
 @synthesize control;
 @synthesize margin;
+@synthesize theme;
 
 
 
@@ -38,13 +39,14 @@
     if (self)
     {
         // label
-        [self setLabel:[[CCLabel alloc] initWithTitle:@"" styleKeys:@{
-                                                                      @"width"         :@"320",
-                                                                      @"font-size"     :@"14",
-                                                                      @"text-align"    :@"left",
-                                                                      @"vertical-align":@"top",
-                                                                      @"padding"       :@"2 8",
-                                                                      }]];
+        [self setLabel:[[CCLabel alloc] initWithStyleKeys:@{
+                                                            @"width"            :@"320",
+                                                            @"font-size"        :@"14",
+                                                            @"font-weight"      :@"bold",
+                                                            @"text-align"       :@"left",
+                                                            @"vertical-align"   :@"top",
+                                                            @"padding"          :@"2 8",
+                                                            }]];
         
         // view
         [self setControl:[[UIView alloc] initWithFrame:CGRectZero]];

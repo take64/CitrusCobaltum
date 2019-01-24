@@ -11,6 +11,7 @@
 #import "CitrusCobaltumTypedef.h"
 #import "CCTableHeaderView.h"
 #import "CCTableFooterView.h"
+#import "CCThemeTableView.h"
 #import "CCUIStruct.h"
 
 #import "CFString.h"
@@ -27,6 +28,7 @@
 @synthesize tableView;
 @synthesize headerCaches;
 @synthesize footerCaches;
+@synthesize theme;
 
 
 
@@ -51,23 +53,18 @@
 }
 
 // ヘッダキャッシュの取得
-- (UIView *) callHeaderCacheWithSection:(NSInteger)section
+- (UIView *) callHeaderCacheWithSection:(NSInteger)section title:(NSString *)title
 {
     UIView *cacheView = [[self headerCaches] objectForKey:@(section)];
     if (cacheView == nil)
     {
-        // delegateから取得
-        NSString *titleString = nil;
-        if ([[self tableViewDelegate] respondsToSelector:@selector(tableView:titleForHeaderInSection:)] == YES)
-        {
-            titleString = [[self tableViewDelegate] tableView:[self tableView] titleForHeaderInSection:section];
-        }
-
         // タイトル文字列がある場合
-        if (titleString != nil && [titleString length] > 0)
+        if (title != nil && [title length] > 0)
         {
             cacheView = [[CCTableHeaderView alloc] initWithReuseIdentifierWithSection:section];
-            [(CCTableHeaderView *)cacheView bindTitle:titleString];
+            [(CCTableHeaderView *)cacheView setTheme:[self theme]];
+            [(CCTableHeaderView *)cacheView bindTitle:title];
+            [(CCTableHeaderView *)cacheView bindTheme];
         }
         
         [self saveCache:[self headerCaches] section:section view:cacheView];
@@ -76,23 +73,18 @@
 }
 
 // フッタキャッシュの取得
-- (UIView *) callFooterCacheWithSection:(NSInteger)section
+- (UIView *) callFooterCacheWithSection:(NSInteger)section title:(NSString *)title
 {
     UIView *cacheView = [[self footerCaches] objectForKey:@(section)];
     if (cacheView == nil)
     {
-        // delegateから取得
-        NSString *titleString = nil;
-        if ([[self tableViewDelegate] respondsToSelector:@selector(tableView:titleForFooterInSection:)] == YES)
-        {
-            titleString = [[self tableViewDelegate] tableView:[self tableView] titleForFooterInSection:section];
-        }
-        
         // タイトル文字列がある場合
-        if (titleString != nil && [titleString length] > 0)
+        if (title != nil && [title length] > 0)
         {
             cacheView = [[CCTableFooterView alloc] initWithReuseIdentifierWithSection:section];
-            [(CCTableFooterView *)cacheView bindTitle:titleString];
+            [(CCTableFooterView *)cacheView setTheme:[self theme]];
+            [(CCTableFooterView *)cacheView bindTitle:title];
+            [(CCTableFooterView *)cacheView bindTheme];
         }
         
         [self saveCache:[self footerCaches] section:section view:cacheView];

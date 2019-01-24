@@ -59,19 +59,22 @@ static CGFloat const kImageSizeOneSide = 64;
         // パネルサイズ
         CGFloat panelWidth = frame.size.width;
         CGFloat panelHeight = frame.size.height;
+        // テーマ
+        CCThemeDrawerView *themeDrawerView = [[CitrusCobaltumApplication callTheme] callDrawerView];
+        CCThemeTableView *themeTableView = [themeDrawerView callTableView];
         
         // ヘッダビュー
         CCView *view;
         view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, panelWidth, panelWidth)];
-        [[view callStyle] addStyleKey:@"background-color" value:[CCColor hexStringWithColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]]];
+        [[view callStyle] addStyleKey:@"background-color" value:[CCColor hexStringWithColor:[themeDrawerView callPanelBackgroundColor]]];
         [self addSubview:view];
         [self setHeadView:view];
         
         // テーブルビュー
         UITableView *tableView;
         tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelWidth, panelWidth, (panelHeight - panelWidth)) style:UITableViewStylePlain];
-        [tableView setBackgroundColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]];
-        [tableView setSeparatorColor:[[CitrusCobaltumApplication callTheme] callDrawerPanelBackColor]];
+        [tableView setBackgroundColor:[themeTableView callBackgroundColor]];
+        [tableView setSeparatorColor:[themeTableView callSeparatorColor]];
         [self addSubview:tableView];
         [self setMenuTableView:tableView];
         
@@ -84,7 +87,9 @@ static CGFloat const kImageSizeOneSide = 64;
 // 画像設定
 - (void) bindImage:(UIImage *)imageValue
 {
-    imageValue = [CFNVL compare:imageValue replace:[[CitrusCobaltumApplication callTheme] callDrawerPanelIconImage]];
+    // テーマ
+    CCThemeDrawerView *themeDrawerView = [[CitrusCobaltumApplication callTheme] callDrawerView];
+    imageValue = [CFNVL compare:imageValue replace:[themeDrawerView callPanelIconImage]];
     
     // 未生成なら生成
     if ([self headImageView] == nil)
