@@ -15,18 +15,18 @@
 //
 
 // background color
-@property (nonatomic, retain) UIColor *backgroundColor;
-@property (nonatomic, retain) UIColor *headBackgroundColor;
-@property (nonatomic, retain) UIColor *cellBackgroundColor;
-@property (nonatomic, retain) UIColor *footBackgroundColor;
+@property (nonatomic, retain) NSString *backgroundColor;
+@property (nonatomic, retain) NSString *headBackgroundColor;
+@property (nonatomic, retain) NSString *cellBackgroundColor;
+@property (nonatomic, retain) NSString *footBackgroundColor;
 
 // text color
-@property (nonatomic, retain) UIColor *headTextColor;
-@property (nonatomic, retain) UIColor *cellTextColor;
-@property (nonatomic, retain) UIColor *footTextColor;
+@property (nonatomic, retain) NSString *headTextColor;
+@property (nonatomic, retain) NSString *cellTextColor;
+@property (nonatomic, retain) NSString *footTextColor;
 
 // separator color
-@property (nonatomic, retain) UIColor *separatorColor;
+@property (nonatomic, retain) NSString *separatorColor;
 
 
 
@@ -34,29 +34,24 @@
 // method
 //
 
-
-
 // background color
-- (UIColor *) callBackgroundColor;
-- (UIColor *) callHeadBackgroundColor;
-- (UIColor *) callCellBackgroundColor;
-- (UIColor *) callFootBackgroundColor;
+- (NSString *) callBackgroundColor;
+- (NSString *) callHeadBackgroundColor;
+- (NSString *) callCellBackgroundColor;
+- (NSString *) callFootBackgroundColor;
 
-// text color
-- (UIColor *) callHeadTextColor;
-- (UIColor *) callCellTextColor;
-- (UIColor *) callFootTextColor;
+// NSStringlor
+- (NSString *) callHeadTextColor;
+- (NSString *) callCellTextColor;
+- (NSString *) callFootTextColor;
 
-// separator color
-- (UIColor *) callSeparatorColor;
-
-// init
-- (instancetype) initWithBackgroudColor:(UIColor *)bodyColor head:(UIColor *)headColor foot:(UIColor *)footColor;
+// NSStringor color
+- (NSString *) callSeparatorColor;
 
 // bind background color
-- (void) bindBackgroudColor:(UIColor *)cellColor head:(UIColor *)headColor foot:(UIColor *)footColor;
+- (void) bindBackgroudColor:(NSString *)cellColor head:(NSString *)headColor foot:(NSString *)footColor;
 
 // bind text color
-- (void) bindTextColor:(UIColor *)cellColor head:(UIColor *)headColor foot:(UIColor *)footColor;
+- (void) bindTextColor:(NSString *)cellColor head:(NSString *)headColor foot:(NSString *)footColor;
 
 @end

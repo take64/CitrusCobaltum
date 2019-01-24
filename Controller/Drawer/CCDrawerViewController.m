@@ -346,10 +346,10 @@ static CGFloat CCDrawerViewControllerMenuHeight()
     {
         CCThemeTableView *theme = [[[CitrusCobaltumApplication callTheme] callDrawerView] callTableView];
         cell = [[CCTableCellLabel alloc] initWithPrefix:nil reuseIdentifier:CellID];
-        [cell setBackgroundColor:[theme callCellBackgroundColor]];
+        [cell setBackgroundColor:[CCColor colorWithHEXString:[theme callCellBackgroundColor]]];
         [[[cell label] callStyle] addStyleKeys:@{
                                                  @"font-size"   :@"14",
-                                                 @"color"       :[CCColor hexStringWithColor:[theme callCellTextColor]],
+                                                 @"color"       :[theme callCellTextColor],
                                                  @"margin"      :@"0 0 0 8",
                                                  }];
     }

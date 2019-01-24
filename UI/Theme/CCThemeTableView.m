@@ -34,32 +34,21 @@
 //
 
 // background color
-- (UIColor *) callBackgroundColor       { return [CFNVL compare:[self backgroundColor]      replace:[UIColor whiteColor]]; }
-- (UIColor *) callHeadBackgroundColor   { return [CFNVL compare:[self headBackgroundColor]  replace:[UIColor whiteColor]]; }
-- (UIColor *) callCellBackgroundColor   { return [CFNVL compare:[self cellBackgroundColor]  replace:[UIColor whiteColor]]; }
-- (UIColor *) callFootBackgroundColor   { return [CFNVL compare:[self footBackgroundColor]  replace:[UIColor whiteColor]]; }
+- (NSString *) callBackgroundColor      { return [CFNVL compare:[self backgroundColor]      replace:@"FFFFFF"]; }
+- (NSString *) callHeadBackgroundColor  { return [CFNVL compare:[self headBackgroundColor]  replace:@"FFFFFF"]; }
+- (NSString *) callCellBackgroundColor  { return [CFNVL compare:[self cellBackgroundColor]  replace:@"FFFFFF"]; }
+- (NSString *) callFootBackgroundColor  { return [CFNVL compare:[self footBackgroundColor]  replace:@"FFFFFF"]; }
 
 // text color
-- (UIColor *) callHeadTextColor         { return [CFNVL compare:[self headTextColor]        replace:[UIColor darkTextColor]]; }
-- (UIColor *) callCellTextColor         { return [CFNVL compare:[self cellTextColor]        replace:[UIColor darkTextColor]]; }
-- (UIColor *) callFootTextColor         { return [CFNVL compare:[self footTextColor]        replace:[UIColor darkTextColor]]; }
+- (NSString *) callHeadTextColor        { return [CFNVL compare:[self headTextColor]        replace:@"333333"]; }
+- (NSString *) callCellTextColor        { return [CFNVL compare:[self cellTextColor]        replace:@"333333"]; }
+- (NSString *) callFootTextColor        { return [CFNVL compare:[self footTextColor]        replace:@"333333"]; }
 
 // separator color
-- (UIColor *) callSeparatorColor        { return [CFNVL compare:[self separatorColor]       replace:[UIColor lightGrayColor]]; }
-
-// init
-- (instancetype) initWithBackgroudColor:(UIColor *)bodyColor head:(UIColor *)headColor foot:(UIColor *)footColor
-{
-    self = [super init];
-    if (self)
-    {
-        [self bindBackgroudColor:bodyColor head:headColor foot:footColor];
-    }
-    return self;
-}
+- (UIColor *) callSeparatorColor        { return [CFNVL compare:[self separatorColor]       replace:@"999999"]; }
 
 // bind background color
-- (void) bindBackgroudColor:(UIColor *)cellColor head:(UIColor *)headColor foot:(UIColor *)footColor
+- (void) bindBackgroudColor:(NSString *)cellColor head:(NSString *)headColor foot:(NSString *)footColor
 {
     [self setCellBackgroundColor:cellColor];
     [self setHeadBackgroundColor:headColor];
@@ -67,7 +56,7 @@
 }
 
 // bind text color
-- (void) bindTextColor:(UIColor *)cellColor head:(UIColor *)headColor foot:(UIColor *)footColor
+- (void) bindTextColor:(NSString *)cellColor head:(NSString *)headColor foot:(NSString *)footColor
 {
     [self setHeadTextColor:headColor];
     [self setCellTextColor:cellColor];

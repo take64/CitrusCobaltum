@@ -66,15 +66,15 @@ static CGFloat const kImageSizeOneSide = 64;
         // ヘッダビュー
         CCView *view;
         view = [[CCView alloc] initWithFrame:CGRectMake(0, 0, panelWidth, panelWidth)];
-        [[view callStyle] addStyleKey:@"background-color" value:[CCColor hexStringWithColor:[themeDrawerView callPanelBackgroundColor]]];
+        [[view callStyle] addStyleKey:@"background-color" value:[themeDrawerView callPanelBackgroundColor]];
         [self addSubview:view];
         [self setHeadView:view];
         
         // テーブルビュー
         UITableView *tableView;
         tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, panelWidth, panelWidth, (panelHeight - panelWidth)) style:UITableViewStylePlain];
-        [tableView setBackgroundColor:[themeTableView callBackgroundColor]];
-        [tableView setSeparatorColor:[themeTableView callSeparatorColor]];
+        [tableView setBackgroundColor:[CCColor colorWithHEXString:[themeTableView callBackgroundColor]]];
+        [tableView setSeparatorColor:[CCColor colorWithHEXString:[themeTableView callSeparatorColor]]];
         [self addSubview:tableView];
         [self setMenuTableView:tableView];
         

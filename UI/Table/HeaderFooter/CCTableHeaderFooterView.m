@@ -141,8 +141,8 @@
 - (void) bindTheme
 {
     [[[self label] callStyle] addStyleKeys:@{
-                                             @"color"           :[CCColor hexStringWithColor:[self labelColor]],
-                                             @"background-color":[CCColor hexStringWithColor:[self labelBackgroundColor]]
+                                             @"color"           :[self labelColor],
+                                             @"background-color":[self labelBackgroundColor],
                                              }];
     
     [[self contentView] setBackgroundColor:[CCColor colorTableBackground]];
