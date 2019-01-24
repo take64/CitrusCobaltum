@@ -17,10 +17,12 @@
 // synthesize
 //
 
+@synthesize backgroundColor;
 @synthesize headBackgroundColor;
-@synthesize bodyBackgroundColor;
+@synthesize cellBackgroundColor;
 @synthesize footBackgroundColor;
 @synthesize headTextColor;
+@synthesize cellTextColor;
 @synthesize footTextColor;
 @synthesize separatorColor;
 
@@ -32,16 +34,18 @@
 //
 
 // background color
+- (UIColor *) callBackgroundColor       { return [CFNVL compare:[self backgroundColor]      replace:[UIColor whiteColor]]; }
 - (UIColor *) callHeadBackgroundColor   { return [CFNVL compare:[self headBackgroundColor]  replace:[UIColor whiteColor]]; }
-- (UIColor *) callBodyBackgroundColor   { return [CFNVL compare:[self bodyBackgroundColor]  replace:[UIColor whiteColor]]; }
+- (UIColor *) callCellBackgroundColor   { return [CFNVL compare:[self cellBackgroundColor]  replace:[UIColor whiteColor]]; }
 - (UIColor *) callFootBackgroundColor   { return [CFNVL compare:[self footBackgroundColor]  replace:[UIColor whiteColor]]; }
 
 // text color
-- (UIColor *) callHeadTextColor         { return [CFNVL compare:[self headBackgroundColor]  replace:[UIColor darkTextColor]]; }
-- (UIColor *) callFootTextColor         { return [CFNVL compare:[self headBackgroundColor]  replace:[UIColor darkTextColor]]; }
+- (UIColor *) callHeadTextColor         { return [CFNVL compare:[self headTextColor]        replace:[UIColor darkTextColor]]; }
+- (UIColor *) callCellTextColor         { return [CFNVL compare:[self cellTextColor]        replace:[UIColor darkTextColor]]; }
+- (UIColor *) callFootTextColor         { return [CFNVL compare:[self footTextColor]        replace:[UIColor darkTextColor]]; }
 
 // separator color
-- (UIColor *) callSeparatorColor        { return [CFNVL compare:[self headBackgroundColor]  replace:[UIColor lightGrayColor]]; }
+- (UIColor *) callSeparatorColor        { return [CFNVL compare:[self separatorColor]       replace:[UIColor lightGrayColor]]; }
 
 // init
 - (instancetype) initWithBackgroudColor:(UIColor *)bodyColor head:(UIColor *)headColor foot:(UIColor *)footColor
@@ -55,17 +59,19 @@
 }
 
 // bind background color
-- (void) bindBackgroudColor:(UIColor *)bodyColor head:(UIColor *)headColor foot:(UIColor *)footColor
+- (void) bindBackgroudColor:(UIColor *)cellColor head:(UIColor *)headColor foot:(UIColor *)footColor
 {
-    [self setBodyBackgroundColor:bodyColor];
+    [self setCellBackgroundColor:cellColor];
     [self setHeadBackgroundColor:headColor];
     [self setFootBackgroundColor:footColor];
 }
 
 // bind text color
-- (void) bindTextColorHead:(UIColor *)headColor foot:(UIColor *)footColor
+- (void) bindTextColor:(UIColor *)cellColor head:(UIColor *)headColor foot:(UIColor *)footColor
 {
     [self setHeadTextColor:headColor];
+    [self setCellTextColor:cellColor];
     [self setFootTextColor:footColor];
 }
+
 @end

@@ -91,6 +91,7 @@ static CGFloat CCDrawerViewControllerMenuHeight()
         
         // テーブルビューコンテナ
         [self setTableViewContainer:[[CCTableViewContainer alloc] initWithTableView:[self callMenuTableView] delegate:self]];
+        [[self tableViewContainer] setTheme:[[[CitrusCobaltumApplication callTheme] callDrawerView] callTableView]];
         
         // エッジジェスチャー
         [[self view] addGestureRecognizer:[self generateScreenEdgePanGesture]];
@@ -343,12 +344,12 @@ static CGFloat CCDrawerViewControllerMenuHeight()
     CCTableCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
     if (cell == nil)
     {
-        CCTheme *theme = [CitrusCobaltumApplication callTheme];
+        CCThemeTableView *theme = [[[CitrusCobaltumApplication callTheme] callDrawerView] callTableView];
         cell = [[CCTableCellLabel alloc] initWithPrefix:nil reuseIdentifier:CellID];
-        [cell setBackgroundColor:[theme callDrawerCellBodyBackColor]];
+        [cell setBackgroundColor:[theme callCellBackgroundColor]];
         [[[cell label] callStyle] addStyleKeys:@{
                                                  @"font-size"   :@"14",
-                                                 @"color"       :[CCColor hexStringWithColor:[theme callDrawerCellBodyTextColor]],
+                                                 @"color"       :[CCColor hexStringWithColor:[theme callCellTextColor]],
                                                  @"margin"      :@"0 0 0 8",
                                                  }];
     }
@@ -365,12 +366,7 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 {
     return [[self menuSections] count];
 }
-
-// セクションタイトル
-- (nullable NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [[[self menuSections] objectAtIndex:section] title];
-}
+//- (nullable NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
 //- (nullable NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
 //- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -387,7 +383,7 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 //
 
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section;
 //- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section;
 //- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath;
 //- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section;
@@ -396,14 +392,14 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 // セルヘッダ高さ
 - (CGFloat) tableView:(UITableView *) tableView heightForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[self tableViewContainer] callHeaderCacheWithSection:section];
+    UIView *view = [[self tableViewContainer] callHeaderCacheWithSection:section title:[[[self menuSections] objectAtIndex:section] title]];
     NSNumber *height = [CFNVL compare:view value1:@([view frame].size.height) value2:@(0)];
     return [height floatValue];
 }
 // セルフッタ高さ
 - (CGFloat) tableView:(UITableView *) tableView heightForFooterInSection:(NSInteger)section
 {
-    UIView *view = [[self tableViewContainer] callFooterCacheWithSection:section];
+    UIView *view = [[self tableViewContainer] callFooterCacheWithSection:section title:nil];
     NSNumber *height = [CFNVL compare:view value1:@([view frame].size.height) value2:@(0)];
     return [height floatValue];
 }
@@ -413,12 +409,12 @@ static CGFloat CCDrawerViewControllerMenuHeight()
 // セルヘッダを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [[self tableViewContainer] callHeaderCacheWithSection:section];
+    return [[self tableViewContainer] callHeaderCacheWithSection:section title:[[[self menuSections] objectAtIndex:section] title]];
 }
 // セルフッタを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    return [[self tableViewContainer] callFooterCacheWithSection:section];
+    return [[self tableViewContainer] callFooterCacheWithSection:section title:[[[self menuSections] objectAtIndex:section] title]];
 }
 //- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath;
 //- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;

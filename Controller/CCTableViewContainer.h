@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+
+@class CCThemeTableView;
 
 @interface CCTableViewContainer : NSObject
 
@@ -18,6 +19,7 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableDictionary *headerCaches;
 @property (nonatomic, retain) NSMutableDictionary *footerCaches;
+@property (nonatomic, retain) CCThemeTableView *theme;
 
 
 
@@ -29,10 +31,10 @@
 - (instancetype) initWithTableView:(UITableView *)view delegate:(id<UITableViewDelegate, UITableViewDataSource>)delegate;
 
 // ヘッダキャッシュの取得
-- (UIView *) callHeaderCacheWithSection:(NSInteger)section;
+- (UIView *) callHeaderCacheWithSection:(NSInteger)section title:(NSString *)title;
 
 // フッタキャッシュの取得
-- (UIView *) callFooterCacheWithSection:(NSInteger)section;
+- (UIView *) callFooterCacheWithSection:(NSInteger)section title:(NSString *)title;
 
 // ヘッダ/フッタキャッシュの追加
 - (void) saveCache:(NSMutableDictionary *)caches section:(NSInteger)section view:(UIView *)viewValue;

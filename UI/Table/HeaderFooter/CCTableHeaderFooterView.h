@@ -9,20 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "CCLabel.h"
+#import "CCThemeTableView.h"
 
 @interface CCTableHeaderFooterView : UITableViewHeaderFooterView
-{
-    // label
-    CCLabel *label;
-    UIColor *labelColor;
-    UIColor *labelBackgroundColor;
-    
-    // view
-    UIView *control;
-    
-    // is margin
-    CGFloat margin;
-}
 
 //
 // property
@@ -32,6 +21,7 @@
 @property (nonatomic, retain) UIColor *labelBackgroundColor;
 @property (nonatomic, retain) UIView *control;
 @property (nonatomic, assign) CGFloat margin;
+@property (nonatomic, retain) CCThemeTableView *theme;
 
 
 

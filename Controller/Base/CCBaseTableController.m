@@ -184,7 +184,7 @@
 // セルヘッダ高さ
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[self tableViewContainer] callHeaderCacheWithSection:section];
+    UIView *view = [[self tableViewContainer] callHeaderCacheWithSection:section title:nil];
     NSNumber *height = [CFNVL compare:view value1:@([view frame].size.height) value2:@(0)];
     return [height floatValue];
 }
@@ -192,7 +192,7 @@
 // セルフッタ高さ
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    UIView *view = [[self tableViewContainer] callFooterCacheWithSection:section];
+    UIView *view = [[self tableViewContainer] callFooterCacheWithSection:section title:nil];
     NSNumber *height = [CFNVL compare:view value1:@([view frame].size.height) value2:@(0)];
     return [height floatValue];
 }
@@ -200,13 +200,13 @@
 // セルヘッダを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [[self tableViewContainer] callHeaderCacheWithSection:section];
+    return [[self tableViewContainer] callHeaderCacheWithSection:section title:nil];
 }
 
 // セルフッタを返す
 - (nullable UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    return [[self tableViewContainer] callFooterCacheWithSection:section];
+    return [[self tableViewContainer] callFooterCacheWithSection:section title:nil];
 }
 
 

@@ -15,6 +15,10 @@
 #import "CCStyle.h"
 #import "CCTheme.h"
 
+#import "CFNVL.h"
+
+
+
 @implementation CCTableHeaderView
 
 #pragma mark - method
@@ -26,7 +30,7 @@
 - (void) bindTheme
 {
     // テーマ
-    CCThemeTableView *theme = [[CitrusCobaltumApplication callTheme] callTableView];
+    CCThemeTableView *theme = [CFNVL compare:[self theme] replace:[[CitrusCobaltumApplication callTheme] callTableView]];
     [self setLabelColor:[theme callHeadTextColor]];
     [self setLabelBackgroundColor:[theme callHeadBackgroundColor]];
     
