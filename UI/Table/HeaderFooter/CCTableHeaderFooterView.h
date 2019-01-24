@@ -17,8 +17,8 @@
 // property
 //
 @property (nonatomic, retain) CCLabel *label;
-@property (nonatomic, retain) UIColor *labelColor;
-@property (nonatomic, retain) UIColor *labelBackgroundColor;
+@property (nonatomic, retain) NSString *labelColor;
+@property (nonatomic, retain) NSString *labelBackgroundColor;
 @property (nonatomic, retain) UIView *control;
 @property (nonatomic, assign) CGFloat margin;
 @property (nonatomic, retain) CCThemeTableView *theme;

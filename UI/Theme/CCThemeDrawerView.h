@@ -18,7 +18,7 @@
 
 // panel
 @property (nonatomic, retain) UIImage *panelIconImage;
-@property (nonatomic, retain) UIColor *panelBackgroundColor;
+@property (nonatomic, retain) NSString *panelBackgroundColor;
 
 // table view
 @property (nonatomic, retain) CCThemeTableView *tableView;
@@ -31,15 +31,12 @@
 
 // panel
 - (UIImage *) callPanelIconImage;
-- (UIColor *) callPanelBackgroundColor;
+- (NSString *) callPanelBackgroundColor;
 
 // theme table view
 - (CCThemeTableView *) callTableView;
 
-// init
-- (instancetype) initWithPanelImage:(UIImage *)panelImage backgroundColor:(UIColor *)backgroundColor;
-
 // bind panel
-- (void) bindPanelImage:(UIImage *)panelImage backgroundColor:(UIColor *)backgroundColor;
+- (void) bindPanelImage:(UIImage *)panelImage backgroundColor:(NSString *)backgroundColor;
 
 @end
