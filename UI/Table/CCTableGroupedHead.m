@@ -8,8 +8,10 @@
 
 #import "CCTableGroupedHead.h"
 
+#import "CitrusCobaltumApplication.h"
 #import "CitrusCobaltumTypedef.h"
 #import "CCStyle.h"
+#import "CCTheme.h"
 
 
 
@@ -38,19 +40,22 @@
 - (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
+        // テーマ
+        CCThemeTableView *theme = [[CitrusCobaltumApplication callTheme] callTableView];
         // ヘッダビュー
-        [self setCellView:[[CCControl alloc] initWithTitle:@"" styleKeys:@{
-                                                                           @"width"             :@"320",
-                                                                           @"height"            :@"24",
-                                                                           @"text-align"        :@"left",
-                                                                           @"text-shadow"       :@"0 -1 1 666666",
-                                                                           @"font-weight"       :@"bold",
-                                                                           @"font-size"         :@"16",
-                                                                           @"color"             :@"FFFFFF",
-                                                                           @"padding"           :@"0 0 0 16",
-                                                                           @"background-color"  :@"008080",
-                                                                           }]];
+        [self setCellView:[[CCControl alloc] initWithStyleKeys:@{
+                                                                 @"width"           :@"320",
+                                                                 @"height"          :@"24",
+                                                                 @"text-align"      :@"left",
+                                                                 @"text-shadow"     :@"0 -1 1 666666",
+                                                                 @"font-weight"     :@"bold",
+                                                                 @"font-size"       :@"16",
+                                                                 @"color"           :[theme callHeadTextColor],
+                                                                 @"padding"         :@"0 0 0 16",
+                                                                 @"background-color":[theme callHeadBackgroundColor],
+                                                                 }]];
         [self addSubview:[self cellView]];
     }
     return self;

@@ -56,4 +56,13 @@
 // テキスト設定
 - (void) setContentText:(NSString *)stringValue;
 
+
+
+//
+// static method
+//
+
+// 生成して返却
++ (instancetype) makeCellWithTableView:(UITableView *)tableView identifier:(NSString *)cellIdentifier;
+
 @end

@@ -219,4 +219,22 @@
     return CGRectMake(contentRect.size.width - width , 0, width, contentRect.size.height);
 }
 
+
+
+#pragma mark - static method
+//
+// static method
+//
+
+// 生成して返却
++ (instancetype) makeCellWithTableView:(UITableView *)tableView identifier:(NSString *)cellIdentifier
+{
+    CCTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[CCTableCell alloc] initWithPrefix:nil suffix:nil reuseIdentifier:cellIdentifier];
+    }
+    return cell;
+}
+
 @end
