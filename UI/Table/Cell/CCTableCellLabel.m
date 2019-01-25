@@ -135,4 +135,22 @@
     return [[self label] title];
 }
 
+
+
+#pragma mark - static extends CCTableCell
+//
+// static extends CCTableCell
+//
+
+// 生成して返却
++ (instancetype) makeCellWithTableView:(UITableView *)tableView identifier:(NSString *)cellIdentifier
+{
+    CCTableCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[CCTableCellLabel alloc] initWithPrefix:nil suffix:nil reuseIdentifier:cellIdentifier];
+    }
+    return cell;
+}
+
 @end
