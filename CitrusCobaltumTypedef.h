@@ -22,4 +22,7 @@ __attribute__((unused)) static NSString * CCStr(CGFloat floatValue)
     return [@(floatValue) stringValue];
 }
 
+// 汎用ブロック
+typedef void (^CitrusCobaltumBlock)(void);
+
 #endif /* CitrusCobaltumTypedef_h */

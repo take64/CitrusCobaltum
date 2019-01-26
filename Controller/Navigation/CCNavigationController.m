@@ -9,6 +9,7 @@
 #import "CCNavigationController.h"
 
 #import "CitrusCobaltumApplication.h"
+#import "CCColor.h"
 #import "CCTheme.h"
 
 @interface CCNavigationController ()
@@ -29,12 +30,12 @@
     if (self)
     {
         // テーマ
-        CCTheme *theme = [CitrusCobaltumApplication callTheme];
+        CCThemeNavigationBar *theme = [[CitrusCobaltumApplication callTheme] callNavigationBar];
         
         // ナヴィゲーション
-        [[self navigationBar] setBarTintColor:[theme callNavigationBarTintColor]];
+        [[self navigationBar] setBarTintColor:[CCColor colorWithHEXString:[theme callBackgroundColor]]];
         [[self navigationBar] setTitleTextAttributes:@{
-                                                       NSForegroundColorAttributeName   :[theme callNavigationBarTextColor],
+                                                       NSForegroundColorAttributeName:[CCColor colorWithHEXString:[theme callTitleColor]],
                                                        }];
     }
     return self;

@@ -8,7 +8,7 @@
 
 #import "CCTableCell.h"
 
-@class CCTableCellTextFieldInnerTextField;
+#import "CCTableCellTextFieldInnerTextField.h"
 
 @interface CCTableCellTextField : CCTableCell <UITextFieldDelegate>
 {

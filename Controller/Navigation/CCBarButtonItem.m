@@ -9,6 +9,7 @@
 #import "CCBarButtonItem.h"
 
 #import "CitrusCobaltumApplication.h"
+#import "CCColor.h"
 #import "CCTheme.h"
 
 @implementation CCBarButtonItem
@@ -24,7 +25,8 @@
     self = [super init];
     if (self)
     {
-        [self setTintColor:[[CitrusCobaltumApplication callTheme] callNavigationBarTextColor]];
+        CCThemeNavigationBar *theme = [[CitrusCobaltumApplication callTheme] callNavigationBar];
+        [self setTintColor:[CCColor colorWithHEXString:[theme callItemColor]]];
     }
     return self;
 }

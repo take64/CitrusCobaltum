@@ -20,7 +20,7 @@
 + (CCTheme *) callTheme;
 
 //// CoreData manager
-//+ (CTCoreDataManager *) callCoreDataManager;
+//+ (CFCoreDataManager *) callCoreDataManager;
 //
 //// CoreData context
 //+ (NSManagedObjectContext *) callCoreDataContext;
