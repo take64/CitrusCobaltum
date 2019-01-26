@@ -1,5 +1,5 @@
 //
-//  CTChart.h
+//  CCChart.h
 //  CitrusCobaltum
 //
 //  Created by kouhei.takemoto on 2019/01/26.
@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CTChart : NSObject
+@interface CCChart : NSObject
+
+//
+// static method
+//
 
 // 色リスト
-+ (NSArray<NSString *> *) callColorList;
++ (NSArray<NSString *> *) colorList;
 
 @end

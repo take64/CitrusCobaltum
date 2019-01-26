@@ -19,13 +19,20 @@
 // property
 //
 @property CCTextView *textView;
-@property CitrusCobaltumBlock didEndEditingBlock;
 
 @end
 
 
 
 @implementation CCTableCellTextView
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize didEndEditingBlock;
+
+
 
 #pragma mark - extends
 //

@@ -128,8 +128,6 @@ CC_INLINE UIBarButtonItem * CCBarButtonItemSpacer() {
     return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 }
 
-// 汎用ブロック
-typedef void (^CitrusCobaltumBlock)(void);
 
 // ボタンタップ用のブロック
 @class CCButton;

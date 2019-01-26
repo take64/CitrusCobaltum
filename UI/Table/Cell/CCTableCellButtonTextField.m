@@ -19,18 +19,20 @@
 
 @interface CCTableCellButtonTextField()
 
-#pragma mark - property
-//
-// property
-//
-@property CCImageButton *clearButton;
-@property CCButton *selectButton;
-
 @end
 
 
 
 @implementation CCTableCellButtonTextField
+
+#pragma mark - synthesize
+//
+// synthesize
+//
+@synthesize clearButton;
+@synthesize selectButton;
+
+
 
 #pragma mark - extends
 //

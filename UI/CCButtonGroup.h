@@ -30,7 +30,7 @@
 // ボタンの追加(文字列から)
 - (CCButton *) addButtonWithTitle:(NSString *)titleString complete:(CCButtonTappedBlock)completeBlock;
 
-// CTBarButtonItemへ変換
+// CCBarButtonItemへ変換
 - (CCBarButtonItem *) toBarButtonItem;
 
 @end

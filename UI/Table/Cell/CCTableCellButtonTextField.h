@@ -8,7 +8,17 @@
 
 #import "CCTableCellTextField.h"
 
+@class CCImageButton;
+
 @interface CCTableCellButtonTextField : CCTableCellTextField <UITextFieldDelegate>
+
+//
+// property
+//
+@property (nonatomic, retain) CCImageButton *clearButton;
+@property (nonatomic, retain) CCButton *selectButton;
+
+
 
 //
 // method

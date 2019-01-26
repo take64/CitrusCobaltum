@@ -62,9 +62,9 @@
 
 
 //// CoreData manager
-//+ (CTCoreDataManager *)callCoreDataManager
+//+ (CFCoreDataManager *)callCoreDataManager
 //{
-//    CTCoreDataManager *_coreDataManager = [[CitrusTouchApplication sharedApplication] coreDataManager];
+//    CFCoreDataManager *_coreDataManager = [[CitrusTouchApplication sharedApplication] coreDataManager];
 //    if (_coreDataManager == nil)
 //    {
 //        CFLog(@"error : CitrusCobaltumApplication.callCoreDataManager");

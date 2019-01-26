@@ -8,7 +8,9 @@
 
 #import "CCNavigationController.h"
 
-@class CCDrawerMenuSection;
+#import "CCDrawerMenuItem.h"
+#import "CCDrawerMenuSection.h"
+
 @class CCTableViewContainer;
 
 @interface CCDrawerViewController : CCNavigationController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>

@@ -36,18 +36,18 @@
 //
 // method
 //
-
-// init
-- (instancetype) initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        [[[self widthAnchor] constraintEqualToConstant:0] setActive:NO];
-        [[[self heightAnchor] constraintEqualToConstant:0] setActive:NO];
-    }
-    return self;
-}
+//
+//// init
+//- (instancetype) initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self)
+//    {
+////        [[[self widthAnchor] constraintEqualToConstant:0] setActive:YES];
+////        [[[self heightAnchor] constraintEqualToConstant:0] setActive:YES];
+//    }
+//    return self;
+//}
 
 // ボタングループの生成
 + (instancetype) bottunGroup
@@ -71,7 +71,7 @@
 - (CCButton *) addButtonWithTitle:(NSString *)titleString complete:(CCButtonTappedBlock)completeBlock
 {
     // アプリケーションテーマ
-    CCTheme *theme = [CitrusCobaltumApplication callTheme];
+    CCThemeNavigationBar *theme = [[CitrusCobaltumApplication callTheme] callNavigationBar];
     
     // ボタン
     CCButton *button = [[CCButton alloc] initWithTitle:titleString];
@@ -80,16 +80,17 @@
                                        @"width"             :@"32",
                                        @"height"            :@"16",
                                        @"font-size"         :@"14",
+                                       @"font-weight"       :@"bold",
                                        @"padding"           :@"4 8 4 8",
-                                       @"color"             :[CCColor hexStringWithColor:[theme callNavigationBarTextColor]],
-                                       @"background-color"  :[CCColor hexStringWithColor:[theme callNavigationBarTintColor]],
+                                       @"color"             :[theme callItemColor],
+                                       @"background-color"  :[theme callBackgroundColor],
                                        }];
     [self addButton:button];
 
     return button;
 }
 
-// CTBarButtonItemへ変換
+// CCBarButtonItemへ変換
 - (CCBarButtonItem *) toBarButtonItem
 {
     return [[CCBarButtonItem alloc] initWithCustomView:self];
