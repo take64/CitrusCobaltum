@@ -48,12 +48,6 @@
 // extends
 //
 
-// セルヘッダタイトル取得
-- (NSString *) callHeaderTitleWithSection:(NSInteger)section
-{
-    return [[self headTitles] objectAtIndex:section];
-}
-
 
 
 #pragma mark - UITableViewDataSource

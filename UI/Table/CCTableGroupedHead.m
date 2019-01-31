@@ -49,7 +49,6 @@
                                                                  @"width"           :@"320",
                                                                  @"height"          :@"24",
                                                                  @"text-align"      :@"left",
-                                                                 @"text-shadow"     :@"0 -1 1 666666",
                                                                  @"font-weight"     :@"bold",
                                                                  @"font-size"       :@"16",
                                                                  @"color"           :[theme callHeadTextColor],

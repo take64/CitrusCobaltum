@@ -257,8 +257,11 @@
 {
     return [[self rowOfSection] count];
 }
-
-//- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+// ヘッダタイトル
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[self headTitles] objectAtIndex:section];
+}
 //- (nullable NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
 //- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath:]

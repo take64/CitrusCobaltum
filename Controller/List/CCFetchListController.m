@@ -66,13 +66,6 @@
     [cell bindEntity:[[self callFetchedResultsController] objectAtIndexPath:indexPath]];
 }
 
-// セルヘッダタイトル取得
-- (NSString *) callHeaderTitleWithSection:(NSInteger)section
-{
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[[self callFetchedResultsController] sections] objectAtIndex:section];
-    return [sectionInfo name];
-}
-
 
 
 #pragma mark - singleton
