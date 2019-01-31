@@ -8,15 +8,14 @@
 
 #import "CCBaseListController.h"
 
-@class CFSectionDatastore;
-@class CCTableCell;
+@class CCSectionDatastore;
 
 @interface CCSectionListController : CCBaseListController
 
 //
 // property
 //
-@property (nonatomic, retain) CFSectionDatastore *sectionDatastore;
+@property (nonatomic, retain) CCSectionDatastore *sectionDatastore;
 
 
 
@@ -25,6 +24,6 @@
 //
 
 // section datastore
-- (CFSectionDatastore *) callSectionDatastore;
+- (CCSectionDatastore *) callSectionDatastore;
 
 @end
