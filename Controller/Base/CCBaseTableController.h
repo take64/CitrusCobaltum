@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "CCControllerStruct.h"
-
-@class CCTableViewContainer;
+#import "CCTableViewContainer.h"
 
 @interface CCBaseTableController : UITableViewController <UIViewControllerTransitioningDelegate>
 

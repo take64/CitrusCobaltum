@@ -203,7 +203,12 @@
     
     // ツールバーボタン表示
     barButtonItems = [[CFNVL compare:[self toolbarItems] replace:@[]] mutableCopy];
-    if ([self visibleRemoveButton] == YES
+    // entityが無い場合で、ツールバーに削除ボタンがある場合は除去
+    if ([self entity] == nil && [barButtonItems indexOfObject:[self removeBarButton]] != NSNotFound)
+    {
+        [barButtonItems removeObject:[self removeBarButton]];
+    }
+    if ([self entity] != nil && [self visibleRemoveButton] == YES
         && [barButtonItems indexOfObject:[self removeBarButton]] == NSNotFound)
     {
         [barButtonItems insertObject:[self removeBarButton] atIndex:0];
