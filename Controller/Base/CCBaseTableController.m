@@ -17,7 +17,6 @@
 #import "CCBasePresentationController.h"
 #import "CCTableHeaderView.h"
 #import "CCTableFooterView.h"
-#import "CCTableViewContainer.h"
 
 #import "CFNVL.h"
 
@@ -110,13 +109,22 @@
 // 非表示
 - (void) hide
 {
-    [self dismissViewControllerAnimated:YES completion:^(void){
-        // 画面閉じ完了がある場合
-        if (self.modalComplete != nil)
-        {
-            self.modalComplete(self);
-        }
-    }];
+//    [self presentationController]
+    // 他のControllerからpresentされている場合
+    if ([self presentationController] != nil)
+    {
+        [self dismissViewControllerAnimated:YES completion:^(void){
+            // 画面閉じ完了がある場合
+            if (self.modalComplete != nil)
+            {
+                self.modalComplete(self);
+            }
+        }];
+        return ;
+    }
+
+    // 他のControllerからpresentされていない場合はnavigation
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 

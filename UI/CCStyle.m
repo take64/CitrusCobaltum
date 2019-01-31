@@ -451,11 +451,11 @@
 - (CGFloat) floatStyleForKey:(NSString *)keyValue defaultValue:(CGFloat)defaultValue
 {
     NSString *styleValue = [self styleForKey:keyValue];
-    if (styleValue != nil)
+    if (styleValue == nil || [styleValue isEqual:[NSNull null]] == YES)
     {
-        return [styleValue floatValue];
+        return defaultValue;
     }
-    return defaultValue;
+    return [styleValue floatValue];
 }
 
 // オフセット構造体で表現できる要素の分解
@@ -463,7 +463,7 @@
 {
     NSString *offsetString = [self styleForKey:keyValue];
     CCOffset offset = {0, 0, 0, 0};
-    if (offsetString == nil)
+    if (offsetString == nil || [offsetString isEqual:[NSNull null]] == YES)
     {
         return offset;
     }

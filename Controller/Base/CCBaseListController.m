@@ -20,7 +20,7 @@
 //
 // property
 //
-@property CCBarButtonItem *barButtonItem;
+@property CCButtonGroup *buttonGroup;
 @property CCButton *addButton;
 @property CCButton *editStartButton;
 @property CCButton *editEndButton;
@@ -70,7 +70,7 @@
             [self onTapBarButtonSelect];
         }];
         [self setSelectButton:button];
-        [self setBarButtonItem:[buttonGroup toBarButtonItem]];
+        [self setButtonGroup:buttonGroup];
     }
     return self;
 }
@@ -159,16 +159,17 @@
 - (void) redrawBarButton
 {
     // 追加ボタン
-    [[self addButton] setHidden:([self visibleAddButton] == NO)];
+    [[self addButton] setHidden:(([self visibleAddButton] == YES && [[self tableView] isEditing] == NO) == NO)];
     // 編集(平常時)ボタン
     [[self editStartButton] setHidden:(([self visibleEditButton] == YES && [[self tableView] isEditing] == NO) == NO)];
     // 編集(編集中)ボタン
     [[self editEndButton] setHidden:(([self visibleEditButton] == YES && [[self tableView] isEditing] == YES) == NO)];
     // 選択ボタン
-    [[self selectButton] setHidden:([self visibleSelectButton] == NO)];
+    [[self selectButton] setHidden:(([self visibleSelectButton] == YES && [[self tableView] isEditing] == NO) == NO)];
     
     // ボタン設定
-    [[self navigationItem] setRightBarButtonItem:[self barButtonItem]];
+    [[self buttonGroup] setNeedsLayout];
+    [[self navigationItem] setRightBarButtonItem:[[self buttonGroup] toBarButtonItem]];
 }
 
 
