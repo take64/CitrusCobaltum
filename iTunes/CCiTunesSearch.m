@@ -25,7 +25,7 @@ static NSString * const kiTunesLookupURL = @"https://itunes.apple.com/lookup";
 //
 
 // 音楽検索
-+ (void) searchMusicWithKeyword:(NSString *)keyword complete:(CitrusCobaltumiTunesSearchBlock __nonnull)complete
++ (void) searchMusicWithKeyword:(NSString *)keyword complete:(CitrusCobaltumiTunesSearchBlock)complete
 {
     [CFHttpRequest getRequest:kiTunesSearchURL parameters:@{ @"term":keyword, @"country":@"JP", @"lang":@"ja_jp", @"limit":@"200", @"media":@"music" } complete:^(id userInfo, NSError *error) {
         NSDictionary *list = [NSJSONSerialization JSONObjectWithData:userInfo options:NSJSONReadingMutableLeaves error:nil];
@@ -42,7 +42,7 @@ static NSString * const kiTunesLookupURL = @"https://itunes.apple.com/lookup";
 }
 
 // 楽曲取得
-+ (void) lookupMusicWithTrackID:(NSString *)trackID complete:(CitrusCobaltumiTunesSearchBlock __nonnull)complete
++ (void) lookupMusicWithTrackID:(NSString *)trackID complete:(CitrusCobaltumiTunesSearchBlock)complete
 {
     [CFHttpRequest getRequest:kiTunesLookupURL parameters:@{ @"id":trackID, @"country":@"JP", @"lang":@"ja_jp", @"limit":@"200" } complete:^(id userInfo, NSError *error) {
         NSDictionary *list = [NSJSONSerialization JSONObjectWithData:userInfo options:NSJSONReadingMutableLeaves error:nil];
@@ -62,7 +62,7 @@ static NSString * const kiTunesLookupURL = @"https://itunes.apple.com/lookup";
 }
 
 // アーティストから楽曲検索
-+ (void) lookupMusicWithArtistID:(NSString *)artistID complete:(CitrusCobaltumiTunesSearchBlock __nonnull)complete
++ (void) lookupMusicWithArtistID:(NSString *)artistID complete:(CitrusCobaltumiTunesSearchBlock)complete
 {
     [CFHttpRequest getRequest:kiTunesLookupURL parameters:@{ @"id":artistID, @"entity":@"song", @"country":@"JP", @"lang":@"ja_jp", @"limit":@"200" } complete:^(id userInfo, NSError *error) {
         NSDictionary *list = [NSJSONSerialization JSONObjectWithData:userInfo options:NSJSONReadingMutableLeaves error:nil];
@@ -79,7 +79,7 @@ static NSString * const kiTunesLookupURL = @"https://itunes.apple.com/lookup";
 }
 
 // アーティストIDからアーティスト取得
-+ (void) lookupArtistWithArtistID:(NSString *)artistID complete:(CitrusCobaltumiTunesSearchBlock __nonnull)complete
++ (void) lookupArtistWithArtistID:(NSString *)artistID complete:(CitrusCobaltumiTunesSearchBlock)complete
 {
     [CFHttpRequest getRequest:kiTunesLookupURL parameters:@{ @"id":artistID, @"country":@"JP", @"lang":@"ja_jp", @"limit":@"200" } complete:^(id userInfo, NSError *error) {
         NSDictionary *list = [NSJSONSerialization JSONObjectWithData:userInfo options:NSJSONReadingMutableLeaves error:nil];

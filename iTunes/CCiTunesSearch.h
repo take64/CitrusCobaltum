@@ -19,15 +19,15 @@ typedef void (^CitrusCobaltumiTunesSearchBlock)(NSArray<CCiTunesSearchResult *> 
 //
 
 // 音楽検索
-+ (void) searchMusicWithKeyword:(NSString *)keyword complete:(CitrusCobaltumiTunesSearchBlock __nonnull)complete;
++ (void) searchMusicWithKeyword:(NSString *)keyword complete:(CitrusCobaltumiTunesSearchBlock)complete;
 
 // 楽曲IDから楽曲取得
-+ (void) lookupMusicWithTrackID:(NSString *)trackID complete:(CitrusCobaltumiTunesSearchBlock __nonnull)complete;
++ (void) lookupMusicWithTrackID:(NSString *)trackID complete:(CitrusCobaltumiTunesSearchBlock)complete;
 
 // アーティストIDから楽曲取得
-+ (void) lookupMusicWithArtistID:(NSString *)artistID complete:(CitrusCobaltumiTunesSearchBlock __nonnull)complete;
++ (void) lookupMusicWithArtistID:(NSString *)artistID complete:(CitrusCobaltumiTunesSearchBlock)complete;
 
 // アーティストIDからアーティスト取得
-+ (void) lookupArtistWithArtistID:(NSString *)artistID complete:(CitrusCobaltumiTunesSearchBlock __nonnull)complete;
++ (void) lookupArtistWithArtistID:(NSString *)artistID complete:(CitrusCobaltumiTunesSearchBlock)complete;
 
 @end
