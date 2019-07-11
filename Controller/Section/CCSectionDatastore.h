@@ -62,6 +62,9 @@ static NSString * const kSectionDatastoreGeneralKey = @"sectionKey";
 // CFCoreDataRequestの結果から生成
 + (CCSectionDatastore *) sectionDatastoreWithEntities:(NSArray<NSManagedObject *> *)entities keyPath:(NSString *)keyPath ascending:(BOOL)ascending;
 
+// NSObjectの配列から生成
++ (CCSectionDatastore *) sectionDatastoreWithElements:(NSArray<NSObject *> *)elements keyPath:(NSString *)keyPath ascending:(BOOL)ascending;
+
 // CCSectionItemの配列から生成
 + (CCSectionDatastore *) sectionDatastoreWithItems:(NSArray<CCSectionItem *> *)items;
 

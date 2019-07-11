@@ -84,9 +84,17 @@
 // スタイルの一括追加
 - (void) addStyleKeys:(NSDictionary *)keyValues
 {
-    for (NSString *keyValue in [keyValues allKeys])
+    for (NSString *key in [keyValues allKeys])
     {
-        [self addStyleKey:keyValue value:[keyValues objectForKey:keyValue]];
+        NSString *value = [keyValues objectForKey:key];
+        if ([value isEqual:[NSNull null]] == YES)
+        {
+            [self removeStyleKey:key];
+        }
+        else
+        {
+            [self addStyleKey:key value:value];
+        }
     }
 }
 

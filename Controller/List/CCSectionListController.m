@@ -8,7 +8,6 @@
 
 #import "CCSectionListController.h"
 
-#import "CCSectionDatastore.h"
 #import "CCTableCell.h"
 
 

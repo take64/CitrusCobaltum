@@ -8,7 +8,7 @@
 
 #import "CCBaseListController.h"
 
-@class CCSectionDatastore;
+#import "CCSectionDatastore.h"
 
 @interface CCSectionListController : CCBaseListController
 
