@@ -178,6 +178,24 @@
     return datastore;
 }
 
+// NSObjectの配列から生成
++ (CCSectionDatastore *) sectionDatastoreWithElements:(NSArray<NSObject *> *)elements keyPath:(NSString *)keyPath ascending:(BOOL)ascending
+{
+    CCSectionDatastore *datastore = [[CCSectionDatastore alloc] init];
+    
+    // セクションに分けながら投入
+    for (NSObject *element in elements)
+    {
+        NSString *key = [element valueForKeyPath:keyPath];
+        [datastore addObject:element key:key];
+    }
+    
+    // ソート
+    [datastore sortSectionOfAscending:ascending];
+    
+    return datastore;
+}
+
 // CCSectionItemの配列から生成
 + (CCSectionDatastore *) sectionDatastoreWithItems:(NSArray<CCSectionItem *> *)items
 {
